@@ -53,8 +53,8 @@ public class Application implements IApplication {
 
     public void executeQuery01() {
         System.out.println("--- executeQuery01 ---");
-        System.out.println(orderList.size());
-        System.out.println();
+        long query01 = orderList.stream().count();
+        System.out.println(query01);
     }
 
     public void executeQuery02() {
@@ -87,12 +87,26 @@ public class Application implements IApplication {
 
     public void executeQuery04() {
         System.out.println("--- executeQuery04 ---");
-        System.out.println();
+        long query04 = orderList.stream()
+                .filter(order -> order.getCustomer().getTown().getId() >= 10)
+                .filter(order -> order.getCustomer().getTown().getId() <= 15)
+                .filter(order -> !order.getCustomer().getTown().getRegion().equals("A") && !order.getCustomer().getTown().getRegion().equals("B") && !order.getCustomer().getTown().getRegion().equals("C") && !order.getCustomer().getTown().getRegion().equals("H"))
+                .filter(order -> order.getProduct().getId() >= 50)
+                .filter(order -> order.getProduct().getId() <= 100)
+                .filter(order -> order.getQuantity() <= 2)
+                .count();
+        System.out.println(query04);
     }
 
     public void executeQuery05() {
         System.out.println("--- executeQuery05 ---");
-        System.out.println();
+        long query05 = orderList.stream()
+                .filter(order -> order.getCustomer().getTown().getId() >= 5)
+                .filter(order -> order.getCustomer().getTown().getId() <= 75)
+                .filter(order -> order.getCustomer().getTown().getRegion().equals("A") || order.getCustomer().getTown().getRegion().equals("B") || order.getCustomer().getTown().getRegion().equals("C") || order.getCustomer().getTown().getRegion().equals("D"))
+                .filter(order -> order.getProduct().getId() == 50)
+                .mapToLong(order -> order.getQuantity()).sum();
+        System.out.println(query05);
     }
 
     public void executeQuery06() {
@@ -111,7 +125,19 @@ public class Application implements IApplication {
 
     public void executeQuery07() {
         System.out.println("--- executeQuery07 ---");
-        System.out.println();
+        Comparator<Order> OrderCustomerIDDesc = Comparator.comparingInt(order -> order.getCustomer().getTown().getId());
+        List<Integer> query07 = orderList.stream()
+                .filter(order -> order.getCustomer().getTown().getId() >= 10)
+                .filter(order -> order.getCustomer().getTown().getId() <= 15)
+                .filter(order -> "AB".contains(order.getCustomer().getTown().getRegion()))
+                .filter(order -> order.getProduct().getId() >= 50)
+                .filter(order -> order.getProduct().getId() <= 55)
+                .filter(order -> order.getQuantity() == 3)
+                .sorted(OrderCustomerIDDesc)
+                .map(order -> order.getId())
+                .limit(3)
+                .collect(Collectors.toList());
+        System.out.println(query07);
     }
 
     public void executeQuery08() {
@@ -136,7 +162,9 @@ public class Application implements IApplication {
 
     public void executeQuery09() {
         System.out.println("--- executeQuery09 ---");
-        System.out.println();
+        Map<String, Long> query09 = orderList.stream()
+                .collect(Collectors.groupingBy(x -> x.getCustomer().getTown().getRegion(), Collectors.counting()));
+        System.out.println(query09);
     }
 
     public void executeQuery10() {
@@ -166,12 +194,22 @@ public class Application implements IApplication {
 
     public void executeQuery12() {
         System.out.println("--- executeQuery12 ---");
-        System.out.println();
+        Map<String, Long> query12 = orderList.stream()
+                .filter(order -> !order.getCustomer().getTown().getRegion().equals("B") && !order.getCustomer().getTown().getRegion().equals("D") && !order.getCustomer().getTown().getRegion().equals("F") && !order.getCustomer().getTown().getRegion().equals("G"))
+                .filter(order -> order.getCustomer().getTown().getId() <= 275)
+                .filter(order -> order.getProduct().getId() <= 300)
+                .collect(Collectors.groupingBy(order -> order.getCustomer().getTown().getRegion(), Collectors.counting()));
+        System.out.println(query12);
     }
 
     public void executeQuery13() {
         System.out.println("--- executeQuery13 ---");
-        System.out.println();
+        Map<Object, Long> query14 = orderList.stream()
+                .filter(order -> !order.getCustomer().getTown().getRegion().equals("B") && !order.getCustomer().getTown().getRegion().equals("C") && !order.getCustomer().getTown().getRegion().equals("D"))
+                .filter(order -> order.getCustomer().getTown().getId() >= 50 && order.getCustomer().getTown().getId() <= 100)
+                .filter(order -> order.getProduct().getId() == 5 || order.getProduct().getId() == 10 || order.getProduct().getId() == 15 || order.getProduct().getId() ==20 || order.getProduct().getId() == 15)
+                .collect(Collectors.groupingBy(order -> order.getCustomer().getTown().getRegion(), Collectors.summingLong(Order::getQuantity)));
+        System.out.println(query14);
     }
 
     public void executeQuery14() {
