@@ -1,4 +1,4 @@
-public class BackPivot {
+public class BackPivot extends Pivot{
 
     public BackPivot() {
 

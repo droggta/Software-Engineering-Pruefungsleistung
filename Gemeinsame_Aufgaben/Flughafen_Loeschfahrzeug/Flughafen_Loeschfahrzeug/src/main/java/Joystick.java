@@ -1,7 +1,3 @@
-public class Joystick {
-
-    public Joystick() {
-
-    }
+public abstract class Joystick {
 
 }

@@ -1,4 +1,4 @@
-public class JoystickRoofCannon {
+public class JoystickRoofCannon extends Joystick{
 
     public JoystickRoofCannon() {
 

@@ -1,4 +1,4 @@
-public class DirectionIndicator {
+public class DirectionIndicator extends Lights{
 
     public DirectionIndicator() {
 

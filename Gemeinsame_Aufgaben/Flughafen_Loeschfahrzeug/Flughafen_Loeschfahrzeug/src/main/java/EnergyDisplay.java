@@ -1,4 +1,4 @@
-public class EnergyDisplay {
+public class EnergyDisplay extends Display{
 
     public EnergyDisplay() {
 

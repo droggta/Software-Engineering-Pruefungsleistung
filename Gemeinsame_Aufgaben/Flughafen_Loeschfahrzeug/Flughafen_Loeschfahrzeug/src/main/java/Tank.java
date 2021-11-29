@@ -1,7 +1,6 @@
-public class Tank {
+public abstract class Tank {
 
-    public Tank() {
-
-    }
+    private int volume;
+    private TankSubstance content;
 
 }

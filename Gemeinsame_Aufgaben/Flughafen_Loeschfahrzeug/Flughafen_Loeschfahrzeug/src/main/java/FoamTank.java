@@ -1,4 +1,4 @@
-public class FoamTank {
+public class FoamTank extends Tank {
 
     public FoamTank() {
 

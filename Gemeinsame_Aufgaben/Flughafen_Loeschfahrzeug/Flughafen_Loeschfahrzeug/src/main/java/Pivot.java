@@ -1,7 +1,10 @@
-public class Pivot {
+public abstract class Pivot {
 
-    public Pivot() {
+    private Wheel[] aWheel;
+    private Position position;
 
+    public void setaWheel(Wheel[] aWheel) {
+        this.aWheel = aWheel;
     }
 
 }

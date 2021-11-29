@@ -1,4 +1,4 @@
-public class LeftPressButton {
+public class LeftPressButton extends PressButton{
 
     public LeftPressButton() {
 

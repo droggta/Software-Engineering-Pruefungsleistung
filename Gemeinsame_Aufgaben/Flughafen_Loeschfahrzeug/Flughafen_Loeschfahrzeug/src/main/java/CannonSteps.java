@@ -1,9 +1,9 @@
 public enum CannonSteps {
-    fünfhundert,
+    fuenfhundert,
     tausend,
-    tausendfünfhundert,
+    tausendfuenfhundert,
     zweitausend,
-    zweitausendfünfhundert,
+    zweitausendfuenfhundert,
     dreitausend,
-    dreitausendfünfhundert
+    dreitausendfuenfhundert
 }

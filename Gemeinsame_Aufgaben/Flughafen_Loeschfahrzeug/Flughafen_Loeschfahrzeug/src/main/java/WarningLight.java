@@ -1,4 +1,4 @@
-public class WarningLight {
+public class WarningLight extends Lights {
 
     public WarningLight() {
 

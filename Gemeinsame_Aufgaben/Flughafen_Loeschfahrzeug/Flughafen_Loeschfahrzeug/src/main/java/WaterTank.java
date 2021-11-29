@@ -1,4 +1,4 @@
-public class WaterTank {
+public class WaterTank extends Tank{
 
     public WaterTank() {
 

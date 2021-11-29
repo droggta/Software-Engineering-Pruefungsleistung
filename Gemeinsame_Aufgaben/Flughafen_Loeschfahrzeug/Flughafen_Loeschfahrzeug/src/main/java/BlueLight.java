@@ -1,4 +1,4 @@
-public class BlueLight {
+public class BlueLight extends Lights{
 
     public BlueLight() {
     }

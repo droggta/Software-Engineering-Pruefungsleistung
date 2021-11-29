@@ -1,4 +1,4 @@
-public class HeadLamp {
+public class HeadLamp extends Lights{
 
     public HeadLamp() {
 

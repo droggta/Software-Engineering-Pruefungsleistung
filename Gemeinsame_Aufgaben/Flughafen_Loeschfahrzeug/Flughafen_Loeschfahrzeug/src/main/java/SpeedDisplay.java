@@ -1,4 +1,4 @@
-public class SpeedDisplay {
+public class SpeedDisplay extends Display{
 
     public SpeedDisplay() {
 

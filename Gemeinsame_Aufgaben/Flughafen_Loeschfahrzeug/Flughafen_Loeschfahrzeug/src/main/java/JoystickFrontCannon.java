@@ -1,4 +1,4 @@
-public class JoystickFrontCannon {
+public class JoystickFrontCannon extends Joystick{
 
     public JoystickFrontCannon() {
 

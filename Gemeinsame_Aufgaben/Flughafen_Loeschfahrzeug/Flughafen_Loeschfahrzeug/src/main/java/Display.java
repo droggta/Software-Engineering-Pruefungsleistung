@@ -1,7 +1,5 @@
-public class Display {
+public abstract class Display {
 
-    public Display() {
-
-    }
+    private double displayedValue;
 
 }

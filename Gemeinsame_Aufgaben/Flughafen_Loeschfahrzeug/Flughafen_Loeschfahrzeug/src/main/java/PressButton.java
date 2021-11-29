@@ -1,6 +1,8 @@
-public class PressButton {
+public abstract class PressButton {
 
-    public PressButton() {
+    private Position position;
+
+    public void push(){
 
     }
 
