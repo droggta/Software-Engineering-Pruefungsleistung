@@ -1,0 +1,6 @@
+Fahrer kann NICHT die Selbstschutzfunktionen nutzen
+Gasmasken sind Integriert in die Sitzplätze (Physische Inklusion)
+Lenkbewegung werden auf die Vorderachse übertragen
+Tanks als Arrays realisieren 2 bis 3 dimenionale Arrays
+=> Entnahme von oben links nach unten rechts
+=> Befüllung von unten links nach oben rechts
