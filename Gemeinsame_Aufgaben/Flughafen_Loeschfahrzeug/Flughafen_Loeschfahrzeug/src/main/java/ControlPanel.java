@@ -7,14 +7,6 @@ public class ControlPanel {
         this.aSwitch = aSwitch;
     }
 
-    public Switch[] getaSwitch() {
-        return aSwitch;
-    }
-
-    public CentralUnit getaCentralUnit() {
-        return aCentralUnit;
-    }
-
     public ControlPanel() {
 
     }
