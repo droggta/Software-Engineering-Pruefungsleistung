@@ -51,6 +51,47 @@ public class Cabine {
         this.aKnobRoofCannon = aKnobRoofCannon;
     }
 
+
+    public Doors[] getaDoors() {
+        return aDoors;
+    }
+
+    public JoystickFrontCannon getaJoystickFrontCannon() {
+        return aJoystickFrontCannon;
+    }
+
+    public JoystickRoofCannon getaJoystickRoofCannon() {
+        return aJoystickRoofCannon;
+    }
+
+    public TurningKnob getaTurningKnob() {
+        return aTurningKnob;
+    }
+
+    public SpeedDisplay getaSpeedDisplay() {
+        return aSpeedDisplay;
+    }
+
+    public EnergyDisplay getaEnergyDisplay() {
+        return aEnergyDisplay;
+    }
+
+    public ControlPanel getaControlPanel() {
+        return aControlPanel;
+    }
+
+    public KnobFrontCannon getaKnobFrontCannon() {
+        return aKnobFrontCannon;
+    }
+
+    public KnobRoofCannon getaKnobRoofCannon() {
+        return aKnobRoofCannon;
+    }
+
+    public Seats[] getaSeats() {
+        return aSeats;
+    }
+
     public Cabine() {
 
     }

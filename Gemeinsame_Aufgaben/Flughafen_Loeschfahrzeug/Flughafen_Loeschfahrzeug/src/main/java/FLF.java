@@ -26,6 +26,27 @@ public class FLF {
         aCabine = builder.bCabine;
     }
 
+    //Getters
+    public PowerUnit getaPowerUnit() {
+        return aPowerUnit;
+    }
+
+    public GroundSprayNozzle getaGroundSprayNoozle() {
+        return aGroundSprayNoozle;
+    }
+
+    public FrontPivot getaFrontPivot() {
+        return aFrontPivot;
+    }
+
+    public BackPivot getaBackPivot() {
+        return aBackPivot;
+    }
+
+    public Cabine getaCabine() {
+        return aCabine;
+    }
+
     public static class Builder{
         // Klassen mit Verbindung zum FLF
         private PowerUnit bPowerUnit;
@@ -219,6 +240,8 @@ public class FLF {
 
             return this;
         }
+
+
 
         public FLF build() {
             return new FLF(this);
