@@ -1,18 +1,18 @@
 public class CentralUnit {
 
-    private RoofCannon aRoofCannon;
-    private FrontCannon aFrontCannon;
+    private JoystickRoofCannon aJoystickRoofCannon;
+    private JoystickFrontCannon aJoystickFrontCannon;
     private GasPedal aGasPedal;
     private BreakPedal aBreakPedal;
     private SterringWheel aSteeringWheel;
     private ControlPanel aControlPanel;
 
-    public void setaRoofCannon(RoofCannon aRoofCannon) {
-        this.aRoofCannon = aRoofCannon;
+    public void setaJoystickRoofCannon(JoystickRoofCannon aJoystickRoofCannon) {
+        this.aJoystickRoofCannon = aJoystickRoofCannon;
     }
 
-    public void setaFrontCannon(FrontCannon aFrontCannon) {
-        this.aFrontCannon = aFrontCannon;
+    public void setaJoystickFrontCannon(JoystickFrontCannon aJoystickFrontCannon) {
+        this.aJoystickFrontCannon = aJoystickFrontCannon;
     }
 
     public void setaGasPedal(GasPedal aGasPedal) {

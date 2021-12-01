@@ -6,7 +6,6 @@ public class GroundSprayNozzle {
         this.aWaterTank = aWaterTank;
     }
 
-
     public GroundSprayNozzle() {
 
     }

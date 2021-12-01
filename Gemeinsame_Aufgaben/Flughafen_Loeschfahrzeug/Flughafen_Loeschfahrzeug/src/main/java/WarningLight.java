@@ -1,7 +1,9 @@
 public class WarningLight extends Lights {
 
-    public WarningLight() {
+    private LED aLED;
 
+    public WarningLight() {
+        aLED = new LED();
     }
 
 }

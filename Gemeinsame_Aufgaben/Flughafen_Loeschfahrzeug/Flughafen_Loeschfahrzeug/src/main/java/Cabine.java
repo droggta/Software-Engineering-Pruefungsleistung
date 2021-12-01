@@ -3,13 +3,25 @@ public class Cabine {
     private Doors[] aDoors;
     private JoystickFrontCannon aJoystickFrontCannon;
     private JoystickRoofCannon aJoystickRoofCannon;
-    private TurningKnob aTurningKnob;
     private SpeedDisplay aSpeedDisplay;
     private EnergyDisplay aEnergyDisplay;
     private ControlPanel aControlPanel;
-    private KnobFrontCannon aKnobFrontCannon;
-    private KnobRoofCannon aKnobRoofCannon;
     private Seats[] aSeats;
+    private GasPedal aGasPedal;
+    private BreakPedal aBreakPedal;
+    private SterringWheel aSterringWheel;
+
+    public void setaGasPedal(GasPedal aGasPedal) {
+        this.aGasPedal = aGasPedal;
+    }
+
+    public void setaBreakPedal(BreakPedal aBreakPedal) {
+        this.aBreakPedal = aBreakPedal;
+    }
+
+    public void setaSterringWheel(SterringWheel aSterringWheel) {
+        this.aSterringWheel = aSterringWheel;
+    }
 
     public void setaSeats(Seats[] aSeats) {
         this.aSeats = aSeats;
@@ -27,10 +39,6 @@ public class Cabine {
         this.aJoystickRoofCannon = aJoystickRoofCannon;
     }
 
-    public void setaTurningKnob(TurningKnob aTurningKnob) {
-        this.aTurningKnob = aTurningKnob;
-    }
-
     public void setaSpeedDisplay(SpeedDisplay aSpeedDisplay) {
         this.aSpeedDisplay = aSpeedDisplay;
     }
@@ -41,14 +49,6 @@ public class Cabine {
 
     public void setaControlPanel(ControlPanel aControlPanel) {
         this.aControlPanel = aControlPanel;
-    }
-
-    public void setaKnobFrontCannon(KnobFrontCannon aKnobFrontCannon) {
-        this.aKnobFrontCannon = aKnobFrontCannon;
-    }
-
-    public void setaKnobRoofCannon(KnobRoofCannon aKnobRoofCannon) {
-        this.aKnobRoofCannon = aKnobRoofCannon;
     }
 
     public Cabine() {

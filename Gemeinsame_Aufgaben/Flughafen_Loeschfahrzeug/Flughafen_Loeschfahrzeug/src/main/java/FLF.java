@@ -1,9 +1,13 @@
 public class FLF {
 
     private final PowerUnit aPowerUnit;
-    private final GroundSprayNozzle aGroundSprayNoozle;
-    private final FrontPivot aFrontPivot;
-    private final BackPivot aBackPivot;
+    private final GroundSprayNozzle[] aGroundSprayNoozle;
+    private final FrontCannon aFrontCannon;
+    private final RoofCannon aRoofCannon;
+    private final Lights[] aLights;
+    private final CentralUnit aCentralUnit;
+    private final FrontPivot[] aFrontPivot;
+    private final BackPivot[] aBackPivot;
     private final Cabine aCabine;
 
     public static void main(String... args){
@@ -11,6 +15,10 @@ public class FLF {
                 .createeverything()
                 .createPowerUnit()
                 .createGroundSprayNozzle()
+                .createFrontCannon()
+                .createRoofCannon()
+                .createLights()
+                .createCentralUnit()
                 .createFrontPivot()
                 .createBackPivot()
                 .createCabine()
@@ -21,6 +29,10 @@ public class FLF {
     private FLF(Builder builder){
         aPowerUnit = builder.bPowerUnit;
         aGroundSprayNoozle = builder.bGroundSprayNoozle;
+        aFrontCannon = builder.bFrontCannon;
+        aRoofCannon = builder.bRoofCannon;
+        aLights = builder.bLights;
+        aCentralUnit = builder.bCentralUnit;
         aFrontPivot = builder.bFrontPivot;
         aBackPivot = builder.bBackPivot;
         aCabine = builder.bCabine;
@@ -29,9 +41,13 @@ public class FLF {
     public static class Builder{
         // Klassen mit Verbindung zum FLF
         private PowerUnit bPowerUnit;
-        private GroundSprayNozzle bGroundSprayNoozle;
-        private FrontPivot bFrontPivot;
-        private BackPivot bBackPivot;
+        private GroundSprayNozzle[] bGroundSprayNoozle;
+        private FrontCannon bFrontCannon;
+        private RoofCannon bRoofCannon;
+        private Lights[] bLights;
+        private CentralUnit bCentralUnit;
+        private FrontPivot[] bFrontPivot;
+        private BackPivot[] bBackPivot;
         private Cabine bCabine;
         // Alle Klassen
         private Battery[] bBattery;
@@ -40,7 +56,6 @@ public class FLF {
         private BreakDisc[] bBreakDisc;
         private BreakingLight bBreakingLight;
         private BreakPedal bBreakPedal;
-        private CentralUnit bCentralUnit;
         private ControlPanel bControlPanel;
         private DirectionIndicator bDirectionIndicator;
         private Display bDisplay;
@@ -50,7 +65,6 @@ public class FLF {
         private ElectricMotor[] bElectricMotor;
         private EnergyDisplay bEnergyDisplay;
         private FoamTank bFoamTank;
-        private FrontCannon bFrontCannon;
         private GasMask bGasMask;
         private GasPedal bGasPedal;
         private HeadLamp bHeadLamp;
@@ -62,19 +76,19 @@ public class FLF {
         private KnobRoofCannon bKnobRoofCannon;
         private LED bLED;
         private LeftPressButton bLeftPressButton;
-        private Lights bLights;
         private MixingUnit bMixingUnit;
         private Operator bOperator;
+        private PieceSegment[] bPieceSegment;
         private Pivot bPivot;
         private PressButton bPressButton;
         private RightPressButton bRightPressButton;
-        private RoofCannon bRoofCannon;
         private Seats[] bSeats;
+        private Segment1 bSegment1;
+        private Segment2 bSegment2;
         private SpeedDisplay bSpeedDisplay;
         private SterringWheel bSterringWheel;
         private Switch[] bSwitch;
         private Tank bTank;
-        private TurningKnob bTuningKnob;
         private WarningLight bWarningLight;
         private WaterTank bWaterTank;
         private Wheel[] bWheel;
@@ -101,30 +115,73 @@ public class FLF {
         }
 
         public Builder createGroundSprayNozzle(){
-            bGroundSprayNoozle = new GroundSprayNozzle();
-            bGroundSprayNoozle.setaWaterTank(bWaterTank);
+            for (int i = 0; i < 7; i++)
+            {
+                bGroundSprayNoozle[i] = new GroundSprayNozzle();
+                bGroundSprayNoozle[i].setaWaterTank(bWaterTank);
+            }
+            return this;
+        }
+
+        public Builder createFrontCannon(){
+            bFrontCannon = new FrontCannon();
+            bFrontCannon.setaMixingUnit(bMixingUnit);
+            return this;
+        }
+
+        public Builder createRoofCannon(){
+            bRoofCannon = new RoofCannon();
+            bRoofCannon.setaMixingUnit(bMixingUnit);
+            bRoofCannon.setaSegment1(bSegment1);
+            bRoofCannon.setaSegment2(bSegment2);
+            return this;
+        }
+
+        public Builder createLights(){
+            bWarningLight = new WarningLight();
+            bHeadLamp = new HeadLamp();
+            bDirectionIndicator = new DirectionIndicator();
+            bBreakingLight = new BreakingLight();
+            bBlueLight = new BlueLight();
+            bLights = new Lights[]{bWarningLight, bHeadLamp, bDirectionIndicator, bBreakingLight, bBlueLight};
+            return this;
+        }
+
+        public Builder createCentralUnit(){
+            bCentralUnit = new CentralUnit();
+            bControlPanel.setaCentralUnit(bCentralUnit);
+            bBreakPedal.setaCentralUnit(bCentralUnit);
+            bGasPedal.setaCentralUnit(bCentralUnit);
+            bSterringWheel.setaCentralUnit(bCentralUnit);
+            bJoystickFrontCannon.setaCentralUnit(bCentralUnit);
+            bJoystickRoofCannon.setaCentralUnit(bCentralUnit);
             return this;
         }
 
         public Builder createFrontPivot(){
-            bFrontPivot = new FrontPivot();
-            bWheel = new Wheel[]{new Wheel(), new Wheel()};
-            for (int i = 0; i < 2; i++){
-                bBreakDisc = new BreakDisc[]{new BreakDisc(), new BreakDisc(), new BreakDisc()};
-                bWheel[i].setaBreakDisc(bBreakDisc);
+            bFrontPivot = new FrontPivot[]{new FrontPivot(), new FrontPivot()};
+            for(int i = 0; i < 2; i++)
+            {
+                bWheel = new Wheel[]{new Wheel(), new Wheel()};
+                for (int j = 0; j < 2; j++){
+                    bBreakDisc = new BreakDisc[]{new BreakDisc(), new BreakDisc(), new BreakDisc()};
+                    bWheel[j].setaBreakDisc(bBreakDisc);
+                }
+                bFrontPivot[i].setaWheel(bWheel);
             }
-            bFrontPivot.setaWheel(bWheel);
             return this;
         }
 
         public Builder createBackPivot(){
-            bBackPivot = new BackPivot();
-            bWheel = new Wheel[]{new Wheel(), new Wheel()};
-            for (int i = 0; i < 2; i++){
-                bBreakDisc = new BreakDisc[]{new BreakDisc(), new BreakDisc(), new BreakDisc()};
-                bWheel[i].setaBreakDisc(bBreakDisc);
+            bBackPivot = new BackPivot[]{new BackPivot(), new BackPivot()};
+            for (int i = 0; i < 2; i++) {
+                bWheel = new Wheel[]{new Wheel(), new Wheel()};
+                for (int j = 0; j < 2; j++) {
+                    bBreakDisc = new BreakDisc[]{new BreakDisc(), new BreakDisc(), new BreakDisc()};
+                    bWheel[j].setaBreakDisc(bBreakDisc);
+                }
+                bBackPivot[i].setaWheel(bWheel);
             }
-            bBackPivot.setaWheel(bWheel);
             return this;
         }
 
@@ -136,10 +193,10 @@ public class FLF {
             bCabine.setaSpeedDisplay(bSpeedDisplay);
             bCabine.setaJoystickFrontCannon(bJoystickFrontCannon);
             bCabine.setaJoystickRoofCannon(bJoystickRoofCannon);
-            bCabine.setaKnobFrontCannon(bKnobFrontCannon);
-            bCabine.setaKnobRoofCannon(bKnobRoofCannon);
-            bCabine.setaTurningKnob(bTuningKnob);
             bCabine.setaSeats(bSeats);
+            bCabine.setaGasPedal(bGasPedal);
+            bCabine.setaBreakPedal(bBreakPedal);
+            bCabine.setaSterringWheel(bSterringWheel);
             return this;
         }
 
@@ -172,13 +229,15 @@ public class FLF {
             bLeftPressButton = new LeftPressButton();
             bMixingUnit = new MixingUnit();
             bOperator = new Operator();
+            bPieceSegment = new PieceSegment[]{new PieceSegment(), new PieceSegment(), new PieceSegment()};
             bRightPressButton = new RightPressButton();
             bRoofCannon = new RoofCannon();
             bSeats = new Seats[]{new Seats(), new Seats(), new Seats(), new Seats()};
+            bSegment1 = new Segment1();
+            bSegment2 = new Segment2();
             bSpeedDisplay = new SpeedDisplay();
             bSterringWheel = new SterringWheel();
             bSwitch = new Switch[]{new Switch(), new Switch(), new Switch(), new Switch(), new Switch(), new Switch()};
-            bTuningKnob = new TurningKnob();
             bWarningLight = new WarningLight();
             bWaterTank = new WaterTank();
 
@@ -188,24 +247,27 @@ public class FLF {
             bMixingUnit.setaWaterTank(bWaterTank);
             bMixingUnit.setaFoamTank(bFoamTank);
 
+            bSegment2.setaPiecesegment(bPieceSegment);
+
             bFrontCannon.setaMixingUnit(bMixingUnit);
             bRoofCannon.setaMixingUnit(bMixingUnit);
 
-            bCentralUnit.setaFrontCannon(bFrontCannon);
-            bCentralUnit.setaRoofCannon(bRoofCannon);
-            bCentralUnit.setaControlPanel(bControlPanel);
-            bCentralUnit.setaBreakPedal(bBreakPedal);
-            bCentralUnit.setaGasPedal(bGasPedal);
-            bCentralUnit.setaSteeringWheel(bSterringWheel);
-
             bDriver.setaBreakPedal(bBreakPedal);
             bDriver.setaGasPedal(bGasPedal);
+            bDriver.setaSterringWheel(bSterringWheel);
             bDriver.setaJoyStickFrontCannon(bJoystickFrontCannon);
 
             bOperator.setaControlPanel(bControlPanel);
             bOperator.setaJoystickRoofCannon(bJoystickRoofCannon);
+            bOperator.setbKnobFrontCannon(bKnobFrontCannon);
+            bOperator.setbKnobRoofCannon(bKnobRoofCannon);
 
             bControlPanel.setaSwitch(bSwitch);
+            bControlPanel.setaKnobFrontCannon(bKnobFrontCannon);
+            bControlPanel.setaKnobRoofCannon(bKnobRoofCannon);
+
+            bJoystick.setaLeftPressButton(bLeftPressButton);
+            bJoystick.setaRightPressButton(bRightPressButton);
 
             for (int i = 0; i < 4; i++){
                 bGasMask = new GasMask();
