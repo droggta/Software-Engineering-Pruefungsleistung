@@ -5,6 +5,7 @@ public class Startup {
     public static void main(String... args){
         FLF aFLF;
         aFLF = FLF.init();
+        aFLF.setaBuilder(null);
 
         Boolean repeat = true;
         Scanner scanner = new Scanner(System.in);

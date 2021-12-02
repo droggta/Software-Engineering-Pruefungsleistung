@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestApplication" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-02T19:28:27" hostname="DESKTOP-8VD62NE" time="0.075">
+<testsuite name="TestApplication" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-02T21:37:20" hostname="DESKTOP-8VD62NE" time="0.027">
   <properties/>
-  <testcase name="sum()" classname="TestApplication" time="0.075"/>
+  <testcase name="sum()" classname="TestApplication" time="0.027"/>
   <system-out><![CDATA[FLF initialisiert.
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

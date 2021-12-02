@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class FLF {
 
     private final PowerUnit aPowerUnit;
@@ -11,6 +9,7 @@ public class FLF {
     private final FrontPivot[] aFrontPivot;
     private final BackPivot[] aBackPivot;
     private final Cabine aCabine;
+    private Builder aBuilder;
 
     public static FLF init(){
         FLF Flughafen_Loeschfahrzeug = new FLF.Builder()
@@ -26,8 +25,14 @@ public class FLF {
                 .createCabine()
                 .build();
         System.out.println("FLF initialisiert.");
-
         return Flughafen_Loeschfahrzeug;
+    }
+
+    public Builder getaBuilder() {
+        return aBuilder;
+    }
+    public void setaBuilder(Builder pbuilder) {
+        aBuilder = pbuilder;
     }
 
     private FLF(Builder builder){
@@ -40,76 +45,77 @@ public class FLF {
         aFrontPivot = builder.bFrontPivot;
         aBackPivot = builder.bBackPivot;
         aCabine = builder.bCabine;
+        aBuilder = builder;
     }
 
     public static class Builder{
         // Klassen mit Verbindung zum FLF
-        private PowerUnit bPowerUnit;
-        private GroundSprayNozzle[] bGroundSprayNoozle;
-        private FrontCannon bFrontCannon;
-        private RoofCannon bRoofCannon;
-        private Lights[] bLights;
-        private CentralUnit bCentralUnit;
-        private FrontPivot[] bFrontPivot;
-        private BackPivot[] bBackPivot;
-        private Cabine bCabine;
+        public PowerUnit bPowerUnit;
+        public GroundSprayNozzle[] bGroundSprayNoozle;
+        public FrontCannon bFrontCannon;
+        public RoofCannon bRoofCannon;
+        public Lights[] bLights;
+        public CentralUnit bCentralUnit;
+        public FrontPivot[] bFrontPivot;
+        public BackPivot[] bBackPivot;
+        public Cabine bCabine;
         // Alle Klassen
-        private Battery[] bBattery;
-        private BatteryBox bBatteryBox;
-        private BlueLight bBlueLight;
-        private BreakDisc[] bBreakDisc;
-        private BreakingLight bBreakingLight;
-        private BreakPedal bBreakPedal;
-        private ControlPanel bControlPanel;
-        private DirectionIndicator bDirectionIndicator;
-        private Display bDisplay;
-        private DoorButton[] bDoorButton;
-        private Doors[] bDoors;
-        private Driver bDriver;
-        private ElectricMotor[] bElectricMotor;
-        private EnergyDisplay bEnergyDisplay;
-        private FoamTank bFoamTank;
-        private GasMask bGasMask;
-        private GasPedal bGasPedal;
-        private HeadLamp bHeadLamp;
-        private Joystick bJoystick;
-        private JoystickFrontCannon bJoystickFrontCannon;
-        private JoystickRoofCannon bJoystickRoofCannon;
-        private KeyButton bKeyButton;
-        private KnobFrontCannon bKnobFrontCannon;
-        private KnobRoofCannon bKnobRoofCannon;
-        private LED bLED;
-        private LeftPressButton bLeftPressButton;
-        private MixingUnit bMixingUnit;
-        private Operator bOperator;
-        private PieceSegment[] bPieceSegment;
-        private Pivot bPivot;
-        private PressButton bPressButton;
-        private RightPressButton bRightPressButton;
-        private Seats[] bSeats;
-        private Segment1 bSegment1;
-        private Segment2 bSegment2;
-        private SpeedDisplay bSpeedDisplay;
-        private SterringWheel bSterringWheel;
-        private Switch[] bSwitch;
-        private Tank bTank;
-        private WarningLight bWarningLight;
-        private WaterTank bWaterTank;
-        private Wheel[] bWheel;
+        public Battery[] bBattery;
+        public BatteryBox bBatteryBox;
+        public BlueLight bBlueLight;
+        public BreakDisc[] bBreakDisc;
+        public BreakingLight bBreakingLight;
+        public BreakPedal bBreakPedal;
+        public ControlPanel bControlPanel;
+        public DirectionIndicator bDirectionIndicator;
+        public Display bDisplay;
+        public DoorButton[] bDoorButton;
+        public Doors[] bDoors;
+        public Driver bDriver;
+        public ElectricMotor[] bElectricMotor;
+        public EnergyDisplay bEnergyDisplay;
+        public FoamTank bFoamTank;
+        public GasMask bGasMask;
+        public GasPedal bGasPedal;
+        public HeadLamp bHeadLamp;
+        public Joystick bJoystick;
+        public JoystickFrontCannon bJoystickFrontCannon;
+        public JoystickRoofCannon bJoystickRoofCannon;
+        public KeyButton bKeyButton;
+        public KnobFrontCannon bKnobFrontCannon;
+        public KnobRoofCannon bKnobRoofCannon;
+        public LED bLED;
+        public LeftPressButton bLeftPressButton;
+        public MixingUnit bMixingUnit;
+        public Operator bOperator;
+        public PieceSegment[] bPieceSegment;
+        public Pivot bPivot;
+        public PressButton bPressButton;
+        public RightPressButton bRightPressButton;
+        public Seats[] bSeats;
+        public Segment1 bSegment1;
+        public Segment2 bSegment2;
+        public SpeedDisplay bSpeedDisplay;
+        public SterringWheel bSterringWheel;
+        public Switch[] bSwitch;
+        public Tank bTank;
+        public WarningLight bWarningLight;
+        public WaterTank bWaterTank;
+        public Wheel[] bWheel;
         //Enumerations
-        private BatteryManagement bBatteryManagement;
-        private BatteryStatus bBatteryStatus;
-        private CannonModes bCannonModes;
-        private CannonSteps bCannonSteps;
-        private DoorStatus bDoorStatus;
-        private FoamRate bFoamRate;
-        private LEDColor bLEDColor;
-        private LightSize bLightSize;
-        private LightStatus bLightStatus;
-        private Position bPosition;
-        private SwitchStatus bSwitchStatus;
-        private SwitchType bSwitchType;
-        private TankSubstance bTankSubstance;
+        public BatteryManagement bBatteryManagement;
+        public BatteryStatus bBatteryStatus;
+        public CannonModes bCannonModes;
+        public CannonSteps bCannonSteps;
+        public DoorStatus bDoorStatus;
+        public FoamRate bFoamRate;
+        public LEDColor bLEDColor;
+        public LightSize bLightSize;
+        public LightStatus bLightStatus;
+        public Position bPosition;
+        public SwitchStatus bSwitchStatus;
+        public SwitchType bSwitchType;
+        public TankSubstance bTankSubstance;
 
         // Erstellen der Klassen am FLF und deren Unterklassen
         public Builder createPowerUnit(){
@@ -288,6 +294,7 @@ public class FLF {
         }
 
         public FLF build() {
+
             return new FLF(this);
         }
     }
