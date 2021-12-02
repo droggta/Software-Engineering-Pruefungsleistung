@@ -5,20 +5,20 @@ public abstract class Joystick {
     private RightPressButton aRightPressButton;
     private KeyButton aKeyButton;
 
-    public void setaLeftPressButton(LeftPressButton aLeftPressButton) {
-        this.aLeftPressButton = aLeftPressButton;
+    public static void setaLeftPressButton(LeftPressButton aLeftPressButton) {
+        aLeftPressButton = aLeftPressButton;
     }
 
-    public void setaRightPressButton(RightPressButton aRightPressButton) {
-        this.aRightPressButton = aRightPressButton;
+    public static void setaRightPressButton(RightPressButton aRightPressButton) {
+        aRightPressButton = aRightPressButton;
     }
 
-    public void setaKeyButton(KeyButton aKeyButton) {
-        this.aKeyButton = aKeyButton;
+    public static void setaKeyButton(KeyButton aKeyButton) {
+        aKeyButton = aKeyButton;
     }
 
-    public void setaCentralUnit(CentralUnit aCentralUnit) {
-        this.aCentralUnit = aCentralUnit;
+    public static void setaCentralUnit(CentralUnit aCentralUnit) {
+        aCentralUnit = aCentralUnit;
     }
 
 }

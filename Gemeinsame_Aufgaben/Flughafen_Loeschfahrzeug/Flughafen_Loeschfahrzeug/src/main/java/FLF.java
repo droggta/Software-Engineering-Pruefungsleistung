@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class FLF {
 
     private final PowerUnit aPowerUnit;
@@ -10,7 +12,7 @@ public class FLF {
     private final BackPivot[] aBackPivot;
     private final Cabine aCabine;
 
-    public static void main(String... args){
+    public static FLF init(){
         FLF Flughafen_Loeschfahrzeug = new FLF.Builder()
                 .createeverything()
                 .createPowerUnit()
@@ -23,7 +25,9 @@ public class FLF {
                 .createBackPivot()
                 .createCabine()
                 .build();
-        System.out.println("Test");
+        System.out.println("FLF initialisiert.");
+
+        return Flughafen_Loeschfahrzeug;
     }
 
     private FLF(Builder builder){
@@ -115,6 +119,7 @@ public class FLF {
         }
 
         public Builder createGroundSprayNozzle(){
+            bGroundSprayNoozle = new GroundSprayNozzle[7];
             for (int i = 0; i < 7; i++)
             {
                 bGroundSprayNoozle[i] = new GroundSprayNozzle();
