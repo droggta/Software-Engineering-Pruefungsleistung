@@ -158,4 +158,48 @@ public class TestApplication {
         //int result = calculator.sum(3, 4);
         assertEquals(7, 7);
     }
+
+    @Test
+    @Order(2)
+    public void usageControlPanel(){        //checks if the controlPanel
+        Switch[] tempaSwitch = aSwitch;
+
+        //All Functions the driver is allowed to call
+
+        for (int i=0;i < tempaSwitch.length; i++)
+        {
+          //  assertEquals(tempaSwitch[i].getaSwitchStatus(), aSwitch[i].getaSwitchStatus);     //get Method is required to make this code work
+        }
+    }
+
+    @Test
+    @Order(3)
+    public void handleParking(){
+        //assertEquals(MotorStatus.off, aElectricMotor[0].getaMotorStatus());       //check if electric motors are turned off
+        //assertEquals(MotorStatus.off, aElectricMotor[1].getaMotorStatus());
+        for(int i = 0; i < 4; i++){
+            assertEquals(null,aSeats[i].getPerson());                       //Check if all seats are free
+        }
+        //assertEquals(DoorStatus.open, aDoors[0].getaDoorStatus());                //check if doors are open
+        //assertEquals(DoorStatus.open, aDoors[1].getaDoorStatus());
+        //assertEquals(CannonStatus.retracted, aRoofCannon.getaCannonStatus());       //check roofcannon
+        assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
+        //check Headlamp. FLF has in total 10 headlamps => Array
+        for(int i=0; i < aHeadLamp.length; i++){
+            assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus);            //check HeadLights
+        }
+        for(int i=0; i < aDirectionIndicator.length; i++){
+            assertEquals(LightStatus.off, aDirectionIndicator[i].getaLightStatus);            //check DirectionIndicatorlights
+        }
+        assertEquals(LightStatus.off, aWarningLight.getaLightStatus());                     //Check if Warninglight is off
+        assertEquals(LightStatus.off, aBlueLight.getaLightStatus());                     //Check if BlueLight is off
+        assertEquals(12500, aWaterTank.getVolume());                            //check if watertank is 100% full
+        assertEquals(2500, aFoamTank.getVolume());                            //check if foamtank is 100% full
+        for(int i=0; i < aBattery.length, i++){
+            assertEquals(100000, aBattery[i].getaSoC);                      //Check if Batteries are 100% full (SoC=State of Charge)
+        }
+        assertEquals(CannonModes.modeA, aKnobFrontCannon.getaCannonMode());
+        assertEquals(CannonSteps.fuenfhundert, aKnobRoofCannon.getaCannonSteps());
+
+    }
 }

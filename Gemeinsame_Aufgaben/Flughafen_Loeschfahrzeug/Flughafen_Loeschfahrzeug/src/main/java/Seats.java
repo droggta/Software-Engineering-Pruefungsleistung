@@ -16,6 +16,23 @@ public class Seats {
         this.aGasMask = aGasMask;
     }
 
+    public String getPerson(){
+
+        if(aOperator != null) {
+            return "Operator";
+        }
+        else if(aDriver != null) {
+            return "Driver";
+        }
+        else if(aDriver != null && aOperator != null){
+            return "Error";
+        }
+        else{
+            return null;
+        }
+
+    }
+
     public Seats() {
 
     }
