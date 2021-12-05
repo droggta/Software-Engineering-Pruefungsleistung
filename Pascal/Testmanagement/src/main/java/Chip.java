@@ -9,5 +9,5 @@ public class Chip {
         uuid = puuid;
     }
 
-    public Core[] getKerne() { return kerne;}
+    public Core[] getCores() { return kerne;}
 }
