@@ -184,7 +184,7 @@ public class TestApplication {
         //assertEquals(DoorStatus.open, aDoors[1].getaDoorStatus());
         //assertEquals(CannonStatus.retracted, aRoofCannon.getaCannonStatus());       //check roofcannon
         assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
-        //check Headlamp. FLF has in total 10 headlamps => Array
+        //check Headlamp. FLF has in total 10 headlamps => Array(3 headlamps on each side and 4 on the roof)
         for(int i=0; i < aHeadLamp.length; i++){
             assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus);            //check HeadLights
         }
@@ -201,5 +201,42 @@ public class TestApplication {
         assertEquals(CannonModes.modeA, aKnobFrontCannon.getaCannonMode());
         assertEquals(CannonSteps.fuenfhundert, aKnobRoofCannon.getaCannonSteps());
 
+    }
+
+    @Test
+    @Order(7)
+    public void handlePushbackVehicleOnFire(){
+        assertEquals(MotorStatus.on,aElectricMotor[0].getaMotorStatus());      //Check if electric motors are turned on
+        assertEquals(MotorStatus.on,aElectricMotor[1].getaMotorStatus());
+        assertEquals("Driver", aSeats[0].getPerson());                  //Check if the Driver sits on seat 0
+        assertEquals("Operator", aSeats[1].getPerson());                //Check if the Operator sits on seat 1
+        assertEquals(LightStatus.on, aWarningLight.getaLightStatus());          //Check if Warninglight is on
+        assertEquals(LightStatus.on, aBlueLight.getaLightStatus());             //Check if BlueLight is on
+        //Tank mit Wasser inital 100% gefüllt
+        //Tank mit Schaum inital 100% gefüllt
+        //!!!! JOYSTICK VERHALTEN + RICHTIGER VERBRAUCH  !!!!!
+
+    }
+
+    @Test
+    @Order(8)
+    public void handleAirplaneEngineFire(){
+        assertEquals(MotorStatus.on, aElectricMotor[0].getMotorStatus());       //Check if electric motors are turned on
+        assertEquals(MotorStatur.on, aElectricMotor[1].getMotorStatus());
+
+        assertEquals("Driver", aSeats[0].getPerson());                  //Check if driver sits on seat 0
+        assertEquals("Operator", aSeats[1].getPerson());                //Check if operator sits on sear 1
+        assertEquals(DoorStatus.closed, aDoors[0].getaDoorStatus());            //Check if both doors are closed
+        assertEquals(DoorStatus.closed, aDoors[1].getaDoorStatus());
+        assertEquals(CannonStatus.activated, aRoofCannon.getaCannonStatus());   //Check if rootcannon is activated
+        //check Headlamp. FLF has in total 10 headlamps => Array(3 headlamps on each side and 4 on the roof)
+        for(int i=0; i < aHeadLamp.length; i++){
+            assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus);            //check headlights(roof and side)
+        }
+        assertEquals(LightStatus.on, aWarningLight.getaLightStatus());              //check if warninglight is on
+        assertEquals(LightStatus.on, aBlueLight.getaLightStatus());                 //check if bluelight is on
+        //Tank mit Wasser inital 100% gefüllt
+        //Tank mit Schaum inital 100% gefüllt
+        //WEITERE SACHEN MÜSSEN HIER ZUM TEST HINZUGEFÜGT WERDEN
     }
 }
