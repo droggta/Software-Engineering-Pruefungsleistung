@@ -10,6 +10,7 @@ public class FLF {
     private final BackPivot[] aBackPivot;
     private final Cabine aCabine;
     private Builder aBuilder;
+    private int velocity = 0;
 
     public static FLF init(){
         FLF Flughafen_Loeschfahrzeug = new FLF.Builder()

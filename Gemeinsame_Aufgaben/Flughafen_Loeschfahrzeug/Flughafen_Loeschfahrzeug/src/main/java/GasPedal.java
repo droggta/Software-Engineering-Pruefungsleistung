@@ -10,8 +10,11 @@ public class GasPedal implements Pedal{
 
     }
 
+    /**
+     * changes the current speed +4km/h
+     */
     public void changeSpeedStep(){
-
+        aCentralUnit.changeSpeedStep(1);
     }
 
 }

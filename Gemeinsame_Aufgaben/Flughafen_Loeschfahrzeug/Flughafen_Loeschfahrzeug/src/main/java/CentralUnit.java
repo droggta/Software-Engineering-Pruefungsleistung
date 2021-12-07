@@ -35,4 +35,10 @@ public class CentralUnit {
 
     }
 
+    /**
+     * changes the speed of the FLF by i km/h
+     * @param i speed change in km/h
+     */
+    public void changeSpeedStep(int i) {
+    }
 }
