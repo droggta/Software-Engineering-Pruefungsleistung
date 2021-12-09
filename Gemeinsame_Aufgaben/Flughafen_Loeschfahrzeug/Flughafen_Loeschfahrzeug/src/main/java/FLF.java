@@ -10,7 +10,7 @@ public class FLF {
     private final BackPivot[] aBackPivot;
     private final Cabine aCabine;
     private Builder aBuilder;
-    private int velocity = 0;
+    private int aVelocity = 0;
 
     public static FLF init(){
         FLF Flughafen_Loeschfahrzeug = new FLF.Builder()
@@ -48,6 +48,7 @@ public class FLF {
         aCabine = builder.bCabine;
         aBuilder = builder;
     }
+
 
     public static class Builder{
         // Klassen mit Verbindung zum FLF
@@ -299,4 +300,16 @@ public class FLF {
             return new FLF(this);
         }
     }
+
+    /**
+     * Changes the current velocity if the FLF and sends info to speed display and power unit
+     * @param i change of velocity in km/h
+     */
+    public void updateaVelocity(int i) {
+        aVelocity = aVelocity + i;
+        aCabine.setaSpeedDisplayValue(aVelocity);       //handles the visualization of the velocity by sending the value to cabine
+        aPowerUnit.provide(aVelocity);
+    }
+
+
 }

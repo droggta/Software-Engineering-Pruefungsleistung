@@ -10,6 +10,7 @@ public class Cabine {
     private GasPedal aGasPedal;
     private BreakPedal aBreakPedal;
     private SterringWheel aSterringWheel;
+    private int velocity = 0;
 
     public void setaGasPedal(GasPedal aGasPedal) {
         this.aGasPedal = aGasPedal;
@@ -55,4 +56,11 @@ public class Cabine {
 
     }
 
+    /**
+     * Sets the speed being displayed in the display
+     * @param aVelocity speed in km/h
+     */
+    public void setaSpeedDisplayValue(int aVelocity) {
+        aSpeedDisplay.setValue(aVelocity);
+    }
 }

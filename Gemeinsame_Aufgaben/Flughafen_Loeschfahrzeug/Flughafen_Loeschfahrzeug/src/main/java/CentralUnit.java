@@ -6,6 +6,7 @@ public class CentralUnit {
     private BreakPedal aBreakPedal;
     private SterringWheel aSteeringWheel;
     private ControlPanel aControlPanel;
+    private FLF aFLF;
 
     public void setaJoystickRoofCannon(JoystickRoofCannon aJoystickRoofCannon) {
         this.aJoystickRoofCannon = aJoystickRoofCannon;
@@ -31,6 +32,10 @@ public class CentralUnit {
         this.aControlPanel = aControlPanel;
     }
 
+    public void setaFLF(FLF aFLF) {
+        this.aFLF = aFLF;
+    }
+
     public CentralUnit() {
 
     }
@@ -40,5 +45,6 @@ public class CentralUnit {
      * @param i speed change in km/h
      */
     public void changeSpeedStep(int i) {
+        aFLF.updateaVelocity(i);
     }
 }
