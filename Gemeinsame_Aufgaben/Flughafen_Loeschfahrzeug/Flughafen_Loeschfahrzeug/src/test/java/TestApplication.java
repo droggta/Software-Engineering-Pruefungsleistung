@@ -271,7 +271,7 @@ public class TestApplication {
     @Test
     @Order(4)
     public void handleInspectionDrive(){
-
+        assertEquals(SwitchStatus.on, aElectricMotor.getaStatus());
     }
 
     @Test

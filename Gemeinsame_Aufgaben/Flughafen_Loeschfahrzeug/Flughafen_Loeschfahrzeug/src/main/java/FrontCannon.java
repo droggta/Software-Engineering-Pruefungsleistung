@@ -1,6 +1,7 @@
 public class FrontCannon {
 
     private MixingUnit aMixingUnit;
+
     private CannonStatus aCannonStatus;
 
     public void setaMixingUnit(MixingUnit aMixingUnit) {
@@ -9,6 +10,10 @@ public class FrontCannon {
 
     public void setaCannonStatus(CannonStatus aCannonStatus) {
         this.aCannonStatus = aCannonStatus;
+    }
+
+    public CannonStatus getaCannonStatus() {
+        return aCannonStatus;
     }
 
     public FrontCannon() {
