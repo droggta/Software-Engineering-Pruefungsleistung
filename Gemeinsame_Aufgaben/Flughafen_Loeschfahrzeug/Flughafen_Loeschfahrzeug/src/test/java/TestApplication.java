@@ -156,7 +156,72 @@ public class TestApplication {
     @Order(1)
     public void sum() {
         //int result = calculator.sum(3, 4);
-        assertEquals(7, 7);
+        assertNotNull(aBackPivot);
+        assertNotNull(aBattery);
+        assertNotNull(aBatteryBox);
+        assertNotNull(aBatteryManagement);
+        assertNotNull(aBatteryStatus);
+        assertNotNull(aBlueLight);
+        assertNotNull(aBreakDisc);
+        assertNotNull(aBreakingLight);
+        assertNotNull(aBreakPedal);
+        assertNotNull(aCabine);
+        assertNotNull(aCannonModes);
+        assertNotNull(aCannonSteps);
+        assertNotNull(aCentralUnit);
+        assertNotNull(aControlPanel);
+        assertNotNull(aDirectionIndicator);
+        assertNotNull(aDisplay);
+        assertNotNull(aDoorButton);
+        assertNotNull(aDoors);
+        assertNotNull(aDoorStatus);
+        assertNotNull(aDriver);
+        assertNotNull(aElectricMotor);
+        assertNotNull(aEnergyDisplay);
+        assertNotNull(aFLF);
+        assertNotNull(aFoamRate);
+        assertNotNull(aFoamTank);
+        assertNotNull(aFrontCannon);
+        assertNotNull(aFrontPivot);
+        assertNotNull(aGasMask);
+        assertNotNull(aGasPedal);
+        assertNotNull(aGroundSprayNoozle);
+        assertNotNull(aHeadLamp);
+        assertNotNull(aJoystick);
+        assertNotNull(aJoystickFrontCannon);
+        assertNotNull(aJoystickRoofCannon);
+        assertNotNull(aKeyButton);
+        assertNotNull(aKnobFrontCannon);
+        assertNotNull(aKnobRoofCannon);
+        assertNotNull(aLED);
+        assertNotNull(aLEDColor);
+        assertNotNull(aLeftPressButton);
+        assertNotNull(aLights);
+        assertNotNull(aLightSize);
+        assertNotNull(aLightStatus);
+        assertNotNull(aMixingUnit);
+        assertNotNull(aOperator);
+        assertNotNull(aPieceSegment);
+        assertNotNull(aPivot);
+        assertNotNull(aPosition);
+        assertNotNull(aPowerUnit);
+        assertNotNull(aPressButton);
+        assertNotNull(aRightPressButton);
+        assertNotNull(aRoofCannon);
+        assertNotNull(aSeats);
+        assertNotNull(aSegment1);
+        assertNotNull(aSegment2);
+        assertNotNull(aSpeedDisplay);
+        assertNotNull(aSterringWheel);
+        assertNotNull(aSwitch);
+        assertNotNull(aSwitchStatus);
+        assertNotNull(aSwitchType);
+        assertNotNull(aTank);
+        assertNotNull(aTankSubstance);
+        assertNotNull(aWarningLight);
+        assertNotNull(aWaterTank);
+        assertNotNull(aWheel);
+
     }
 
     @Test
@@ -200,6 +265,24 @@ public class TestApplication {
         }
         assertEquals(CannonModes.modeA, aKnobFrontCannon.getaCannonMode());
         assertEquals(CannonSteps.fuenfhundert, aKnobRoofCannon.getaCannonSteps());
+
+    }
+
+    @Test
+    @Order(4)
+    public void handleInspectionDrive(){
+
+    }
+
+    @Test
+    @Order(5)
+    public void handleEmergencyService(){
+
+    }
+
+    @Test
+    @Order(6)
+    public void handleFuelTruckOnFire(){
 
     }
 
