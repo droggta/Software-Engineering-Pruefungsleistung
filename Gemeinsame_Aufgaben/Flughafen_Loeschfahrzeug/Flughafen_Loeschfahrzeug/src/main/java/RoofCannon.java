@@ -21,6 +21,10 @@ public class RoofCannon {
         this.aCannonStatus = aCannonStatus;
     }
 
+    public CannonStatus getaCannonStatus() {
+        return aCannonStatus;
+    }
+
     public RoofCannon() {
 
     }

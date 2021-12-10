@@ -1,6 +1,7 @@
 public class ElectricMotor {
 
     SwitchStatus aStatus;
+    MotorStatus aMotorStatus;
 
     public ElectricMotor() {
         aStatus = SwitchStatus.off;
@@ -14,4 +15,7 @@ public class ElectricMotor {
         this.aStatus = aStatus;
     }
 
+    public MotorStatus getaMotorStatus() {
+        return aMotorStatus;
+    }
 }

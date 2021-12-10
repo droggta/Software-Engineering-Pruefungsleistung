@@ -1,7 +1,12 @@
 public class KnobRoofCannon {
 
-    public KnobRoofCannon() {
+    private CannonSteps aCannonSteps;
 
+    public KnobRoofCannon() {
+        aCannonSteps = CannonSteps.fuenfhundert;
     }
 
+    public CannonSteps getaCannonSteps() {
+        return aCannonSteps;
+    }
 }

@@ -260,10 +260,10 @@ public class TestApplication {
         assertEquals(LightStatus.off, aBlueLight.getaLightStatus());                     //Check if BlueLight is off
         assertEquals(12500, aWaterTank.getVolume());                            //check if watertank is 100% full
         assertEquals(2500, aFoamTank.getVolume());                            //check if foamtank is 100% full
-        for(int i=0; i < aBattery.length, i++){
-            assertEquals(100000, aBattery[i].getaSoC);                      //Check if Batteries are 100% full (SoC=State of Charge)
+        for(int i=0; i < aBattery.length; i++){
+            assertEquals(100000, aBattery[i].getaSoC());                      //Check if Batteries are 100% full (SoC=State of Charge)
         }
-        assertEquals(CannonModes.modeA, aKnobFrontCannon.getaCannonMode());
+        assertEquals(CannonModes.modeA, aKnobFrontCannon.getaCannonModes());
         assertEquals(CannonSteps.fuenfhundert, aKnobRoofCannon.getaCannonSteps());
 
     }
@@ -271,7 +271,6 @@ public class TestApplication {
     @Test
     @Order(4)
     public void handleInspectionDrive(){
-        assertEquals(SwitchStatus.on, aElectricMotor.getaStatus());
     }
 
     @Test
@@ -283,7 +282,6 @@ public class TestApplication {
     @Test
     @Order(6)
     public void handleFuelTruckOnFire(){
-        aJoystickRoofCannon.
 
     }
 
@@ -305,8 +303,8 @@ public class TestApplication {
     @Test
     @Order(8)
     public void handleAirplaneEngineFire(){
-        assertEquals(MotorStatus.on, aElectricMotor[0].getMotorStatus());       //Check if electric motors are turned on
-        assertEquals(MotorStatur.on, aElectricMotor[1].getMotorStatus());
+        assertEquals(MotorStatus.on, aElectricMotor[0].getaMotorStatus());       //Check if electric motors are turned on
+        assertEquals(MotorStatus.on, aElectricMotor[1].getaMotorStatus());
 
         assertEquals("Driver", aSeats[0].getPerson());                  //Check if driver sits on seat 0
         assertEquals("Operator", aSeats[1].getPerson());                //Check if operator sits on sear 1

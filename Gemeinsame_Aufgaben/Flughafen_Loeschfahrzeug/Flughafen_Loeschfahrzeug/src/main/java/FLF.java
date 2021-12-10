@@ -309,7 +309,7 @@ public class FLF {
     public void updateaVelocity(int i) {
         aVelocity = aVelocity + i;
         aCabine.setaSpeedDisplayValue(aVelocity);       //handles the visualization of the velocity by sending the value to cabine
-        aPowerUnit.provide(aVelocity);
+        //aPowerUnit.provide(aVelocity); still in implementation
     }
 
     /**

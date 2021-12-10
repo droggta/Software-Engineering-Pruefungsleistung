@@ -8,6 +8,10 @@ public class Doors {
         this.aDoorButton = aDoorButton;
     }
 
+    public DoorStatus getaDoorStatus() {
+        return aDoorStatus;
+    }
+
     public Doors() {
 
     }
