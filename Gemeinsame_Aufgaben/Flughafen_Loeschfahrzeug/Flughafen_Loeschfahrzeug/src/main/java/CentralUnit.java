@@ -47,4 +47,12 @@ public class CentralUnit {
     public void changeSpeedStep(int i) {
         aFLF.updateaVelocity(i);
     }
+
+    /**
+     * Sends the updated steeringangle to the FLF
+     * @param aSteeringAngle Parameter given in % (minus=left, positiv=right)
+     */
+    public void steerFLF(int aSteeringAngle) {
+        aFLF.steerFLF(aSteeringAngle);
+    }
 }

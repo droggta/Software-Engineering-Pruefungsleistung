@@ -283,6 +283,7 @@ public class TestApplication {
     @Test
     @Order(6)
     public void handleFuelTruckOnFire(){
+        aJoystickRoofCannon.
 
     }
 

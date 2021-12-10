@@ -50,6 +50,7 @@ public class FLF {
     }
 
 
+
     public static class Builder{
         // Klassen mit Verbindung zum FLF
         public PowerUnit bPowerUnit;
@@ -309,6 +310,20 @@ public class FLF {
         aVelocity = aVelocity + i;
         aCabine.setaSpeedDisplayValue(aVelocity);       //handles the visualization of the velocity by sending the value to cabine
         aPowerUnit.provide(aVelocity);
+    }
+
+    /**
+     * Sends the steering angle to both front pivots and direction indicators
+     * @param aSteeringAngle Parameter given in % (minus=left, positiv=right)
+     */
+    public void steerFLF(int aSteeringAngle) {
+        for(int i = 0; i < aFrontPivot.length; i++){
+            aFrontPivot[0].updateaSteerAngle(aSteeringAngle);   //steering angle is send to both front pivots
+        }
+
+        //send information to direction indicators
+        ab
+
     }
 
 
