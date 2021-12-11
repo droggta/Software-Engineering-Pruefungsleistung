@@ -1,8 +1,8 @@
 public abstract class Lights {
 
-    private LightSize size;
-    private LightStatus aLightStatus;
-    private Position position;
+    protected LightSize aSize;
+    protected LightStatus aLightStatus;
+    protected Position aPosition;
 
     /**
      * sets the status of the light to on

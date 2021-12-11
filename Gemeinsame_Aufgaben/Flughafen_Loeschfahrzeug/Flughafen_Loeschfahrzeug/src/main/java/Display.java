@@ -4,7 +4,9 @@ public abstract class Display {
 
     /**
      * sets the value being shown in the display
-     * @param value is the parameter shown in the display
+     * @param pValue is the parameter shown in the display
      */
-    public abstract void setValue(int value);
+    public void setValue(int pValue){
+        displayedValue = pValue;
+    };
 }

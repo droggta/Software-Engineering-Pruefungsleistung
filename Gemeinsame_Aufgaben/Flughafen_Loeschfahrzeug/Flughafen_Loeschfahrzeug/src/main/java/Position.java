@@ -6,6 +6,8 @@ public enum Position {
     backRight,
     frontRoofLeft,
     frontRoofRight,
+    backRoofLeft,
+    backRoofRight,
     left,
     right,
     outdoor,

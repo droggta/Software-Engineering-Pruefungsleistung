@@ -7,7 +7,9 @@ public class PowerUnit {
     }
 
     public PowerUnit() {
-
+        //*****************************************************************************
+        //* Beispielzugriff auf BatteryManagement: BatteryManagement.instance.load(); *
+        //*****************************************************************************
     }
 
 }

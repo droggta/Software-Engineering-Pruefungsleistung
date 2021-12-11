@@ -24,12 +24,12 @@ public class TestApplication {
     // Alle Klassen
     private Battery[] aBattery;
     private BatteryBox aBatteryBox;
-    private BlueLight aBlueLight;
+    private BlueLight[] aBlueLight;
     private BreakDisc[] aBreakDisc;
-    private BreakingLight aBreakingLight;
+    private BreakingLight[] aBreakingLight;
     private BreakPedal aBreakPedal;
     private ControlPanel aControlPanel;
-    private DirectionIndicator aDirectionIndicator;
+    private DirectionIndicator[] aDirectionIndicator;
     private Display aDisplay;
     private DoorButton[] aDoorButton;
     private Doors[] aDoors;
@@ -39,7 +39,7 @@ public class TestApplication {
     private FoamTank aFoamTank;
     private GasMask aGasMask;
     private GasPedal aGasPedal;
-    private HeadLamp aHeadLamp;
+    private HeadLamp[] aHeadLamp;
     private Joystick aJoystick;
     private JoystickFrontCannon aJoystickFrontCannon;
     private JoystickRoofCannon aJoystickRoofCannon;
@@ -61,7 +61,7 @@ public class TestApplication {
     private SterringWheel aSterringWheel;
     private Switch[] aSwitch;
     private Tank aTank;
-    private WarningLight aWarningLight;
+    private WarningLight[] aWarningLight;
     private WaterTank aWaterTank;
     private Wheel[] aWheel;
     //Enumerations
@@ -96,12 +96,12 @@ public class TestApplication {
         // Alle Klassen
         aBattery = aBuilder.bBattery;
         aBatteryBox = aBuilder.bBatteryBox;
-        aBlueLight = aBuilder.bBlueLight;
+        aBlueLight = aBuilder.bBlueLights;
         aBreakDisc = aBuilder.bBreakDisc;
-        aBreakingLight = aBuilder.bBreakingLight;
+        aBreakingLight = aBuilder.bBreakingLights;
         aBreakPedal = aBuilder.bBreakPedal;
         aControlPanel = aBuilder.bControlPanel;
-        aDirectionIndicator = aBuilder.bDirectionIndicator;
+        aDirectionIndicator = aBuilder.bDirectionIndicators;
         aDisplay = aBuilder.bDisplay;
         aDoorButton = aBuilder.bDoorButton;
         aDoors = aBuilder.bDoors;
@@ -111,7 +111,7 @@ public class TestApplication {
         aFoamTank = aBuilder.bFoamTank;
         aGasMask = aBuilder.bGasMask;
         aGasPedal = aBuilder.bGasPedal;
-        aHeadLamp = aBuilder.bHeadLamp;
+        aHeadLamp = aBuilder.bHeadLamps;
         aJoystick = aBuilder.bJoystick;
         aJoystickFrontCannon = aBuilder.bJoystickFrontCannon;
         aJoystickRoofCannon = aBuilder.bJoystickRoofCannon;
@@ -133,7 +133,7 @@ public class TestApplication {
         aSterringWheel = aBuilder.bSterringWheel;
         aSwitch = aBuilder.bSwitch;
         aTank = aBuilder.bTank;
-        aWarningLight = aBuilder.bWarningLight;
+        aWarningLight = aBuilder.bWarningLights;
         aWaterTank = aBuilder.bWaterTank;
         aWheel = aBuilder.bWheel;
         //Enumerations
@@ -251,13 +251,13 @@ public class TestApplication {
         assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
         //check Headlamp. FLF has in total 10 headlamps => Array(3 headlamps on each side and 4 on the roof)
         for(int i=0; i < aHeadLamp.length; i++){
-            assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus);            //check HeadLights
+            assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus());            //check HeadLights
         }
         for(int i=0; i < aDirectionIndicator.length; i++){
-            assertEquals(LightStatus.off, aDirectionIndicator[i].getaLightStatus);            //check DirectionIndicatorlights
+            assertEquals(LightStatus.off, aDirectionIndicator[i].getaLightStatus());            //check DirectionIndicatorlights
         }
-        assertEquals(LightStatus.off, aWarningLight.getaLightStatus());                     //Check if Warninglight is off
-        assertEquals(LightStatus.off, aBlueLight.getaLightStatus());                     //Check if BlueLight is off
+        assertEquals(LightStatus.off, aWarningLight[].getaLightStatus());                     //Check if Warninglight is off
+        assertEquals(LightStatus.off, aBlueLight[].getaLightStatus());                     //Check if BlueLight is off
         assertEquals(12500, aWaterTank.getVolume());                            //check if watertank is 100% full
         assertEquals(2500, aFoamTank.getVolume());                            //check if foamtank is 100% full
         for(int i=0; i < aBattery.length; i++){
@@ -292,8 +292,8 @@ public class TestApplication {
         assertEquals(MotorStatus.on,aElectricMotor[1].getaMotorStatus());
         assertEquals("Driver", aSeats[0].getPerson());                  //Check if the Driver sits on seat 0
         assertEquals("Operator", aSeats[1].getPerson());                //Check if the Operator sits on seat 1
-        assertEquals(LightStatus.on, aWarningLight.getaLightStatus());          //Check if Warninglight is on
-        assertEquals(LightStatus.on, aBlueLight.getaLightStatus());             //Check if BlueLight is on
+        assertEquals(LightStatus.on, aWarningLight[].getaLightStatus());          //Check if Warninglight is on
+        assertEquals(LightStatus.on, aBlueLight[].getaLightStatus());             //Check if BlueLight is on
         //Tank mit Wasser inital 100% gefüllt
         //Tank mit Schaum inital 100% gefüllt
         //!!!! JOYSTICK VERHALTEN + RICHTIGER VERBRAUCH  !!!!!
@@ -313,10 +313,10 @@ public class TestApplication {
         assertEquals(CannonStatus.activated, aRoofCannon.getaCannonStatus());   //Check if rootcannon is activated
         //check Headlamp. FLF has in total 10 headlamps => Array(3 headlamps on each side and 4 on the roof)
         for(int i=0; i < aHeadLamp.length; i++){
-            assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus);            //check headlights(roof and side)
+            assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus());            //check headlights(roof and side)
         }
-        assertEquals(LightStatus.on, aWarningLight.getaLightStatus());              //check if warninglight is on
-        assertEquals(LightStatus.on, aBlueLight.getaLightStatus());                 //check if bluelight is on
+        assertEquals(LightStatus.on, aWarningLight[].getaLightStatus());              //check if warninglight is on
+        assertEquals(LightStatus.on, aBlueLight[].getaLightStatus());                 //check if bluelight is on
         //Tank mit Wasser inital 100% gefüllt
         //Tank mit Schaum inital 100% gefüllt
         //WEITERE SACHEN MÜSSEN HIER ZUM TEST HINZUGEFÜGT WERDEN
