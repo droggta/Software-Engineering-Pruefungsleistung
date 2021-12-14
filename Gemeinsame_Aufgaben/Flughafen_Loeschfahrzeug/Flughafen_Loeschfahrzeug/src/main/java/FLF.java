@@ -88,13 +88,13 @@ public class FLF {
         public KnobFrontCannon bKnobFrontCannon;
         public KnobRoofCannon bKnobRoofCannon;
         public LED bLED;
-        public LeftPressButton bLeftPressButton;
+        //public LeftPressButton bLeftPressButton;
         public MixingUnit bMixingUnit;
         public Operator bOperator;
         public PieceSegment[] bPieceSegment;
         public Pivot bPivot;
-        public PressButton bPressButton;
-        public RightPressButton bRightPressButton;
+        public PressButton[] bPressButton;
+        //public RightPressButton bRightPressButton;
         public Seats[] bSeats;
         public Segment1 bSegment1;
         public Segment2 bSegment2;
@@ -229,17 +229,22 @@ public class FLF {
             bFoamTank = new FoamTank();
             bFrontCannon = new FrontCannon();
             bGasPedal = new GasPedal();
-            bJoystickFrontCannon = new JoystickFrontCannon();
-            bJoystickRoofCannon = new JoystickRoofCannon();
+            bJoystickFrontCannon = new JoystickFrontCannon(bCentralUnit);
+            bJoystickRoofCannon = new JoystickRoofCannon(bCentralUnit);
             bKeyButton = new KeyButton();
             bKnobFrontCannon = new KnobFrontCannon();
             bKnobRoofCannon = new KnobRoofCannon();
             bLED = new LED();
-            bLeftPressButton = new LeftPressButton();
+            //bLeftPressButton = new LeftPressButton();
             bMixingUnit = new MixingUnit();
             bOperator = new Operator();
             bPieceSegment = new PieceSegment[]{new PieceSegment(), new PieceSegment(), new PieceSegment()};
-            bRightPressButton = new RightPressButton();
+            //bRightPressButton = new RightPressButton();
+            bPressButton = new PressButton[4];
+            bPressButton[0] = new LeftPressButton(bJoystickFrontCannon);
+            bPressButton[1] = new LeftPressButton(bJoystickRoofCannon);
+            bPressButton[2] = new RightPressButton(bJoystickFrontCannon);
+            bPressButton[3] = new RightPressButton(bJoystickRoofCannon);
             bRoofCannon = new RoofCannon();
             bSeats = new Seats[]{new Seats(), new Seats(), new Seats(), new Seats()};
             bSegment1 = new Segment1();
@@ -276,8 +281,13 @@ public class FLF {
             bKnobFrontCannon.setaControlPanel(bControlPanel);
             bKnobRoofCannon.setaControlPanel(bControlPanel);
 
-            bJoystick.setaLeftPressButton(bLeftPressButton);
-            bJoystick.setaRightPressButton(bRightPressButton);
+
+            bJoystickFrontCannon.setaLeftPressButton((LeftPressButton) bPressButton[0]);
+            bJoystickFrontCannon.setaRightPressButton((RightPressButton) bPressButton[2]);
+            bJoystickRoofCannon.setaLeftPressButton((LeftPressButton) bPressButton[1]);
+            bJoystickRoofCannon.setaRightPressButton((RightPressButton) bPressButton[3]);
+            //bJoystick.setaLeftPressButton(bPressButton[0]);
+            //bJoystick.setaRightPressButton(bPressButton[2]);
 
             for (int i = 0; i < 4; i++){
                 bGasMask = new GasMask();

@@ -47,13 +47,11 @@ public class TestApplication {
     private KnobFrontCannon aKnobFrontCannon;
     private KnobRoofCannon aKnobRoofCannon;
     private LED aLED;
-    private LeftPressButton aLeftPressButton;
     private MixingUnit aMixingUnit;
     private Operator aOperator;
     private PieceSegment[] aPieceSegment;
     private Pivot aPivot;
-    private PressButton aPressButton;
-    private RightPressButton aRightPressButton;
+    private PressButton[] aPressButton;
     private Seats[] aSeats;
     private Segment1 aSegment1;
     private Segment2 aSegment2;
@@ -119,13 +117,11 @@ public class TestApplication {
         aKnobFrontCannon = aBuilder.bKnobFrontCannon;
         aKnobRoofCannon = aBuilder.bKnobRoofCannon;
         aLED = aBuilder.bLED;
-        aLeftPressButton = aBuilder.bLeftPressButton;
         aMixingUnit = aBuilder.bMixingUnit;
         aOperator = aBuilder.bOperator;
         aPieceSegment = aBuilder.bPieceSegment;
         aPivot = aBuilder.bPivot;
         aPressButton = aBuilder.bPressButton;
-        aRightPressButton = aBuilder.bRightPressButton;
         aSeats = aBuilder.bSeats;
         aSegment1 = aBuilder.bSegment1;
         aSegment2 = aBuilder.bSegment2;
@@ -195,7 +191,6 @@ public class TestApplication {
         assertNotNull(aKnobRoofCannon);
         assertNotNull(aLED);
         assertNotNull(aLEDColor);
-        assertNotNull(aLeftPressButton);
         assertNotNull(aLights);
         assertNotNull(aLightSize);
         assertNotNull(aLightStatus);
@@ -206,7 +201,6 @@ public class TestApplication {
         assertNotNull(aPosition);
         assertNotNull(aPowerUnit);
         assertNotNull(aPressButton);
-        assertNotNull(aRightPressButton);
         assertNotNull(aRoofCannon);
         assertNotNull(aSeats);
         assertNotNull(aSegment1);

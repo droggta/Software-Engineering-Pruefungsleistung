@@ -1,8 +1,13 @@
 public class JoystickRoofCannon extends Joystick{
 
-    public JoystickRoofCannon() {
+    public JoystickRoofCannon(CentralUnit c) {
+        super(c);
 
     }
+
+
+
+
 
 
 

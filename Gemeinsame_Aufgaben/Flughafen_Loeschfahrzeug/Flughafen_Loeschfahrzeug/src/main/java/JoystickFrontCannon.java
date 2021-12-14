@@ -1,8 +1,7 @@
 public class JoystickFrontCannon extends Joystick{
 
-    public JoystickFrontCannon() {
-
+    public JoystickFrontCannon(CentralUnit c) {
+        super(c);
     }
-
 
 }

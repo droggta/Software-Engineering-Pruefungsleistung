@@ -5,6 +5,15 @@ public abstract class Joystick {
     private RightPressButton aRightPressButton;
     private KeyButton aKeyButton;
 
+
+    public Joystick(CentralUnit aCentralUnit) {
+        this.aCentralUnit = aCentralUnit;
+    }
+
+    public Joystick() {
+
+    }
+
     public static void setaLeftPressButton(LeftPressButton aLeftPressButton) {
         aLeftPressButton = aLeftPressButton;
     }
