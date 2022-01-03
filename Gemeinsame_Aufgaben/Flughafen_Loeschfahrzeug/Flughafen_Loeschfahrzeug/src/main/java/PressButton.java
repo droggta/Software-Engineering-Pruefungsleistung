@@ -5,9 +5,6 @@ public abstract class PressButton {
     private Joystick bJoystick;
 
     public void push(){
-
-
-
         if (aButtonStatus == ButtonStatus.active)
         {
             aButtonStatus = ButtonStatus.inactiv;
@@ -16,6 +13,8 @@ public abstract class PressButton {
             {
                 aButtonStatus = ButtonStatus.active;
             }
+
+        bJoystick.pushPressButton(aPosition, aButtonStatus);
 
     }
 

@@ -1,6 +1,6 @@
 public abstract class Joystick {
 
-    private CentralUnit aCentralUnit;
+    protected CentralUnit aCentralUnit;
     private LeftPressButton aLeftPressButton;
     private RightPressButton aRightPressButton;
     private KeyButton aKeyButton;
@@ -30,4 +30,5 @@ public abstract class Joystick {
         aCentralUnit = aCentralUnit;
     }
 
+    public abstract void pushPressButton(Position aPosition, ButtonStatus aButtonStatus);
 }
