@@ -49,6 +49,13 @@ public class FLF {
         aBuilder = builder;
     }
 
+    public void setaRoofCannonStatus(CannonStatus cStatus) {
+        aRoofCannon.setaCannonStatus(cStatus);
+    }
+
+    public void setRoofCannonAngle(int angle) {
+        aRoofCannon.setRoofCannonAngle(angle);
+    }
 
 
     public static class Builder{

@@ -55,4 +55,12 @@ public class CentralUnit {
     public void steerFLF(int aSteeringAngle) {
         aFLF.steerFLF(aSteeringAngle);
     }
+
+    public void setaRoofCannonStatus(CannonStatus cStatus) {
+        aFLF.setaRoofCannonStatus(cStatus);
+    }
+
+    public void setRoofCannonAngle(int angle) {
+        aFLF.setRoofCannonAngle(angle);
+    }
 }
