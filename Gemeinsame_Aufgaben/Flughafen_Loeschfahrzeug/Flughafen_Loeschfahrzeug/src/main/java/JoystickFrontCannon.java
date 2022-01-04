@@ -14,19 +14,12 @@ public class JoystickFrontCannon extends Joystick{
 
         switch (aPosition) {
             case left:      //left button is used for activating and deactivating
-                if(aButtonStatus == ButtonStatus.active) {
-                    aCentralUnit.setaRoofCannonStatus(CannonStatus.activated);  //activate RoofCannon
-                    aCentralUnit.setRoofCannonAngle(90);                        //Change angle of segment1 to 90 degrees (extend arm)
-                }
-                if(aButtonStatus == ButtonStatus.inactiv){
-                    aCentralUnit.setaRoofCannonStatus(CannonStatus.deactivated);
-                    aCentralUnit.setRoofCannonAngle(0);                         //Change angle of segment1 to 0 degrees (rectract arm)
-                }
-                break;
+                    aCentralUnit.activateRoofCannon();
+                    break;
+
             case right:     //right button is used for adjusting the mixture
-                if(aButtonStatus == ButtonStatus.active){
                     aCentralUnit.adjustMixture();
-                }
+                    break;
         }
 
     }

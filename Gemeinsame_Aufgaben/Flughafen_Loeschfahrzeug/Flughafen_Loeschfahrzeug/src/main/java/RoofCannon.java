@@ -32,4 +32,8 @@ public class RoofCannon {
     public void setRoofCannonAngle(int angle) {
         aSegment1.changeSegmentAngle(angle);
     }
+
+    public void adjustMixture() {
+        aMixingUnit.adjustFoamRate();   
+    }
 }

@@ -63,4 +63,12 @@ public class CentralUnit {
     public void setRoofCannonAngle(int angle) {
         aFLF.setRoofCannonAngle(angle);
     }
+
+    public void activateRoofCannon() {
+        aFLF.activateRoofCannon();
+    }
+
+    public void adjustMixture() {
+        aFLF.adjustMixture();
+    }
 }

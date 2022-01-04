@@ -57,6 +57,22 @@ public class FLF {
         aRoofCannon.setRoofCannonAngle(angle);
     }
 
+    public void activateRoofCannon() {
+        switch (aRoofCannon.getaCannonStatus()){
+            case activated:     //if current status is activated roof cannon is being deactivated
+                aRoofCannon.setaCannonStatus(CannonStatus.deactivated);
+                aRoofCannon.setRoofCannonAngle(0);      //set angle of segment1 of roof cannon
+                break;
+            case deactivated:   //if current status is deactivated roof cannon is being activated
+                aRoofCannon.setaCannonStatus(CannonStatus.activated);
+                aRoofCannon.setRoofCannonAngle(90);     //set angle of segment1 of roof cannon
+        }
+    }
+
+    public void adjustMixture() {
+        aRoofCannon.adjustMixture();
+    }
+
 
     public static class Builder{
         // Klassen mit Verbindung zum FLF
