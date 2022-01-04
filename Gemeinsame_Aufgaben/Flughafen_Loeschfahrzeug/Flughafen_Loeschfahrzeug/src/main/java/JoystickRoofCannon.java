@@ -14,4 +14,9 @@ public class JoystickRoofCannon extends Joystick{
     public void pushPressButton(Position aPosition, ButtonStatus aButtonStatus) {
 
     }
+
+    @Override
+    public void pushKeyButton() {
+
+    }
 }

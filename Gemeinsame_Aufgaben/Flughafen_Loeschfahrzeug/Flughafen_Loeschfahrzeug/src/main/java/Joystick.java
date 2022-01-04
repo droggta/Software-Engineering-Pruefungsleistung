@@ -31,4 +31,6 @@ public abstract class Joystick {
     }
 
     public abstract void pushPressButton(Position aPosition, ButtonStatus aButtonStatus);
+
+    public abstract void pushKeyButton();
 }

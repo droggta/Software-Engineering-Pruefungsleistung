@@ -56,19 +56,43 @@ public class CentralUnit {
         aFLF.steerFLF(aSteeringAngle);
     }
 
-    public void setaRoofCannonStatus(CannonStatus cStatus) {
-        aFLF.setaRoofCannonStatus(cStatus);
-    }
 
-    public void setRoofCannonAngle(int angle) {
-        aFLF.setRoofCannonAngle(angle);
-    }
-
-    public void activateRoofCannon() {
-        aFLF.activateRoofCannon();
+    public void activateFrontCannon() {
+        aFLF.activateFrontCannon();
     }
 
     public void adjustMixture() {
         aFLF.adjustMixture();
+    }
+
+    public void emitExtinguishingAgentFrontCannon() {
+        int units = 0;          //units per iteration
+        switch (aControlPanel.getFrontCannonStep()){
+            case fuenfhundert:
+                units = 500;
+                break;
+            case tausend:
+                units = 1000;
+                break;
+            case tausendfuenfhundert:
+                units = 1500;
+                break;
+            case zweitausend:
+                units = 2000;
+                break;
+            case zweitausendfuenfhundert:
+                units = 2500;
+                break;
+            case dreitausend:
+                units = 3000;
+                break;
+            case dreitausendfuenfhundert:
+                units = 3500;
+                break;
+        }
+
+        aFLF.emitExtinguishingAgentCannon(units, "front");
+
+
     }
 }

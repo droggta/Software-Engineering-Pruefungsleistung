@@ -14,7 +14,7 @@ public class JoystickFrontCannon extends Joystick{
 
         switch (aPosition) {
             case left:      //left button is used for activating and deactivating
-                    aCentralUnit.activateRoofCannon();
+                    aCentralUnit.activateFrontCannon();
                     break;
 
             case right:     //right button is used for adjusting the mixture
@@ -22,5 +22,13 @@ public class JoystickFrontCannon extends Joystick{
                     break;
         }
 
+    }
+
+    /**
+     * emits the extinguishing agent
+     */
+    @Override
+    public void pushKeyButton() {
+        aCentralUnit.emitExtinguishingAgentFrontCannon();
     }
 }

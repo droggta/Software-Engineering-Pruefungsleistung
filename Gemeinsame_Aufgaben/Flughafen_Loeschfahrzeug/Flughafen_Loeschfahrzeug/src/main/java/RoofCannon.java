@@ -34,6 +34,11 @@ public class RoofCannon {
     }
 
     public void adjustMixture() {
-        aMixingUnit.adjustFoamRate();   
+        if(aCannonStatus == CannonStatus.activated) {       //only if the cannon is activated the foam rate can be adjusted
+            aMixingUnit.adjustFoamRate();
+        }
+    }
+
+    public void emit(int units) {
     }
 }

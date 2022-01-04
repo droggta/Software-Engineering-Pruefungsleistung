@@ -25,4 +25,11 @@ public class ControlPanel {
 
     }
 
+    /**
+     * returns current CannonStep being set by the KnobFrontCannon
+     * @return
+     */
+    public CannonSteps getFrontCannonStep() {
+        return aKnobFrontCannon.getaCannonStep();
+    }
 }

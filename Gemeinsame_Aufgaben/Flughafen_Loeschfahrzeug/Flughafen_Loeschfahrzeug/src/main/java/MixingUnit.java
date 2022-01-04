@@ -16,6 +16,11 @@ public class MixingUnit {
         aFoamRate = FoamRate.zero;      //initial value
     }
 
+
+    /**
+     * changes to the given FoamRate
+     * @param fRate
+     */
     public void adjustFoamRate(FoamRate fRate){
         aFoamRate = fRate;
     }
@@ -41,6 +46,10 @@ public class MixingUnit {
                 System.out.println("Warning: Problem with adjusting the FoamRate");
                 break;
         }
+    }
+
+    public FoamRate getaFoamRate(){
+        return aFoamRate;
     }
 
 }

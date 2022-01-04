@@ -57,20 +57,37 @@ public class FLF {
         aRoofCannon.setRoofCannonAngle(angle);
     }
 
-    public void activateRoofCannon() {
-        switch (aRoofCannon.getaCannonStatus()){
+    public void activateFrontCannon() {
+        switch (aFrontCannon.getaCannonStatus()){
             case activated:     //if current status is activated roof cannon is being deactivated
-                aRoofCannon.setaCannonStatus(CannonStatus.deactivated);
-                aRoofCannon.setRoofCannonAngle(0);      //set angle of segment1 of roof cannon
+                aFrontCannon.setaCannonStatus(CannonStatus.deactivated);
+                aFrontCannon.setFrontCannonAngle(0);      //set angle of segment1 of roof cannon
                 break;
             case deactivated:   //if current status is deactivated roof cannon is being activated
-                aRoofCannon.setaCannonStatus(CannonStatus.activated);
-                aRoofCannon.setRoofCannonAngle(90);     //set angle of segment1 of roof cannon
+                aFrontCannon.setaCannonStatus(CannonStatus.activated);
+                aFrontCannon.setFrontCannonAngle(90);     //set angle of segment1 of roof cannon
         }
     }
 
     public void adjustMixture() {
         aRoofCannon.adjustMixture();
+    }
+
+    /**
+     * emits the extinguishing agent
+     * @param units units per interation controls how much is emitted
+     * @param cannon value can either be roof or front and describes which cannon is meant
+     */
+    public void emitExtinguishingAgentCannon(int units, String cannon) {
+        switch (cannon){
+            case "front":
+                aFrontCannon.emit(units);
+                break;
+            case "roof":
+                aRoofCannon.emit(units);
+            default:
+                System.out.println("Cannon does not exits!");
+        }
     }
 
 

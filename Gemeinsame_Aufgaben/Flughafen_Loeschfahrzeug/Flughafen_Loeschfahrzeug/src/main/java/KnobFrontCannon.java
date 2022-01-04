@@ -2,11 +2,11 @@ import javax.naming.ldap.Control;
 
 public class KnobFrontCannon {
 
-    private CannonModes aCannonModes;
+    private CannonSteps aCannonStep;
     private ControlPanel aControlPanel;
 
     public KnobFrontCannon() {
-        aCannonModes = CannonModes.modeA;
+        aCannonStep = CannonSteps.fuenfhundert;
 
     }
 
@@ -15,7 +15,15 @@ public class KnobFrontCannon {
         this.aControlPanel = aControlPanel;
     }
 
-    public CannonModes getaCannonModes() {
-        return aCannonModes;
+    /**
+     * returns current CannonStep
+     * @return
+     */
+    public CannonSteps getaCannonStep() {
+        return aCannonStep;
+    }
+
+    public void setaCannonStep(CannonSteps step){
+        aCannonStep = step;
     }
 }
