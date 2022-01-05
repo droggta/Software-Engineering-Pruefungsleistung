@@ -61,9 +61,14 @@ public class CentralUnit {
         aFLF.activateFrontCannon();
     }
 
+    public void activateRoofCannon() {
+        aFLF.activateRoofCannon();
+    }
+
     public void adjustMixture() {
         aFLF.adjustMixture();
     }
+
 
     public void emitExtinguishingAgentFrontCannon() {
         int units = 0;          //units per iteration
@@ -92,7 +97,22 @@ public class CentralUnit {
         }
 
         aFLF.emitExtinguishingAgentCannon(units, "front");
+    }
 
+    public void emitExtinguishingAgentRoofCannon() {
+        int units = 0;
+        switch (aControlPanel.getRoofCannonMode()){
+            case modeA:
+                units = 500;
+                break;
+            case modeB:
+                units = 1000;
+                break;
+            case modeC:
+                units = 2500;
+                break;
+        }
 
+        aFLF.emitExtinguishingAgentCannon(units, "roof");
     }
 }

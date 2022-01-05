@@ -28,5 +28,13 @@ public class FrontCannon {
     }
 
     public void emit(int units) {
+        int waterVolume;        //Volume of water being used in one iteration
+        int foamVolume;         //Volume of foam being used in one iteration
+
+        foamVolume = (int) (units * (aMixingUnit.getaFoamRateAsInt()*0.01));
+        waterVolume = (int) (units * (1 - (aMixingUnit.getaFoamRateAsInt()*0.01)));
+
+        aMixingUnit.consumeWater(waterVolume);
+        aMixingUnit.consumeFoam(foamVolume);
     }
 }

@@ -4,4 +4,8 @@ public class WaterTank extends Tank{
 
     }
 
+    @Override
+    public void consumeVolume(int pVolume) {
+        super.consumeVolume(pVolume);
+    }
 }

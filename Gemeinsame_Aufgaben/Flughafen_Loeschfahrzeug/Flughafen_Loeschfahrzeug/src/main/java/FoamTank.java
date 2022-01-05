@@ -4,4 +4,8 @@ public class FoamTank extends Tank {
 
     }
 
+    @Override
+    public void consumeVolume(int pVolume) {
+        super.consumeVolume(pVolume);
+    }
 }

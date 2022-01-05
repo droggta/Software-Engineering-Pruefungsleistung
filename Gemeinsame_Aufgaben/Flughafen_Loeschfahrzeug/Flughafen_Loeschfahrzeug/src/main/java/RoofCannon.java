@@ -40,5 +40,21 @@ public class RoofCannon {
     }
 
     public void emit(int units) {
+        int waterVolume;        //Volume of water being used in one iteration
+        int foamVolume;         //Volume of foam being used in one iteration
+
+        foamVolume = (int) (units * (aMixingUnit.getaFoamRateAsInt()*0.01));
+        waterVolume = (int) (units * (1 - (aMixingUnit.getaFoamRateAsInt()*0.01)));
+
+        aMixingUnit.consumeWater(waterVolume);
+        aMixingUnit.consumeFoam(foamVolume);
+    }
+
+    public void setSegment2Angle(int i) {
+        aSegment2.setAngle(i);
+    }
+
+    public void setSegment1Angle(int i) {
+        aSegment1.changeSegmentAngle(i);
     }
 }

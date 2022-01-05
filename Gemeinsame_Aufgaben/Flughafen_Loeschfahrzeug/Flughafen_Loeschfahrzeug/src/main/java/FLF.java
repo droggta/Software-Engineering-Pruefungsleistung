@@ -66,9 +66,28 @@ public class FLF {
             case deactivated:   //if current status is deactivated roof cannon is being activated
                 aFrontCannon.setaCannonStatus(CannonStatus.activated);
                 aFrontCannon.setFrontCannonAngle(90);     //set angle of segment1 of roof cannon
+                break;
         }
     }
 
+    public void activateRoofCannon() {
+        switch (aRoofCannon.getaCannonStatus()){
+            case activated:
+                aRoofCannon.setaCannonStatus(CannonStatus.deactivated);
+                aRoofCannon.setSegment1Angle(0);
+                aRoofCannon.setSegment2Angle(0);
+                break;
+            case deactivated:
+                aRoofCannon.setaCannonStatus(CannonStatus.activated);
+                aRoofCannon.setSegment1Angle(90);
+                aRoofCannon.setSegment2Angle(90);
+                break;
+        }
+    }
+
+    /**
+     * Adjusts the mixture of foam and water for both all cannons
+     */
     public void adjustMixture() {
         aRoofCannon.adjustMixture();
     }
@@ -89,7 +108,6 @@ public class FLF {
                 System.out.println("Cannon does not exits!");
         }
     }
-
 
     public static class Builder{
         // Klassen mit Verbindung zum FLF

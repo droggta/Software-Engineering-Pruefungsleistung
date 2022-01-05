@@ -52,4 +52,31 @@ public class MixingUnit {
         return aFoamRate;
     }
 
+    /**
+     * returns FoamRate.
+     * E.g. 5% means: 5% foam and 95% water
+     * @return FoamRate in percentage
+     */
+    public int getaFoamRateAsInt(){
+        switch (aFoamRate){
+            case zero:
+                return 0;
+            case drei:
+                return 3;
+            case fuenf:
+                return 5;
+            case zehn:
+                return 10;
+            default:
+                return -1;
+        }
+    }
+
+    public void consumeFoam(int foamVolume) {
+            aFoamTank.consumeVolume(foamVolume);
+    }
+
+    public void consumeWater(int waterVolume) {
+        aWaterTank.consumeVolume(waterVolume);
+    }
 }

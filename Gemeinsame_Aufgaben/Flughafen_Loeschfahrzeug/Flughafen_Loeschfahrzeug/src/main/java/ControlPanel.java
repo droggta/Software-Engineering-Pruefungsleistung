@@ -32,4 +32,8 @@ public class ControlPanel {
     public CannonSteps getFrontCannonStep() {
         return aKnobFrontCannon.getaCannonStep();
     }
+
+    public CannonModes getRoofCannonMode() {
+        return aKnobRoofCannon.getaCannonMode();
+    }
 }

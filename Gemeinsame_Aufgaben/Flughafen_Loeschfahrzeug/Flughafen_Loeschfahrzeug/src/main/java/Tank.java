@@ -7,4 +7,7 @@ public abstract class Tank {
         return volume;
     }
 
+    public void consumeVolume(int pVolume) {
+        volume = volume - pVolume;
+    }
 }

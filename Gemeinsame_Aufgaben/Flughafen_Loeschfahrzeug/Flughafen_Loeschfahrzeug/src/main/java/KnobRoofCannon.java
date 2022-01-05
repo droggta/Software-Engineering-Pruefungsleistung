@@ -1,17 +1,17 @@
 public class KnobRoofCannon {
 
-    private CannonSteps aCannonSteps;
+    private CannonModes aCannonMode;
     private ControlPanel aControlPanel;
 
     public KnobRoofCannon() {
-        aCannonSteps = CannonSteps.fuenfhundert;
+        aCannonMode = CannonModes.modeA;
     }
 
     public void setaControlPanel(ControlPanel aControlPanel) {
         this.aControlPanel = aControlPanel;
     }
 
-    public CannonSteps getaCannonSteps() {
-        return aCannonSteps;
+    public CannonModes getaCannonMode() {
+        return aCannonMode;
     }
 }
