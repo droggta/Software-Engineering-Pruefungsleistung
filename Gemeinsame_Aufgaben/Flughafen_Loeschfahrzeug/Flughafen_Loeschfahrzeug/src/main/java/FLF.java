@@ -142,7 +142,7 @@ public class FLF {
         public Joystick bJoystick;
         public JoystickFrontCannon bJoystickFrontCannon;
         public JoystickRoofCannon bJoystickRoofCannon;
-        public KeyButton bKeyButton;
+        public KeyButton[] bKeyButton;
         public KnobFrontCannon bKnobFrontCannon;
         public KnobRoofCannon bKnobRoofCannon;
         public LED bLED;
@@ -289,7 +289,8 @@ public class FLF {
             bGasPedal = new GasPedal();
             bJoystickFrontCannon = new JoystickFrontCannon(bCentralUnit);
             bJoystickRoofCannon = new JoystickRoofCannon(bCentralUnit);
-            bKeyButton = new KeyButton();
+            bKeyButton[0] = new KeyButton(bJoystickFrontCannon);
+            bKeyButton[1] = new KeyButton(bJoystickRoofCannon);
             bKnobFrontCannon = new KnobFrontCannon();
             bKnobRoofCannon = new KnobRoofCannon();
             bLED = new LED();
@@ -340,11 +341,14 @@ public class FLF {
             bKnobRoofCannon.setaControlPanel(bControlPanel);
 
 
+            bJoystickFrontCannon.setaKeyButton(bKeyButton[0]);
+            bJoystickRoofCannon.setaKeyButton(bKeyButton[1]);
+
             bJoystickFrontCannon.setaLeftPressButton((LeftPressButton) bPressButton[0]);
             bJoystickFrontCannon.setaRightPressButton((RightPressButton) bPressButton[2]);
             bJoystickRoofCannon.setaLeftPressButton((LeftPressButton) bPressButton[1]);
             bJoystickRoofCannon.setaRightPressButton((RightPressButton) bPressButton[3]);
-            //bJoystick.setaLeftPressButton(bPressButton[0]);
+            //bJoystick.setaLeftPressButton(bPressButton[0]);  Das hier war die Alte Version. Nun sind die PressButtons in einem Array angelegt
             //bJoystick.setaRightPressButton(bPressButton[2]);
 
             for (int i = 0; i < 4; i++){

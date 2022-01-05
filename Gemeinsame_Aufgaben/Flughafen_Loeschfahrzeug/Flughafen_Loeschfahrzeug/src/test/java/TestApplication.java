@@ -43,7 +43,7 @@ public class TestApplication {
     private Joystick aJoystick;
     private JoystickFrontCannon aJoystickFrontCannon;
     private JoystickRoofCannon aJoystickRoofCannon;
-    private KeyButton aKeyButton;
+    private KeyButton[] aKeyButton;
     private KnobFrontCannon aKnobFrontCannon;
     private KnobRoofCannon aKnobRoofCannon;
     private LED aLED;

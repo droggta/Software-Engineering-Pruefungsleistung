@@ -29,4 +29,6 @@ public class JoystickRoofCannon extends Joystick{
         aCentralUnit.emitExtinguishingAgentRoofCannon();
 
     }
+
+
 }

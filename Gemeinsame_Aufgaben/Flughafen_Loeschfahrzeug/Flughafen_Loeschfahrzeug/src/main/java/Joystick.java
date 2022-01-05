@@ -22,7 +22,7 @@ public abstract class Joystick {
         aRightPressButton = aRightPressButton;
     }
 
-    public static void setaKeyButton(KeyButton aKeyButton) {
+    protected static void setaKeyButton(KeyButton aKeyButton) {
         aKeyButton = aKeyButton;
     }
 
