@@ -234,14 +234,14 @@ public class TestApplication {
     @Test
     @Order(3)
     public void handleParking(){
-        //assertEquals(MotorStatus.off, aElectricMotor[0].getaMotorStatus());       //check if electric motors are turned off
-        //assertEquals(MotorStatus.off, aElectricMotor[1].getaMotorStatus());
+        assertEquals(MotorStatus.off, aElectricMotor[0].getaMotorStatus());       //check if electric motors are turned off
+        assertEquals(MotorStatus.off, aElectricMotor[1].getaMotorStatus());
         for(int i = 0; i < 4; i++){
             assertEquals(null,aSeats[i].getPerson());                       //Check if all seats are free
         }
-        //assertEquals(DoorStatus.open, aDoors[0].getaDoorStatus());                //check if doors are open
-        //assertEquals(DoorStatus.open, aDoors[1].getaDoorStatus());
-        //assertEquals(CannonStatus.retracted, aRoofCannon.getaCannonStatus());       //check roofcannon
+        assertEquals(DoorStatus.open, aDoors[0].getaDoorStatus());                //check if doors are open
+        assertEquals(DoorStatus.open, aDoors[1].getaDoorStatus());
+        assertEquals(CannonStatus.retracted, aRoofCannon.getaCannonStatus());       //check roofcannon
         assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
         //check Headlamp. FLF has in total 10 headlamps => Array(3 headlamps on each side and 4 on the roof)
         for(int i=0; i < aHeadLamp.length; i++){
@@ -250,21 +250,56 @@ public class TestApplication {
         for(int i=0; i < aDirectionIndicator.length; i++){
             assertEquals(LightStatus.off, aDirectionIndicator[i].getaLightStatus());            //check DirectionIndicatorlights
         }
-        assertEquals(LightStatus.off, aWarningLight[].getaLightStatus());                     //Check if Warninglight is off
-        assertEquals(LightStatus.off, aBlueLight[].getaLightStatus());                     //Check if BlueLight is off
+        //assertEquals(LightStatus.off, aWarningLight[].getaLightStatus());                     //Check if Warninglight is off
+        //assertEquals(LightStatus.off, aBlueLight[].getaLightStatus());                     //Check if BlueLight is off
         assertEquals(12500, aWaterTank.getVolume());                            //check if watertank is 100% full
         assertEquals(2500, aFoamTank.getVolume());                            //check if foamtank is 100% full
         for(int i=0; i < aBattery.length; i++){
             assertEquals(100000, aBattery[i].getaSoC());                      //Check if Batteries are 100% full (SoC=State of Charge)
         }
-        assertEquals(CannonModes.modeA, aKnobFrontCannon.getaCannonModes());
-        assertEquals(CannonSteps.fuenfhundert, aKnobRoofCannon.getaCannonSteps());
+        assertEquals(CannonModes.modeA, aKnobFrontCannon.getaCannonStep());
+        assertEquals(CannonSteps.fuenfhundert, aKnobRoofCannon.getaCannonMode());
 
     }
 
     @Test
     @Order(4)
     public void handleInspectionDrive(){
+        assertEquals(MotorStatus.on, aElectricMotor[0].getaMotorStatus());          //Check if electric motors are on
+        assertEquals(MotorStatus.on, aElectricMotor[1].getaMotorStatus());
+        for(int i = 0; i < 2; i++){
+            assertEquals(null,aSeats[i].getPerson());                       //Check if both front seats are taken
+        }
+        assertEquals(DoorStatus.closed, aDoors[0].getaDoorStatus());                //check if doors are closed
+        assertEquals(DoorStatus.closed, aDoors[1].getaDoorStatus());
+        assertEquals(0, aRoofCannon.getaSegment1().getAngle());
+        assertEquals(0, aRoofCannon.getaSegment2().getAngle());
+        for(int i = 0; i < aRoofCannon.getaSegment2().getaPiecesegment().length; i++){      //check if segments of roof arm are retracted
+            assertEquals(0, aRoofCannon.getaSegment2().getaPiecesegment()[i]);
+        }
+        assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
+        //Dachscheinwerfer ausgeschalten, Seitenleuchten ausgeschalten, Frontscheinwerfer eingeschalten
+        for(int i = 0; i < aWarningLight.length; i++){                                      //Check if warning light is turned on
+            assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());
+        }
+        for(int i = 0 ; i < aBlueLight.length; i++){                                        //Check if Bluelight is turned off
+            assertEquals(LightStatus.off, aBlueLight[i].getaLightStatus());
+        }
+        assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full
+        assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());                    //Check if foam tank is 100% full
+        assertEquals(CannonSteps.fuenfhundert ,aKnobFrontCannon.getaCannonStep());          //Check if knob for front cannon is set to step one
+        assertEquals(CannonModes.modeA, aKnobRoofCannon.getaCannonMode());                  //Check if knob for roof cannon is set to mode one
+
+        for (int i = 0; i < (28/4); i++){                                                   //accelerate the FLF to 28km/h in 4km/h steps
+            aDriver.accelerate();
+        }
+        assertEquals(28, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
+        //FLF fährt fünf Interationen mit konstant 28km/h geradeaus
+        aDriver.steer(-5);                                                       //change steeringangle to -5% (left)
+        //FLF fährt fünf Interationen mit konstant 28km/h nach 5% links
+        assertEquals(-5, aFLF.getSteeringAngleFrontPivot());                        //check if the steering angle of the front pivots is -5%
+
+
     }
 
     @Test
@@ -286,10 +321,14 @@ public class TestApplication {
         assertEquals(MotorStatus.on,aElectricMotor[1].getaMotorStatus());
         assertEquals("Driver", aSeats[0].getPerson());                  //Check if the Driver sits on seat 0
         assertEquals("Operator", aSeats[1].getPerson());                //Check if the Operator sits on seat 1
-        assertEquals(LightStatus.on, aWarningLight[].getaLightStatus());          //Check if Warninglight is on
-        assertEquals(LightStatus.on, aBlueLight[].getaLightStatus());             //Check if BlueLight is on
-        //Tank mit Wasser inital 100% gefüllt
-        //Tank mit Schaum inital 100% gefüllt
+        for(int i = 0; i < aWarningLight.length; i++) {
+            assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());          //Check if Warninglight is on
+        }
+        for(int i = 0; i < aBackPivot.length; i++) {
+            assertEquals(LightStatus.on, aBlueLight[i].getaLightStatus());             //Check if BlueLight is on
+        }
+        assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full
+        assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());                    //Check if foam tank is 100% full
         //!!!! JOYSTICK VERHALTEN + RICHTIGER VERBRAUCH  !!!!!
 
     }
@@ -309,10 +348,14 @@ public class TestApplication {
         for(int i=0; i < aHeadLamp.length; i++){
             assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus());            //check headlights(roof and side)
         }
-        assertEquals(LightStatus.on, aWarningLight[].getaLightStatus());              //check if warninglight is on
-        assertEquals(LightStatus.on, aBlueLight[].getaLightStatus());                 //check if bluelight is on
-        //Tank mit Wasser inital 100% gefüllt
-        //Tank mit Schaum inital 100% gefüllt
+        for(int i = 0; i < aWarningLight.length; i++) {
+            assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());              //check if warninglight is on
+        }
+        for(int i = 0; i < aBlueLight.length; i++) {
+            assertEquals(LightStatus.on, aBlueLight[i].getaLightStatus());                 //check if bluelight is on
+        }
+        assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full
+        assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());                    //Check if foam tank is 100% full
         //WEITERE SACHEN MÜSSEN HIER ZUM TEST HINZUGEFÜGT WERDEN
     }
 }

@@ -57,4 +57,12 @@ public class RoofCannon {
     public void setSegment1Angle(int i) {
         aSegment1.changeSegmentAngle(i);
     }
+
+    public Segment1 getaSegment1() {
+        return aSegment1;
+    }
+
+    public Segment2 getaSegment2() {
+        return aSegment2;
+    }
 }

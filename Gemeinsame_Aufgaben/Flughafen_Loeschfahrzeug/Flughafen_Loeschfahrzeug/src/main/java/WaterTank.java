@@ -1,7 +1,7 @@
 public class WaterTank extends Tank{
 
     public WaterTank() {
-
+        volume = 12500;     //12500 as inital value
     }
 
     @Override

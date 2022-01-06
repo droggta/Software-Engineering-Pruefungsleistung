@@ -138,7 +138,7 @@ public class FLF {
         public FoamTank bFoamTank;
         public GasMask bGasMask;
         public GasPedal bGasPedal;
-        public HeadLamp[] bHeadLamps;
+        public HeadLamp[] bHeadLamps;   //10 Headlamps: left 3x right 3x roof 4x
         public Joystick bJoystick;
         public JoystickFrontCannon bJoystickFrontCannon;
         public JoystickRoofCannon bJoystickRoofCannon;
@@ -393,8 +393,24 @@ public class FLF {
         }
 
         //send information to direction indicators
+    }
 
+    /**
+     * Returns the angle both front pivots are currently set to
+     * @return angle given in % (minus=left, positiv=right)
+     */
+    public int getSteeringAngleFrontPivot(){
+        if(aFrontPivot[0].getSteerAngle() == aFrontPivot[1].getSteerAngle()){
+            return  aFrontPivot[0].getSteerAngle();
+        }
+    }
 
+    /**
+     * returns the current velocity of the FLF
+     * @return veloctiy stored in the FLF class
+     */
+    public int getaVelocity() {
+        return aVelocity;
     }
 
 

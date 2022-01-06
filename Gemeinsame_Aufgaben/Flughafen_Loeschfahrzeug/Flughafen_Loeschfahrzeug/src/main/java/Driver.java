@@ -21,8 +21,25 @@ public class Driver {
         this.aBreakPedal = aBreakPedal;
     }
 
+
     public Driver() {
 
+    }
+
+    public void accelerate(){
+        aGasPedal.changeSpeedStep();
+    }
+
+    public void slowDown(){
+        aBreakPedal.changeSpeedStep();
+    }
+
+    /**
+     * Driver uses the steeringWheel in order to change the steering angle
+     * @param steeringAngle is the procendual change of the angle in % (minus=left, positiv=right)
+     */
+    public void steer(int steeringAngle){
+        aSterringWheel.steerFLF(steeringAngle);
     }
 
 }

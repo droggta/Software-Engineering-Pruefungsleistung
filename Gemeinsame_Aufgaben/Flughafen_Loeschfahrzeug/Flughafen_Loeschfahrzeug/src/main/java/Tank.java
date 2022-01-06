@@ -1,6 +1,6 @@
 public abstract class Tank {
 
-    private int volume;
+    protected int volume;
     private TankSubstance content;
 
     public int getVolume() {

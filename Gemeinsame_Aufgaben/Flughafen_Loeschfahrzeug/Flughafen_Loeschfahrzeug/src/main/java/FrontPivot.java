@@ -13,4 +13,13 @@ public class FrontPivot extends Pivot{
     public void updateaSteerAngle(int aSteeringAngle) {
         steerAngle = aSteeringAngle;
     }
+
+
+    /**
+     * returns the current steering angle of the front pivot
+     * @return angle given in % (minus=left, positiv=right)
+     */
+    public int getSteerAngle() {
+        return steerAngle;
+    }
 }

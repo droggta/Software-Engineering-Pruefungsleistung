@@ -1,7 +1,7 @@
 public class FoamTank extends Tank {
 
-    public FoamTank(){
-
+    public FoamTank() {
+        volume = 2500;      //2500 as initaal value
     }
 
     @Override
