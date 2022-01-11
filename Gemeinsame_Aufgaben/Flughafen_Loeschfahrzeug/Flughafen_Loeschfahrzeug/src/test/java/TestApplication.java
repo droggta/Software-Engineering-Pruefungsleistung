@@ -221,14 +221,7 @@ public class TestApplication {
     @Test
     @Order(2)
     public void usageControlPanel(){        //checks if the controlPanel
-        Switch[] tempaSwitch = aSwitch;
 
-        //All Functions the driver is allowed to call
-
-        for (int i=0;i < tempaSwitch.length; i++)
-        {
-          //  assertEquals(tempaSwitch[i].getaSwitchStatus(), aSwitch[i].getaSwitchStatus);     //get Method is required to make this code work
-        }
     }
 
     @Test
@@ -278,6 +271,12 @@ public class TestApplication {
             assertEquals(0, aRoofCannon.getaSegment2().getaPiecesegment()[i]);
         }
         assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
+        for(int i = 0+aLights.length; i < aLights.length; i++) {
+            assertEquals(LightStatus.off, aLights[i].getaLightStatus());
+        }
+        for(int i = 0; i < aLights.length-8; i++){
+            assertEquals(LightStatus.off, aLights[i].getaLightStatus());
+        }
         //Dachscheinwerfer ausgeschalten, Seitenleuchten ausgeschalten, Frontscheinwerfer eingeschalten
         for(int i = 0; i < aWarningLight.length; i++){                                      //Check if warning light is turned on
             assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());

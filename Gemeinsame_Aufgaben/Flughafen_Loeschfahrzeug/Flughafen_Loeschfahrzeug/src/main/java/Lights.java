@@ -21,4 +21,13 @@ public abstract class Lights {
     public LightStatus getaLightStatus() {
         return aLightStatus;
     }
+
+    public Position getaPosition() {
+        return aPosition;
+    }
+
+    public void setaLightStatus(LightStatus aLightStatus) {
+        this.aLightStatus = aLightStatus;
+    }
+
 }

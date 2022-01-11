@@ -36,4 +36,8 @@ public class ControlPanel {
     public CannonModes getRoofCannonMode() {
         return aKnobRoofCannon.getaCannonMode();
     }
+
+    public void useSwitch(SwitchType type, SwitchStatus status){
+        aCentralUnit.useSwitch(type, status);
+    }
 }

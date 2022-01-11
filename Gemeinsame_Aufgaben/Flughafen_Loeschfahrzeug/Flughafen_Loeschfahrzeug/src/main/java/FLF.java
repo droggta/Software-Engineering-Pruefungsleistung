@@ -5,6 +5,9 @@ public class FLF {
     private final FrontCannon aFrontCannon;
     private final RoofCannon aRoofCannon;
     private final Lights[] aLights;
+    private final WarningLight[] aWarningLights;
+    private final BlueLight[] aBlueLights;
+    private final HeadLamp[] aHeadLamps;
     private final CentralUnit aCentralUnit;
     private final FrontPivot[] aFrontPivot;
     private final BackPivot[] aBackPivot;
@@ -42,6 +45,9 @@ public class FLF {
         aFrontCannon = builder.bFrontCannon;
         aRoofCannon = builder.bRoofCannon;
         aLights = builder.bLights;
+        aWarningLights = builder.bWarningLights;
+        aBlueLights = builder.bBlueLights;
+        aHeadLamps = builder.bHeadLamps;
         aCentralUnit = builder.bCentralUnit;
         aFrontPivot = builder.bFrontPivot;
         aBackPivot = builder.bBackPivot;
@@ -106,6 +112,59 @@ public class FLF {
                 aRoofCannon.emit(units);
             default:
                 System.out.println("Cannon does not exits!");
+        }
+    }
+
+    /**
+     * Activates all electric motors
+     * @param status true=on    false=off
+     */
+    public void activateElectricEngine(boolean status) {
+       aPowerUnit.activateElectricMotor(status);
+    }
+
+
+    /**
+     * Turns the WarningLights on or off
+     * @param status true=on
+     */
+    public void activateWarningLight(boolean status) {
+        LightStatus lStatus = LightStatus.off;
+        if(status){
+            lStatus = LightStatus.on;
+        }
+
+        for (int i = 0; i < aWarningLights.length; i++){
+            aWarningLights[i].setaLightStatus(lStatus);
+        }
+    }
+
+    public void activateBlueLight(boolean status) {
+        LightStatus lStatus = LightStatus.off;
+        if(status){
+            lStatus = LightStatus.on;
+        }
+
+        for (int i = 0; i < aBlueLights.length; i++){
+            aBlueLights[i].setaLightStatus(lStatus);
+        }
+    }
+
+    /**
+     * Activate Headlights. In total 10 HeadLights exist. 4 in the front area on the roof and 3 on each side of the FLF.
+     * With from and to you can set which lights should be affected by the call of the method
+     * @param status The LightsStatus the lights should be set to
+     * @param from Number of the first light
+     * @param to Number of the last ligt
+     */
+    public void activateHeadLights(boolean status, int from, int to) {
+        LightStatus lStatus = LightStatus.off;
+        if(status){
+            lStatus = LightStatus.on;
+        }
+
+        for(int i = from; i <= to; i++){
+            aHeadLamps[i].setaLightStatus(lStatus);
         }
     }
 
@@ -310,7 +369,7 @@ public class FLF {
             bSegment2 = new Segment2();
             bSpeedDisplay = new SpeedDisplay();
             bSterringWheel = new SterringWheel();
-            bSwitch = new Switch[]{new Switch(), new Switch(), new Switch(), new Switch(), new Switch(), new Switch()};
+            bSwitch = new Switch[]{new Switch(SwitchType.electricEngines), new Switch(SwitchType.warningLight), new Switch(SwitchType.blueLight), new Switch(SwitchType.headLamp), new Switch(SwitchType.roofMountedLight), new Switch(SwitchType.sideLamp)};       //Switches are initialized with their SwitchType
             bWaterTank = new WaterTank();
 
             //Zuweisungen
@@ -348,6 +407,10 @@ public class FLF {
             bJoystickFrontCannon.setaRightPressButton((RightPressButton) bPressButton[2]);
             bJoystickRoofCannon.setaLeftPressButton((LeftPressButton) bPressButton[1]);
             bJoystickRoofCannon.setaRightPressButton((RightPressButton) bPressButton[3]);
+
+            for (int i = 0; i < bSwitch.length; i++){
+                bSwitch[i].setaControlPanel(bControlPanel);
+            }
             //bJoystick.setaLeftPressButton(bPressButton[0]);  Das hier war die Alte Version. Nun sind die PressButtons in einem Array angelegt
             //bJoystick.setaRightPressButton(bPressButton[2]);
 
@@ -402,6 +465,9 @@ public class FLF {
     public int getSteeringAngleFrontPivot(){
         if(aFrontPivot[0].getSteerAngle() == aFrontPivot[1].getSteerAngle()){
             return  aFrontPivot[0].getSteerAngle();
+        }
+        else {
+            return -9999;
         }
     }
 

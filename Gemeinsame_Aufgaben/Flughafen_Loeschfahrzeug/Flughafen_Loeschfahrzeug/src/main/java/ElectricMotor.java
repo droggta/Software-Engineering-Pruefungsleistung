@@ -1,18 +1,17 @@
 public class ElectricMotor {
 
-    SwitchStatus aStatus;
     MotorStatus aMotorStatus;
 
     public ElectricMotor() {
-        aStatus = SwitchStatus.off;
+        aMotorStatus = MotorStatus.off;         //initial value
     }
 
-    public SwitchStatus getaStatus() {
-        return aStatus;
+    public MotorStatus getaStatus() {
+        return aMotorStatus;
     }
 
-    public void setaStatus(SwitchStatus aStatus) {
-        this.aStatus = aStatus;
+    public void setaMotorStatus(MotorStatus aStatus) {
+        this.aMotorStatus = aStatus;
     }
 
     public MotorStatus getaMotorStatus() {

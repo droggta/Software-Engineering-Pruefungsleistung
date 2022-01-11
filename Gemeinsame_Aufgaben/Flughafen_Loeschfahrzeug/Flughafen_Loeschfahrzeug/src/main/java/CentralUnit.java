@@ -115,4 +115,40 @@ public class CentralUnit {
 
         aFLF.emitExtinguishingAgentCannon(units, "roof");
     }
+
+    public void useSwitch(SwitchType type, SwitchStatus sStatus){
+        boolean status;
+        switch (sStatus){
+            case off:
+                status = false;
+                break;
+            case on:
+                status = true;
+                break;
+            default:
+                status = false;
+        }
+
+        switch (type){
+            case electricEngines:
+                aFLF.activateElectricEngine(status);
+                break;
+            case warningLight:
+                aFLF.activateWarningLight(status);
+                break;
+            case blueLight:
+                aFLF.activateBlueLight(status);
+                break;
+            case headLamp:
+                aFLF.activateHeadLights(status, 0, 1);
+                break;
+            case roofMountedLight:
+                aFLF.activateHeadLights(status, 2, 3);
+                break;
+            case sideLamp:
+                aFLF.activateHeadLights(status, 4, 9);
+                break;
+        }
+    }
+
 }
