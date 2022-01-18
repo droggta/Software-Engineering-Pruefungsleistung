@@ -168,6 +168,14 @@ public class FLF {
         }
     }
 
+    /**
+     * Get current set FoamRate of the mixing unit
+     * @return current FoamRate
+     */
+    public FoamRate getFoamRate() {
+        return aFrontCannon.getFoamRate();
+    }
+
     public static class Builder{
         // Klassen mit Verbindung zum FLF
         public PowerUnit bPowerUnit;

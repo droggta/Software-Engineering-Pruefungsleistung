@@ -25,4 +25,20 @@ public class Operator {
 
     }
 
+    /**
+     * Operator usese the Knob to change the CannonMode of the RoofCannon
+     * @param cannonMode
+     */
+    public void useKnobJoystickRoofCannon(CannonModes cannonMode){
+        bKnobRoofCannon.setaCannonMode(cannonMode);
+    }
+
+    /**
+     * Operator usese the Knob to change the CannonStep of the FrontCannon
+     * @param cannonStep
+     */
+    public void useKnobJoystickFrontCannon(CannonSteps cannonStep){
+        bKnobFrontCannon.setaCannonStep(cannonStep);
+    }
+
 }

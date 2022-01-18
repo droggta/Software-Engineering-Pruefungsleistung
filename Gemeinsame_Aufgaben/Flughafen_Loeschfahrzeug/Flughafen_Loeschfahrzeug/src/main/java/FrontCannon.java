@@ -17,6 +17,10 @@ public class FrontCannon {
         return aCannonStatus;
     }
 
+    public int getAngle(){
+        return angle;
+    }
+
     public FrontCannon() {
 
     }
@@ -36,5 +40,9 @@ public class FrontCannon {
 
         aMixingUnit.consumeWater(waterVolume);
         aMixingUnit.consumeFoam(foamVolume);
+    }
+
+    public FoamRate getFoamRate() {
+        return aMixingUnit.getaFoamRate();
     }
 }

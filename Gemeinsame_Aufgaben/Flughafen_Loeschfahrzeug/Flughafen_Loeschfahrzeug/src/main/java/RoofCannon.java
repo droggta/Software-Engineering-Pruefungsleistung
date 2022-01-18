@@ -39,6 +39,10 @@ public class RoofCannon {
         }
     }
 
+    /**
+     * Calculates the absolute amount of water and foam being emitted
+     * @param units
+     */
     public void emit(int units) {
         int waterVolume;        //Volume of water being used in one iteration
         int foamVolume;         //Volume of foam being used in one iteration

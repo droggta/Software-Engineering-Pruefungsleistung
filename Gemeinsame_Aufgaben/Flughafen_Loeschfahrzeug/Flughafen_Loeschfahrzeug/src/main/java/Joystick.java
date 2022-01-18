@@ -30,7 +30,7 @@ public abstract class Joystick {
         aCentralUnit = aCentralUnit;
     }
 
-    public abstract void pushPressButton(Position aPosition, ButtonStatus aButtonStatus);
+    public abstract void pushPressButton(Position aPosition);
 
     public abstract void pushKeyButton();
 }

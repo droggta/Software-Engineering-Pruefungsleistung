@@ -21,6 +21,8 @@ public class ControlPanel {
         this.aSwitch = aSwitch;
     }
 
+
+
     public ControlPanel() {
 
     }
@@ -39,5 +41,9 @@ public class ControlPanel {
 
     public void useSwitch(SwitchType type, SwitchStatus status){
         aCentralUnit.useSwitch(type, status);
+    }
+
+    public void useKnobRoofCannon(){
+        aCentralUnit.adjustMixture();
     }
 }

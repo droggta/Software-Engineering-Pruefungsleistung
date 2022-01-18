@@ -316,18 +316,40 @@ public class TestApplication {
     @Test
     @Order(7)
     public void handlePushbackVehicleOnFire(){
-        assertEquals(MotorStatus.on,aElectricMotor[0].getaMotorStatus());      //Check if electric motors are turned on
+        assertEquals(MotorStatus.on,aElectricMotor[0].getaMotorStatus());       //Check if electric motors are turned on
         assertEquals(MotorStatus.on,aElectricMotor[1].getaMotorStatus());
         assertEquals("Driver", aSeats[0].getPerson());                  //Check if the Driver sits on seat 0
         assertEquals("Operator", aSeats[1].getPerson());                //Check if the Operator sits on seat 1
+        for (int i = 0; i < aDoors.length; i++){
+            assertEquals(DoorStatus.closed, aDoors[i].getaDoorStatus());        //Check if all doors are closed
+        }
+        for(int i=0; i < aHeadLamp.length; i++){                                //check Headlamp. FLF has in total 10 headlamps => Array(3 headlamps on each side and 4 on the roof)
+            assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus());      //check headlights(roof and side)
+        }
         for(int i = 0; i < aWarningLight.length; i++) {
-            assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());          //Check if Warninglight is on
+            assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());   //Check if Warninglight is on
         }
         for(int i = 0; i < aBackPivot.length; i++) {
-            assertEquals(LightStatus.on, aBlueLight[i].getaLightStatus());             //Check if BlueLight is on
+            assertEquals(LightStatus.on, aBlueLight[i].getaLightStatus());      //Check if BlueLight is on
         }
-        assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full
-        assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());                    //Check if foam tank is 100% full
+        assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());      //Check if water tank is 100% full
+        assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());        //Check if foam tank is 100% full
+        aFrontCannon.setFrontCannonAngle(90);                                   //- - - Set angle to 90 degrees
+        assertEquals(90, aFrontCannon.getAngle());                      //Check if angle is turned to 90 degrees
+        aOperator.useKnobJoystickFrontCannon(CannonSteps.dreitausendfuenfhundert); //Set volume being emitted to 3500units
+        while (aJoystickFrontCannon.getcurrentFoamRate() != FoamRate.zehn)      //Check if current FoamRate equals 10% if not 10%...
+        {
+            aDriver.useJoystickPressButton(Position.right);                     //...repeat pressing the Button unit FoamRate is set to 10%
+        }
+        assertEquals(CannonSteps.dreitausendfuenfhundert, aKnobFrontCannon.getaCannonStep());   //Check if volume is successfully set to 3500units
+        assertEquals(FoamRate.zehn ,aMixingUnit.getaFoamRate());                //Check if FoamRate is successfully set to 10%
+        for(int i=0; i < 3; i++){
+            aDriver.useJoystickKeyButton();                                     //KeyButtons emits mixture
+        }
+
+        //Joystick
+
+
         //!!!! JOYSTICK VERHALTEN + RICHTIGER VERBRAUCH  !!!!!
 
     }

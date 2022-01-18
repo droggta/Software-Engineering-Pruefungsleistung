@@ -14,4 +14,9 @@ public class KnobRoofCannon {
     public CannonModes getaCannonMode() {
         return aCannonMode;
     }
+
+    public void setaCannonMode(CannonModes aCannonMode) {
+        this.aCannonMode = aCannonMode;
+        
+    }
 }

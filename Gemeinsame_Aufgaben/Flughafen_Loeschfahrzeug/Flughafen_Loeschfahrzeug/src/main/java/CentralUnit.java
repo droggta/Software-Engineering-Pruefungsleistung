@@ -151,4 +151,7 @@ public class CentralUnit {
         }
     }
 
+    public FoamRate getcurrentFoamRate() {
+        return aFLF.getFoamRate();
+    }
 }

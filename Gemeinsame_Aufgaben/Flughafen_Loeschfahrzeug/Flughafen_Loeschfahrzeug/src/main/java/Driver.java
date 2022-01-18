@@ -42,4 +42,19 @@ public class Driver {
         aSterringWheel.steerFLF(steeringAngle);
     }
 
+    /**
+     * Driver uses one of the PressButtons of the Joystick for the FrontCannon
+     * @param p wheter left or right Button is pressed. Left=de/activate Right=adjust Mixture
+     */
+    public void useJoystickPressButton(Position p){
+        aJoyStickFrontCannon.pushPressButton(p);
+    }
+
+    /**
+     * emits the extinguishing agent with the set parameters (FoamRate, Units)
+     */
+    public void useJoystickKeyButton(){
+        aJoyStickFrontCannon.pushKeyButton();
+    }
+
 }

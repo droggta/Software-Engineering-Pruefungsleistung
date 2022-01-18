@@ -14,7 +14,7 @@ public abstract class PressButton {
                 aButtonStatus = ButtonStatus.active;
             }
 
-        bJoystick.pushPressButton(aPosition, aButtonStatus);
+        bJoystick.pushPressButton(aPosition);
 
     }
 
