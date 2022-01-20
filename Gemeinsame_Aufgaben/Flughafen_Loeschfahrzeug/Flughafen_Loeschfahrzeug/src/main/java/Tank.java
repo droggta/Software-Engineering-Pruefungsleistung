@@ -11,32 +11,23 @@ public abstract class Tank {
      * @return current fill level as a number in units
      */
     public int getVolume() {
+        int calculatedVolume = 0;
+        int[] tempFillLevel = aFillLevel;
         int tankLength = volume.length;             //length of the Tank
         int tankWidth = volume[0][0].length;        //width of the Tank
         int tankHeight = volume[0].length;          //height of the Tank
 
-        int calculatedVolume = 0;
-        int height = 0;
-        int width = tankWidth-1;
-        int length = 0;
-        while (height < tankHeight && volume[0][height][0] == true) {     //As long as i is smaller than length of array in order to prevent an IndexOutOfRange, search the height of array by checking if the "rightest" field in the back is true
-            height++;
-            calculatedVolume+= tankLength*tankWidth;        //One horizontal layer is added to the volume
+        int i;
+        for(i=aFillLevel[1]; i > 0;i--){            //Height
+            calculatedVolume+= (divisor[0]*divisor[2]); //process layer LxB (Height)
         }
-        while (width >= 0 && volume[0][height][width]){
-            width++;
-            calculatedVolume+= tankWidth;
+        for(i=aFillLevel[2]; i > 0; i--){
+            calculatedVolume+= (divisor[0]);            //process B (Width)
         }
-        if(width == 0)
-        {
-            return calculatedVolume;
+        for(i=aFillLevel[0]; i >0; i--){
+            calculatedVolume++;
         }
-        for(length = tankLength-1;length <= 0; length++){
-            if(volume[length][height][width]){
-                calculatedVolume++;
-            }
-        }
-        aFillLevel = new int[] {length, height, width};
+
         return calculatedVolume;
     }
 
@@ -53,6 +44,10 @@ public abstract class Tank {
     }
 
 
+    /**
+     * Moves the pointer to the new fill level
+     * @param pVolume consumed volume in units
+     */
     public void consumeVolume(int pVolume) {        //!!!Function still needs an update due to the change from an int into an array
         int tempVolume = pVolume;
         int diffLength = 0;
@@ -69,8 +64,10 @@ public abstract class Tank {
         }
         diffLength = tempVolume;
 
-        
-
+        //Pointer is updated
+        aFillLevel[0]-= diffLength;
+        aFillLevel[1]-= diffHeight;
+        aFillLevel[2]-= diffWidth;
 
     }
 }
