@@ -250,9 +250,8 @@ public class TestApplication {
         for(int i=0; i < aBattery.length; i++){
             assertEquals(100000, aBattery[i].getaSoC());                      //Check if Batteries are 100% full (SoC=State of Charge)
         }
-        assertEquals(CannonModes.modeA, aKnobFrontCannon.getaCannonStep());
-        assertEquals(CannonSteps.fuenfhundert, aKnobRoofCannon.getaCannonMode());
-
+        assertEquals(CannonModes.modeA, aKnobFrontCannon.getaCannonStep());             //Check Knob for FrontCannon
+        assertEquals(CannonSteps.fuenfhundert, aKnobRoofCannon.getaCannonMode());       //Check Knob for RoofCannon
     }
 
     @Test
@@ -346,12 +345,97 @@ public class TestApplication {
         for(int i=0; i < 3; i++){
             aDriver.useJoystickKeyButton();                                     //KeyButtons emits mixture
         }
-
-        //Joystick
-
+        behaviorJoystick1();
 
         //!!!! JOYSTICK VERHALTEN + RICHTIGER VERBRAUCH  !!!!!
 
+    }
+
+    private void behaviorJoystick1() {
+        if(aFrontCannon.getaCannonStatus() == CannonStatus.activated){          //if current JoystickStatus
+            aJoystickFrontCannon.pushPressButton(Position.left);
+            assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus()); //check if after pressing button is deactivated
+            assertEquals(0, aFrontCannon.getAngle());                       //and angle is 0
+            int tempMix = aMixingUnit.getaFoamRateAsInt();                          //foam rate
+            aJoystickFrontCannon.pushPressButton(Position.right);                     //Press right button (nothing should happen!)
+            assertEquals(tempMix, aMixingUnit.getaFoamRateAsInt());                 //check if foamrate is the same => nothing happend as it should
+            aJoystickFrontCannon.pushPressButton(Position.left);
+            assertEquals(CannonStatus.activated, aFrontCannon.getaCannonStatus()); //check if after pressing button roofcannon is activated
+            assertEquals(90, aFrontCannon.getAngle());                      //and angle is 90
+            behaviorJoystickFaomRate(aMixingUnit.getaFoamRateAsInt());
+
+        }
+        else{ //if deactivated
+            aJoystickFrontCannon.pushPressButton(Position.left);
+            assertEquals(CannonStatus.activated, aFrontCannon.getaCannonStatus()); //check if after pressing button is activated
+            assertEquals(90, aFrontCannon.getAngle());
+            behaviorJoystickFaomRate(aMixingUnit.getaFoamRateAsInt());
+            int tempVolume = aWaterTank.getVolume() + aFoamTank.getVolume();
+            aJoystickFrontCannon.pushKeyButton();       //emit
+            assertEquals(aKnobFrontCannon.getaCannonStepAsInt(), tempVolume - aFoamTank.getVolume() - aWaterTank.getVolume());
+            aJoystickFrontCannon.pushPressButton(Position.left);
+            assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus()); //check if after pressing button is deactivated
+            assertEquals(0, aFrontCannon.getAngle());
+            int tempMix = aMixingUnit.getaFoamRateAsInt();
+            aJoystickFrontCannon.pushPressButton(Position.right);
+            assertEquals(tempMix, aMixingUnit.getaFoamRateAsInt());     //check if foam rate stays the same (it should!)
+            int tempWVolume = aWaterTank.getVolume();
+            int tempFVolume = aFoamTank.getVolume();
+            aJoystickFrontCannon.pushKeyButton();
+            assertEquals(tempFVolume, aFoamTank.getVolume());
+            assertEquals(tempWVolume, aWaterTank.getVolume());
+
+        }
+
+    }
+
+    /**
+     * Check if through the right click of the button the foam rate is properly changed
+     * @param tempMix current foamrate
+     */
+    private void behaviorJoystickFaomRate(int tempMix) {
+        switch (tempMix){
+            case 0:
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(3, aMixingUnit.getaFoamRateAsInt());
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(5, aMixingUnit.getaFoamRateAsInt());
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(10, aMixingUnit.getaFoamRateAsInt());
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(0, aMixingUnit.getaFoamRateAsInt());
+                break;
+            case 3:
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(5, aMixingUnit.getaFoamRateAsInt());
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(10, aMixingUnit.getaFoamRateAsInt());
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(0, aMixingUnit.getaFoamRateAsInt());
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(3, aMixingUnit.getaFoamRateAsInt());
+                break;
+            case 5:
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(10, aMixingUnit.getaFoamRateAsInt());
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(0, aMixingUnit.getaFoamRateAsInt());
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(3, aMixingUnit.getaFoamRateAsInt());
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(5, aMixingUnit.getaFoamRateAsInt());
+                break;
+            case 10:
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(0, aMixingUnit.getaFoamRateAsInt());
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(3, aMixingUnit.getaFoamRateAsInt());
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(5, aMixingUnit.getaFoamRateAsInt());
+                aJoystickFrontCannon.pushPressButton(Position.right);
+                assertEquals(10, aMixingUnit.getaFoamRateAsInt());
+                break;
+        }
     }
 
     @Test

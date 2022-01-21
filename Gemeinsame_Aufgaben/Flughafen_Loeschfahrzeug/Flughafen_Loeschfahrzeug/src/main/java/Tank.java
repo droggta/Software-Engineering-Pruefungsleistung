@@ -70,4 +70,31 @@ public abstract class Tank {
         aFillLevel[2]-= diffWidth;
 
     }
+
+    /**
+     * Moves the pointer to the new fill level
+     * @param pVolume added volume in units
+     */
+    public void fillVolume(int pVolume){
+        int tempVolume = pVolume;
+        int diffLength = 0;
+        int diffHeight = 0;
+        int diffWidth = 0;
+
+        if(tempVolume >= (divisor[0]*divisor[2])){     //If consumed volume bigger than 1 layer Length*Width
+            diffHeight = (int) Math.floor(tempVolume / (divisor[0]*divisor[2]));
+            tempVolume -= diffHeight*(divisor[0]*divisor[2]);
+        }
+        if(tempVolume >= (divisor[0])) {                //if volume is bigger as width
+            diffWidth = (int) Math.floor(tempVolume / divisor[0]);
+            tempVolume-= diffWidth*divisor[0];
+        }
+        diffLength = tempVolume;
+
+        //Pointer is updated
+        aFillLevel[0]+= diffLength;
+        aFillLevel[1]+= diffHeight;
+        aFillLevel[2]+= diffWidth;
+
+    }
 }
