@@ -39,6 +39,8 @@ public class KnobFrontCannon {
                 return 3000;
             case dreitausendfuenfhundert:
                 return 3500;
+            default:
+                return 0;//error
         }
     }
 
