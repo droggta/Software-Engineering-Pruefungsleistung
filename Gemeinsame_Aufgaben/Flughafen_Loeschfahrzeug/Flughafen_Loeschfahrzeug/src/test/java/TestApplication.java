@@ -315,6 +315,7 @@ public class TestApplication {
     @Test
     @Order(7)
     public void handlePushbackVehicleOnFire(){
+        int p = 0;
         int initWaterVolume = aWaterTank.getVolume();
         int initFoamVolume = aFoamTank.getVolume();
         assertEquals(MotorStatus.on,aElectricMotor[0].getaMotorStatus());       //Check if electric motors are turned on
@@ -335,23 +336,61 @@ public class TestApplication {
         }
         assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());      //Check if water tank is 100% full
         assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());        //Check if foam tank is 100% full
-        aFrontCannon.setFrontCannonAngle(90);                                   //- - - Set angle to 90 degrees
+        if(aFrontCannon.getaCannonStatus() != CannonStatus.activated) {         //Check if frontcannon ist activated
+            aDriver.useJoystickPressButton(Position.left);                      //if not press button in order to activate
+        }
+        assertEquals(CannonStatus.activated, aFrontCannon.getaCannonStatus());  //Check if frontcannon is now activated
         assertEquals(90, aFrontCannon.getAngle());                      //Check if angle is turned to 90 degrees
         aOperator.useKnobJoystickFrontCannon(CannonSteps.dreitausendfuenfhundert); //Set volume being emitted to 3500units
-        while (aJoystickFrontCannon.getcurrentFoamRate() != FoamRate.zehn)      //Check if current FoamRate equals 10% if not 10%...
+        p=0;
+        while (aMixingUnit.getaFoamRate() != FoamRate.zehn)      //Check if current FoamRate equals 10% if not 10%...
         {
             aDriver.useJoystickPressButton(Position.right);                     //...repeat pressing the Button unit FoamRate is set to 10%
+            if(p>5){
+                assertTrue(false);                                      //error: changing the foamRate seems not to work!
+            }
         }
         assertEquals(CannonSteps.dreitausendfuenfhundert, aKnobFrontCannon.getaCannonStep());   //Check if volume is successfully set to 3500units
         assertEquals(FoamRate.zehn ,aMixingUnit.getaFoamRate());                //Check if FoamRate is successfully set to 10%
         for(int i=0; i < 3; i++){
-            aDriver.useJoystickKeyButton();                                     //KeyButtons emits mixture
+            checkEmitConsumptionCannon(3500, 10, aJoystickFrontCannon);      //Emit mixture and check if consumption works according to the set parameters
         }
-
         behaviorJoystick1();                                                    //Check behavior of the 1.Joystick responsible for controlling the frontcannon
-
-        //!!!! JOYSTICK VERHALTEN + RICHTIGER VERBRAUCH  !!!!!
-
+        if(aRoofCannon.getaCannonStatus() != CannonStatus.activated){           //check if roof cannon is activated
+            aOperator.useJoystickPressButton(Position.left);                    //if not press button in order to activate the roof cannon
+        }
+        assertEquals(CannonStatus.activated, aRoofCannon.getaCannonStatus());   //Check if the roof cannon is activated
+        assertEquals(90, aRoofCannon.getaSegment1().getAngle());        //Check angle of roof cannon segment1
+        assertEquals(90, aRoofCannon.getaSegment2().getAngle());        //Check angle of roof cannon segment2
+        aOperator.useKnobJoystickRoofCannon(CannonModes.modeC);                 //set to ModeC (2500units)
+        assertEquals(CannonModes.modeC, aKnobRoofCannon.getaCannonMode());      //check if the set units is 2500units (ModeC)
+        p=0;
+        while(aMixingUnit.getaFoamRate() != FoamRate.fuenf){                    //check if foamrate is 5%
+            aOperator.useJoystickPressButton(Position.right);                   //if not press button in order to change foamRate
+            if(p>5){
+                assertTrue(false);                                      //error: changing the foamRate seems not to work!
+            }
+        }
+        assertEquals(FoamRate.fuenf, aMixingUnit.getaFoamRate());               //check if foamRate is successfully set to 5%
+        assertEquals(90, aRoofCannon.getaSegment1().getAngle());        //check if angle of segment1 is 90degreee
+        assertEquals(90, aRoofCannon.getaSegment2().getAngle());        //check if angle of segment2 is 90degreee
+        for(int i=0; i<5; i++){
+                checkEmitConsumptionCannon(2500, 5, aJoystickRoofCannon);   //emit mixture and check consumption
+        }
+        aOperator.useKnobJoystickFrontCannon(CannonSteps.tausend);              //Set volume being emitted to 1000units
+        p=0;
+        while (aMixingUnit.getaFoamRate() != FoamRate.drei)                     //Check if current FoamRate equals 3% if not 10%...
+        {
+            aDriver.useJoystickPressButton(Position.right);                     //...repeat pressing the Button unit FoamRate is set to 10%
+            if(p>5){
+                assertTrue(false);                                      //error: changing the foamRate seems not to work!
+            }
+        }
+        assertEquals(CannonSteps.tausend, aKnobFrontCannon.getaCannonStep());   //Check if volume is successfully set to 3500units
+        assertEquals(FoamRate.drei ,aMixingUnit.getaFoamRate());                //Check if FoamRate is successfully set to 10%
+        for(int i=0; i < 3; i++){
+            checkEmitConsumptionCannon(1000, 3, aJoystickFrontCannon);      //Emit mixture and check if consumption works according to the set parameters
+        }
     }
 
     @Test
