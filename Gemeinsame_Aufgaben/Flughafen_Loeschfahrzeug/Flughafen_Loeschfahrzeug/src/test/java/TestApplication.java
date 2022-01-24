@@ -221,7 +221,7 @@ public class TestApplication {
     @Test
     @Order(2)
     public void usageControlPanel(){        //checks if the controlPanel
-
+        //Driver does not use the control panel so nothing happens. Operator is responsible for the control panel
     }
 
     @Test
@@ -234,7 +234,8 @@ public class TestApplication {
         }
         assertEquals(DoorStatus.open, aDoors[0].getaDoorStatus());                //check if doors are open
         assertEquals(DoorStatus.open, aDoors[1].getaDoorStatus());
-        assertEquals(CannonStatus.retracted, aRoofCannon.getaCannonStatus());       //check roofcannon
+        assertEquals(90, aRoofCannon.getaSegment1().getAngle());       //check roofcannon
+        assertEquals(90, aRoofCannon.getaSegment2().getAngle());
         assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
         //check Headlamp. FLF has in total 10 headlamps => Array(3 headlamps on each side and 4 on the roof)
         for(int i=0; i < aHeadLamp.length; i++){
@@ -245,8 +246,8 @@ public class TestApplication {
         }
         //assertEquals(LightStatus.off, aWarningLight[].getaLightStatus());                     //Check if Warninglight is off
         //assertEquals(LightStatus.off, aBlueLight[].getaLightStatus());                     //Check if BlueLight is off
-        assertEquals(12500, aWaterTank.getVolume());                            //check if watertank is 100% full
-        assertEquals(2500, aFoamTank.getVolume());                            //check if foamtank is 100% full
+        assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                            //check if watertank is 100% full
+        assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());                            //check if foamtank is 100% full
         for(int i=0; i < aBattery.length; i++){
             assertEquals(100000, aBattery[i].getaSoC());                      //Check if Batteries are 100% full (SoC=State of Charge)
         }
