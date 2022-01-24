@@ -260,7 +260,7 @@ public class TestApplication {
         assertEquals(MotorStatus.on, aElectricMotor[0].getaMotorStatus());          //Check if electric motors are on
         assertEquals(MotorStatus.on, aElectricMotor[1].getaMotorStatus());
         for(int i = 0; i < 2; i++){
-            assertEquals(null,aSeats[i].getPerson());                       //Check if both front seats are taken
+            assertNotNull(aSeats[i].getPerson());                            //Check if both front seats are taken
         }
         assertEquals(DoorStatus.closed, aDoors[0].getaDoorStatus());                //check if doors are closed
         assertEquals(DoorStatus.closed, aDoors[1].getaDoorStatus());
@@ -270,7 +270,8 @@ public class TestApplication {
             assertEquals(0, aRoofCannon.getaSegment2().getaPiecesegment()[i]);
         }
         assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
-        for(int i = 0+aLights.length; i < aLights.length; i++) {
+        // TODO: Lights einteilen in Frontlight und Seitenlicht
+        for(int i = 0; i < aLights.length; i++) {
             assertEquals(LightStatus.off, aLights[i].getaLightStatus());
         }
         for(int i = 0; i < aLights.length-8; i++){
@@ -288,28 +289,116 @@ public class TestApplication {
         assertEquals(CannonSteps.fuenfhundert ,aKnobFrontCannon.getaCannonStep());          //Check if knob for front cannon is set to step one
         assertEquals(CannonModes.modeA, aKnobRoofCannon.getaCannonMode());                  //Check if knob for roof cannon is set to mode one
 
-        for (int i = 0; i < (28/4); i++){                                                   //accelerate the FLF to 28km/h in 4km/h steps
+        for (int i = 1; i <= 7; i++){                                                   //accelerate the FLF to 28km/h in 4km/h steps
             aDriver.accelerate();
+            assertEquals(i*4, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
         }
-        assertEquals(28, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
         //FLF fährt fünf Interationen mit konstant 28km/h geradeaus
-        aDriver.steer(-5);                                                       //change steeringangle to -5% (left)
-        //FLF fährt fünf Interationen mit konstant 28km/h nach 5% links
-        assertEquals(-5, aFLF.getSteeringAngleFrontPivot());                        //check if the steering angle of the front pivots is -5%
+        for (int i = 0; i < 5; i++){
+            assertEquals(28, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
+        }
 
+        //FLF fährt fünf Interationen mit konstant 28km/h nach 5% links
+        aDriver.steer(-5);                                            //change steeringangle to -5% (left)
+        for (int i = 0; i < 3; i++){
+            assertEquals(28, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
+            assertEquals(-5, aFLF.getSteeringAngleFrontPivot());                        //check if the steering angle of the front pivots is -5%
+        }
+
+        //FLF fährt fünf Interationen mit konstant 28km/h geradeaus
+        aDriver.steer(5);
+        for (int i = 0; i < 5; i++){
+            assertEquals(28, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
+            assertEquals(0, aFLF.getSteeringAngleFrontPivot());
+        }
+
+        //FLF fährt fünf Interationen mit konstant 28km/h nach 5% rechts
+        aDriver.steer(5);                                            //change steeringangle to -5% (left)
+        for (int i = 0; i < 3; i++){
+            assertEquals(28, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
+            assertEquals(5, aFLF.getSteeringAngleFrontPivot());                        //check if the steering angle of the front pivots is -5%
+        }
+        aDriver.steer(-5);
+
+        //FLF bremst in sieben Iterationen
+        aDriver.steer(5);
+        for (int i = 1; i <= 7; i++){
+            aDriver.slowDown();
+            assertEquals(28-(i*4), aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
+        }
+
+        //TODO: Energieverbrauch
 
     }
 
     @Test
     @Order(5)
     public void handleEmergencyService(){
+        assertEquals(MotorStatus.on, aElectricMotor[0].getaMotorStatus());          //Check if electric motors are on
+        assertEquals(MotorStatus.on, aElectricMotor[1].getaMotorStatus());
+        for(int i = 0; i < 2; i++){
+            assertNotNull(aSeats[i].getPerson());                       //Check if both front seats are taken
+        }
+        assertEquals(DoorStatus.closed, aDoors[0].getaDoorStatus());                //check if doors are closed
+        assertEquals(DoorStatus.closed, aDoors[1].getaDoorStatus());
+        assertEquals(0, aRoofCannon.getaSegment1().getAngle());
+        assertEquals(0, aRoofCannon.getaSegment2().getAngle());
+        for(int i = 0; i < aRoofCannon.getaSegment2().getaPiecesegment().length; i++){      //check if segments of roof arm are retracted
+            assertEquals(0, aRoofCannon.getaSegment2().getaPiecesegment()[i]);
+        }
+        assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
+        // TODO: Lights einteilen in Frontlight und Seitenlicht
+        for(int i = 0; i < aHeadLamp.length; i++) {
+            assertEquals(LightStatus.on, aLights[i].getaLightStatus());   // Check if Sitelights and Frontlight turned on
+        }
+        for(int i = 0; i < aWarningLight.length; i++){                                      //Check if warning light is turned on
+            assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());
+        }
+        for(int i = 0 ; i < aBlueLight.length; i++){                                        //Check if Bluelight is turned off
+            assertEquals(LightStatus.off, aBlueLight[i].getaLightStatus());
+        }
 
+        assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full
+        assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());                    //Check if foam tank is 100% full
+        assertEquals(CannonSteps.fuenfhundert ,aKnobFrontCannon.getaCannonStep());          //Check if knob for front cannon is set to step one
+        assertEquals(CannonModes.modeA, aKnobRoofCannon.getaCannonMode());                  //Check if knob for roof cannon is set to mode one
+
+        for (int i = 1; i <= 20; i++){                                                   //accelerate the FLF to 28km/h in 4km/h steps
+            aDriver.accelerate();
+            assertEquals(i*4, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
+        }
+        //FLF fährt fünf Interationen mit konstant 28km/h geradeaus
+        for (int i = 0; i < 10; i++){
+            assertEquals(80, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
+        }
+        //TODO: Energieverbrauch
     }
 
     @Test
     @Order(6)
     public void handleFuelTruckOnFire(){
+        assertEquals(MotorStatus.on, aElectricMotor[0].getaMotorStatus());          //Check if electric motors are on
+        assertEquals(MotorStatus.on, aElectricMotor[1].getaMotorStatus());
+        for(int i = 0; i < 2; i++){
+            assertNotNull(aSeats[i].getPerson());                       //Check if both front seats are taken
+        }
+        assertEquals(DoorStatus.closed, aDoors[0].getaDoorStatus());                //check if doors are closed
+        assertEquals(DoorStatus.closed, aDoors[1].getaDoorStatus());
 
+        // TODO: Lights einteilen in Frontlight und Seitenlicht
+        for(int i = 0; i < aHeadLamp.length; i++) {
+            assertEquals(LightStatus.on, aLights[i].getaLightStatus());   // Check if Sitelights and Frontlight turned on
+        }
+        for(int i = 0; i < aWarningLight.length; i++){                                      //Check if warning light is turned on
+            assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());
+        }
+        for(int i = 0 ; i < aBlueLight.length; i++){                                        //Check if Bluelight is turned off
+            assertEquals(LightStatus.off, aBlueLight[i].getaLightStatus());
+        }
+
+        assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full
+        assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());                    //Check if foam tank is 100% full
+        //TODO: Weitere Punkte einfügen
     }
 
     @Test
