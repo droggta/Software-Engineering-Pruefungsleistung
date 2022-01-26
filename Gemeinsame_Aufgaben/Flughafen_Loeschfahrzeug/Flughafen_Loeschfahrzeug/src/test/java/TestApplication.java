@@ -290,25 +290,32 @@ public class TestApplication {
         assertEquals(CannonSteps.fuenfhundert ,aKnobFrontCannon.getaCannonStep());          //Check if knob for front cannon is set to step one
         assertEquals(CannonModes.modeA, aKnobRoofCannon.getaCannonMode());                  //Check if knob for roof cannon is set to mode one
 
+        int startEnergieVolume = aBatteryBox.getallSoC();
+        int consumedEnergy = 0;
+
         for (int i = 1; i <= 7; i++){                                                   //accelerate the FLF to 28km/h in 4km/h steps
             aDriver.accelerate();
+            consumedEnergy += aFLF.getaVelocity()*25;
             assertEquals(i*4, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
         }
         //FLF fährt fünf Interationen mit konstant 28km/h geradeaus
         for (int i = 0; i < 5; i++){
+            consumedEnergy += aFLF.getaVelocity()*25;
             assertEquals(28, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
         }
 
         //FLF fährt fünf Interationen mit konstant 28km/h nach 5% links
         aDriver.steer(-5);                                            //change steeringangle to -5% (left)
         for (int i = 0; i < 3; i++){
-            assertEquals(28, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
+            consumedEnergy += aFLF.getaVelocity()*25;
+            assertEquals(28, aFLF.getaVelocity());                                    //check if the velocity is actually 28km/h
             assertEquals(-5, aFLF.getSteeringAngleFrontPivot());                        //check if the steering angle of the front pivots is -5%
         }
 
         //FLF fährt fünf Interationen mit konstant 28km/h geradeaus
         aDriver.steer(5);
         for (int i = 0; i < 5; i++){
+            consumedEnergy += aFLF.getaVelocity()*25;
             assertEquals(28, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
             assertEquals(0, aFLF.getSteeringAngleFrontPivot());
         }
@@ -316,6 +323,7 @@ public class TestApplication {
         //FLF fährt fünf Interationen mit konstant 28km/h nach 5% rechts
         aDriver.steer(5);                                            //change steeringangle to -5% (left)
         for (int i = 0; i < 3; i++){
+            consumedEnergy += aFLF.getaVelocity()*25;
             assertEquals(28, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
             assertEquals(5, aFLF.getSteeringAngleFrontPivot());                        //check if the steering angle of the front pivots is -5%
         }
@@ -325,11 +333,10 @@ public class TestApplication {
         aDriver.steer(5);
         for (int i = 1; i <= 7; i++){
             aDriver.slowDown();
+            consumedEnergy += aFLF.getaVelocity()*25;
             assertEquals(28-(i*4), aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
         }
-
-        //TODO: Energieverbrauch
-
+        assertEquals(startEnergieVolume-consumedEnergy, aBatteryBox.getallSoC());
     }
 
     @Test
@@ -364,15 +371,20 @@ public class TestApplication {
         assertEquals(CannonSteps.fuenfhundert ,aKnobFrontCannon.getaCannonStep());          //Check if knob for front cannon is set to step one
         assertEquals(CannonModes.modeA, aKnobRoofCannon.getaCannonMode());                  //Check if knob for roof cannon is set to mode one
 
+        int startEnergieVolume = aBatteryBox.getallSoC();
+        int consumedEnergy = 0;
+
         for (int i = 1; i <= 20; i++){                                                   //accelerate the FLF to 28km/h in 4km/h steps
             aDriver.accelerate();
+            consumedEnergy += aFLF.getaVelocity()*25;
             assertEquals(i*4, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
         }
         //FLF fährt fünf Interationen mit konstant 28km/h geradeaus
         for (int i = 0; i < 10; i++){
+            consumedEnergy += aFLF.getaVelocity()*25;
             assertEquals(80, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
         }
-        //TODO: Energieverbrauch
+        assertEquals(startEnergieVolume-consumedEnergy, aBatteryBox.getallSoC());
     }
 
     @Test
@@ -396,10 +408,56 @@ public class TestApplication {
         for(int i = 0 ; i < aBlueLight.length; i++){                                        //Check if Bluelight is turned off
             assertEquals(LightStatus.off, aBlueLight[i].getaLightStatus());
         }
-
+        // TODO: Ist Tank initial bei 100%?
         assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full
         assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());                    //Check if foam tank is 100% full
-        //TODO: Weitere Punkte einfügen
+
+        int startVolumeWater = aWaterTank.getVolume();
+        aFLF.activateGroundSprayNozzles();
+        assertEquals(startVolumeWater-(100* aGroundSprayNoozle.length), aWaterTank.getVolume()); //Check if Waterconsumption from GroundNozzles is correct
+
+        if(aFrontCannon.getaCannonStatus() != CannonStatus.activated) {         //Check if frontcannon ist activated
+            aDriver.useJoystickPressButton(Position.left);                      //if not press button in order to activate
+        }
+        assertEquals(CannonStatus.activated, aFrontCannon.getaCannonStatus());  //Check if frontcannon is now activated
+        assertEquals(90, aFrontCannon.getAngle());                      //Check if angle is turned to 90 degrees
+        aOperator.useKnobJoystickFrontCannon(CannonSteps.dreitausendfuenfhundert); //Set volume being emitted to 3500units
+        for (int i = 0; i < 5; i++){ //Check if current FoamRate equals 10% if not 10%...
+            if (aMixingUnit.getaFoamRate() != FoamRate.fuenf){
+                aDriver.useJoystickPressButton(Position.right); //...repeat pressing the Button unit FoamRate is set to 10%
+            }
+        }
+        if (aMixingUnit.getaFoamRate() != FoamRate.fuenf) {
+            assertTrue(false); //error: changing the foamRate seems not to work!
+        }
+        assertEquals(CannonSteps.dreitausend, aKnobFrontCannon.getaCannonStep());   //Check if volume is successfully set to 3500units
+        assertEquals(FoamRate.fuenf ,aMixingUnit.getaFoamRate());                //Check if FoamRate is successfully set to 10%
+        for(int i=0; i < 3; i++){
+            checkEmitConsumptionCannon(3000, 5, aJoystickFrontCannon);      //Emit mixture and check if consumption works according to the set parameters
+        }
+        behaviorJoystick1();                                                    //Check behavior of the 1.Joystick responsible for controlling the frontcannon
+        if(aRoofCannon.getaCannonStatus() != CannonStatus.activated){           //check if roof cannon is activated
+            aOperator.useJoystickPressButton(Position.left);                    //if not press button in order to activate the roof cannon
+        }
+        assertEquals(CannonStatus.activated, aRoofCannon.getaCannonStatus());   //Check if the roof cannon is activated
+        assertEquals(90, aRoofCannon.getaSegment1().getAngle());        //Check angle of roof cannon segment1
+        assertEquals(90, aRoofCannon.getaSegment2().getAngle());        //Check angle of roof cannon segment2
+        aOperator.useKnobJoystickRoofCannon(CannonModes.modeC);                 //set to ModeC (2500units)
+        assertEquals(CannonModes.modeC, aKnobRoofCannon.getaCannonMode());      //check if the set units is 2500units (ModeC)
+        for (int i = 0; i < 5; i++){ //Check if current FoamRate equals 10% if not 10%...
+            if (aMixingUnit.getaFoamRate() != FoamRate.drei){
+                aDriver.useJoystickPressButton(Position.right); //...repeat pressing the Button unit FoamRate is set to 10%
+            }
+        }
+        if (aMixingUnit.getaFoamRate() != FoamRate.drei) {
+            assertTrue(false); //error: changing the foamRate seems not to work!
+        }
+        assertEquals(FoamRate.drei, aMixingUnit.getaFoamRate());               //check if foamRate is successfully set to 5%
+        assertEquals(90, aRoofCannon.getaSegment1().getAngle());        //check if angle of segment1 is 90degreee
+        assertEquals(90, aRoofCannon.getaSegment2().getAngle());        //check if angle of segment2 is 90degreee
+        for(int i=0; i<3; i++){
+            checkEmitConsumptionCannon(2500, 3, aJoystickRoofCannon);   //emit mixture and check consumption
+        }
     }
 
     @Test

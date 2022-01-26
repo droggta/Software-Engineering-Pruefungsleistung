@@ -10,4 +10,8 @@ public class GroundSprayNozzle {
 
     }
 
+    public void sprayWater(){
+        aWaterTank.consumeVolume(100);
+    }
+
 }

@@ -1,13 +1,15 @@
 public class Battery {
 
-    private double aCapacity;
+    private int aCapacity;
     private BatteryStatus aBatteryStatus;
-    private double aSoC;        //Soc = State of Charge
+    private int aSoC;        //Soc = State of Charge
 
     public Battery() {
+        aCapacity = 100000;
+        aSoC = 100000;
     }
 
-    public double getaSoC() {
+    public int getaSoC() {
         return aSoC;
     }
 }

@@ -176,6 +176,58 @@ public class FLF {
         return aFrontCannon.getFoamRate();
     }
 
+    /**
+     * Changes the current velocity if the FLF and sends info to speed display and power unit
+     * @param i change of velocity in km/h
+     */
+    public void updateaVelocity(int i) {
+        aVelocity = aVelocity + i;
+        aCabine.setaSpeedDisplayValue(aVelocity);       //handles the visualization of the velocity by sending the value to cabine
+        //aPowerUnit.provide(aVelocity); still in implementation
+    }
+
+    /**
+     * Sends the steering angle to both front pivots and direction indicators
+     * @param aSteeringAngle Parameter given in % (minus=left, positiv=right)
+     */
+    public void steerFLF(int aSteeringAngle) {
+        for(int i = 0; i < aFrontPivot.length; i++){
+            aFrontPivot[0].updateaSteerAngle(aSteeringAngle);   //steering angle is send to both front pivots
+        }
+
+        //send information to direction indicators
+    }
+
+    /**
+     * Returns the angle both front pivots are currently set to
+     * @return angle given in % (minus=left, positiv=right)
+     */
+    public int getSteeringAngleFrontPivot(){
+        if(aFrontPivot[0].getSteerAngle() == aFrontPivot[1].getSteerAngle()){
+            return  aFrontPivot[0].getSteerAngle();
+        }
+        else {
+            return -9999;
+        }
+    }
+
+    /**
+     * returns the current velocity of the FLF
+     * @return veloctiy stored in the FLF class
+     */
+    public int getaVelocity() {
+        return aVelocity;
+    }
+
+    /**
+     *
+     */
+    public void activateGroundSprayNozzles(){
+        for (int i = 0; i < aGroundSprayNoozle.length; i++){
+            aGroundSprayNoozle[i].sprayWater();
+        }
+    }
+
     public static class Builder{
         // Klassen mit Verbindung zum FLF
         public PowerUnit bPowerUnit;
@@ -444,48 +496,7 @@ public class FLF {
         }
     }
 
-    /**
-     * Changes the current velocity if the FLF and sends info to speed display and power unit
-     * @param i change of velocity in km/h
-     */
-    public void updateaVelocity(int i) {
-        aVelocity = aVelocity + i;
-        aCabine.setaSpeedDisplayValue(aVelocity);       //handles the visualization of the velocity by sending the value to cabine
-        //aPowerUnit.provide(aVelocity); still in implementation
-    }
 
-    /**
-     * Sends the steering angle to both front pivots and direction indicators
-     * @param aSteeringAngle Parameter given in % (minus=left, positiv=right)
-     */
-    public void steerFLF(int aSteeringAngle) {
-        for(int i = 0; i < aFrontPivot.length; i++){
-            aFrontPivot[0].updateaSteerAngle(aSteeringAngle);   //steering angle is send to both front pivots
-        }
-
-        //send information to direction indicators
-    }
-
-    /**
-     * Returns the angle both front pivots are currently set to
-     * @return angle given in % (minus=left, positiv=right)
-     */
-    public int getSteeringAngleFrontPivot(){
-        if(aFrontPivot[0].getSteerAngle() == aFrontPivot[1].getSteerAngle()){
-            return  aFrontPivot[0].getSteerAngle();
-        }
-        else {
-            return -9999;
-        }
-    }
-
-    /**
-     * returns the current velocity of the FLF
-     * @return veloctiy stored in the FLF class
-     */
-    public int getaVelocity() {
-        return aVelocity;
-    }
 
 
 }
