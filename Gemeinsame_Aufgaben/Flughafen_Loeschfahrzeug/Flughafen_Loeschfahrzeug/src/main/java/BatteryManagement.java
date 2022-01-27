@@ -1,9 +1,9 @@
 public enum BatteryManagement {
     instance;
 
-    private BatteryBox aBatteryBox;
+    private static BatteryBox aBatteryBox;
 
-    public void setaBatteryBox(BatteryBox pBatteryBox){
+    public static void setaBatteryBox(BatteryBox pBatteryBox){
         aBatteryBox = pBatteryBox;
     }
 

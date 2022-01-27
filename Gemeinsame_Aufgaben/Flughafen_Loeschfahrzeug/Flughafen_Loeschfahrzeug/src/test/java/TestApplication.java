@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestApplication {
+    // TODO: Superklassen und Enums raus nehmen
     private FLF aFLF;
     private FLF.Builder aBuilder;
 
@@ -62,7 +63,7 @@ public class TestApplication {
     private WarningLight[] aWarningLight;
     private WaterTank aWaterTank;
     private Wheel[] aWheel;
-    //Enumerations
+    /*Enumerations
     private BatteryManagement aBatteryManagement;
     private BatteryStatus aBatteryStatus;
     private CannonModes aCannonModes;
@@ -75,7 +76,7 @@ public class TestApplication {
     private Position aPosition;
     private SwitchStatus aSwitchStatus;
     private SwitchType aSwitchType;
-    private TankSubstance aTankSubstance;
+    private TankSubstance aTankSubstance;*/
 
     @BeforeEach
     public void init() {
@@ -132,7 +133,7 @@ public class TestApplication {
         aWarningLight = aBuilder.bWarningLights;
         aWaterTank = aBuilder.bWaterTank;
         aWheel = aBuilder.bWheel;
-        //Enumerations
+        /*Enumerations
         aBatteryManagement = aBuilder.bBatteryManagement;
         aBatteryStatus = aBuilder.bBatteryStatus;
         aCannonModes = aBuilder.bCannonModes;
@@ -145,7 +146,7 @@ public class TestApplication {
         aPosition = aBuilder.bPosition;
         aSwitchStatus = aBuilder.bSwitchStatus;
         aSwitchType = aBuilder.bSwitchType;
-        aTankSubstance = aBuilder.bTankSubstance;
+        aTankSubstance = aBuilder.bTankSubstance;*/
     }
 
     @Test
@@ -155,27 +156,27 @@ public class TestApplication {
         assertNotNull(aBackPivot);
         assertNotNull(aBattery);
         assertNotNull(aBatteryBox);
-        assertNotNull(aBatteryManagement);
-        assertNotNull(aBatteryStatus);
+        //assertNotNull(aBatteryManagement);
+        //assertNotNull(aBatteryStatus);
         assertNotNull(aBlueLight);
         assertNotNull(aBreakDisc);
         assertNotNull(aBreakingLight);
         assertNotNull(aBreakPedal);
         assertNotNull(aCabine);
-        assertNotNull(aCannonModes);
-        assertNotNull(aCannonSteps);
+        //assertNotNull(aCannonModes);
+        //assertNotNull(aCannonSteps);
         assertNotNull(aCentralUnit);
         assertNotNull(aControlPanel);
         assertNotNull(aDirectionIndicator);
-        assertNotNull(aDisplay);
+        //assertNotNull(aDisplay);
         assertNotNull(aDoorButton);
         assertNotNull(aDoors);
-        assertNotNull(aDoorStatus);
+        //assertNotNull(aDoorStatus);
         assertNotNull(aDriver);
         assertNotNull(aElectricMotor);
         assertNotNull(aEnergyDisplay);
         assertNotNull(aFLF);
-        assertNotNull(aFoamRate);
+        //assertNotNull(aFoamRate);
         assertNotNull(aFoamTank);
         assertNotNull(aFrontCannon);
         assertNotNull(aFrontPivot);
@@ -183,22 +184,22 @@ public class TestApplication {
         assertNotNull(aGasPedal);
         assertNotNull(aGroundSprayNoozle);
         assertNotNull(aHeadLamp);
-        assertNotNull(aJoystick);
+        //assertNotNull(aJoystick);
         assertNotNull(aJoystickFrontCannon);
         assertNotNull(aJoystickRoofCannon);
         assertNotNull(aKeyButton);
         assertNotNull(aKnobFrontCannon);
         assertNotNull(aKnobRoofCannon);
         assertNotNull(aLED);
-        assertNotNull(aLEDColor);
-        assertNotNull(aLights);
-        assertNotNull(aLightSize);
-        assertNotNull(aLightStatus);
+        //assertNotNull(aLEDColor);
+        //assertNotNull(aLights);
+        //assertNotNull(aLightSize);
+        //assertNotNull(aLightStatus);
         assertNotNull(aMixingUnit);
         assertNotNull(aOperator);
         assertNotNull(aPieceSegment);
-        assertNotNull(aPivot);
-        assertNotNull(aPosition);
+        //assertNotNull(aPivot);
+        //assertNotNull(aPosition);
         assertNotNull(aPowerUnit);
         assertNotNull(aPressButton);
         assertNotNull(aRoofCannon);
@@ -208,10 +209,10 @@ public class TestApplication {
         assertNotNull(aSpeedDisplay);
         assertNotNull(aSterringWheel);
         assertNotNull(aSwitch);
-        assertNotNull(aSwitchStatus);
-        assertNotNull(aSwitchType);
-        assertNotNull(aTank);
-        assertNotNull(aTankSubstance);
+        //assertNotNull(aSwitchStatus);
+        //assertNotNull(aSwitchType);
+        //assertNotNull(aTank);
+        //assertNotNull(aTankSubstance);
         assertNotNull(aWarningLight);
         assertNotNull(aWaterTank);
         assertNotNull(aWheel);
@@ -271,17 +272,31 @@ public class TestApplication {
             assertEquals(0, aRoofCannon.getaSegment2().getaPiecesegment()[i]);
         }
         assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
-        // TODO: Lights einteilen in Frontlight und Seitenlicht
-        for(int i = 0; i < aLights.length; i++) {
-            assertEquals(LightStatus.off, aLights[i].getaLightStatus());
+        // TODO: Was sind die Seitenlampen?
+        // Dachscheinwerfer
+        for(int i = 0; i < aHeadLamp.length; i++) {
+            if(aHeadLamp[i].getaPosition() == Position.frontRoof) {
+                assertEquals(LightStatus.off, aLights[i].getaLightStatus());
+            }
         }
-        for(int i = 0; i < aLights.length-8; i++){
-            assertEquals(LightStatus.off, aLights[i].getaLightStatus());
+        //Seitenlampen sind hier Fahrtrichtungsanzeiger & Bremslicht
+        for(int i = 0; i < aBreakingLight.length; i++){
+            assertEquals(LightStatus.off, aBreakingLight[i].getaLightStatus());
         }
-        //Dachscheinwerfer ausgeschalten, Seitenleuchten ausgeschalten, Frontscheinwerfer eingeschalten
+        for(int i = 0; i < aDirectionIndicator.length; i++){
+            assertEquals(LightStatus.off, aDirectionIndicator[i].getaLightStatus());
+        }
+        // Frontscheinwerfer
+        for(int i = 0; i < aHeadLamp.length; i++){
+            if(aHeadLamp[i].getaPosition() != Position.frontRoof) {
+                assertEquals(LightStatus.on, aLights[i].getaLightStatus());
+            }
+        }
+        // Warnlicht
         for(int i = 0; i < aWarningLight.length; i++){                                      //Check if warning light is turned on
             assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());
         }
+        // Blaulicht
         for(int i = 0 ; i < aBlueLight.length; i++){                                        //Check if Bluelight is turned off
             assertEquals(LightStatus.off, aBlueLight[i].getaLightStatus());
         }
@@ -355,15 +370,33 @@ public class TestApplication {
             assertEquals(0, aRoofCannon.getaSegment2().getaPiecesegment()[i]);
         }
         assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
-        // TODO: Lights einteilen in Frontlight und Seitenlicht
+        // TODO: Was sind die Seitenlampen?
+        // Dachscheinwerfer
         for(int i = 0; i < aHeadLamp.length; i++) {
-            assertEquals(LightStatus.on, aLights[i].getaLightStatus());   // Check if Sitelights and Frontlight turned on
+            if(aHeadLamp[i].getaPosition() == Position.frontRoof) {
+                assertEquals(LightStatus.on, aLights[i].getaLightStatus());
+            }
         }
+        //Seitenlampen sind hier Fahrtrichtungsanzeiger & Bremslicht
+        for(int i = 0; i < aBreakingLight.length; i++){
+            assertEquals(LightStatus.off, aBreakingLight[i].getaLightStatus());
+        }
+        for(int i = 0; i < aDirectionIndicator.length; i++){
+            assertEquals(LightStatus.off, aDirectionIndicator[i].getaLightStatus());
+        }
+        // Frontscheinwerfer
+        for(int i = 0; i < aHeadLamp.length; i++){
+            if(aHeadLamp[i].getaPosition() != Position.frontRoof) {
+                assertEquals(LightStatus.on, aLights[i].getaLightStatus());
+            }
+        }
+        // Warnlicht
         for(int i = 0; i < aWarningLight.length; i++){                                      //Check if warning light is turned on
             assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());
         }
+        // Blaulicht
         for(int i = 0 ; i < aBlueLight.length; i++){                                        //Check if Bluelight is turned off
-            assertEquals(LightStatus.off, aBlueLight[i].getaLightStatus());
+            assertEquals(LightStatus.on, aBlueLight[i].getaLightStatus());
         }
 
         assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full
@@ -398,15 +431,33 @@ public class TestApplication {
         assertEquals(DoorStatus.closed, aDoors[0].getaDoorStatus());                //check if doors are closed
         assertEquals(DoorStatus.closed, aDoors[1].getaDoorStatus());
 
-        // TODO: Lights einteilen in Frontlight und Seitenlicht
+        // TODO: Was sind die Seitenlampen?
+        // Dachscheinwerfer
         for(int i = 0; i < aHeadLamp.length; i++) {
-            assertEquals(LightStatus.on, aLights[i].getaLightStatus());   // Check if Sitelights and Frontlight turned on
+            if(aHeadLamp[i].getaPosition() == Position.frontRoof) {
+                assertEquals(LightStatus.on, aLights[i].getaLightStatus());
+            }
         }
+        //Seitenlampen sind hier Fahrtrichtungsanzeiger & Bremslicht
+        for(int i = 0; i < aBreakingLight.length; i++){
+            assertEquals(LightStatus.on, aBreakingLight[i].getaLightStatus());
+        }
+        for(int i = 0; i < aDirectionIndicator.length; i++){
+            assertEquals(LightStatus.on, aDirectionIndicator[i].getaLightStatus());
+        }
+        // Frontscheinwerfer
+        for(int i = 0; i < aHeadLamp.length; i++){
+            if(aHeadLamp[i].getaPosition() != Position.frontRoof) {
+                assertEquals(LightStatus.on, aLights[i].getaLightStatus());
+            }
+        }
+        // Warnlicht
         for(int i = 0; i < aWarningLight.length; i++){                                      //Check if warning light is turned on
             assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());
         }
+        // Blaulicht
         for(int i = 0 ; i < aBlueLight.length; i++){                                        //Check if Bluelight is turned off
-            assertEquals(LightStatus.off, aBlueLight[i].getaLightStatus());
+            assertEquals(LightStatus.on, aBlueLight[i].getaLightStatus());
         }
         // TODO: Ist Tank initial bei 100%?
         assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full

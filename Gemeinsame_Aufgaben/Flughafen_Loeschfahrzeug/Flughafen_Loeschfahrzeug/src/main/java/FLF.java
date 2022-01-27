@@ -282,8 +282,8 @@ public class FLF {
         public WarningLight[] bWarningLights;
         public WaterTank bWaterTank;
         public Wheel[] bWheel;
-        //Enumerations
-        public BatteryManagement bBatteryManagement;
+        /*Enumerations
+        //public BatteryManagement bBatteryManagement;
         public BatteryStatus bBatteryStatus;
         public CannonModes bCannonModes;
         public CannonSteps bCannonSteps;
@@ -295,7 +295,7 @@ public class FLF {
         public Position bPosition;
         public SwitchStatus bSwitchStatus;
         public SwitchType bSwitchType;
-        public TankSubstance bTankSubstance;
+        public TankSubstance bTankSubstance;*/
 
         // Erstellen der Klassen am FLF und deren Unterklassen
         public Builder createPowerUnit(){
@@ -330,7 +330,7 @@ public class FLF {
 
         public Builder createLights(){
             bWarningLights = new WarningLight[]{new WarningLight(LightSize.small, Position.frontRoofLeft), new WarningLight(LightSize.small, Position.backRoofRight)};
-            bHeadLamps = new HeadLamp[]{new HeadLamp(LightSize.medium, Position.frontLeft), new HeadLamp(LightSize.medium, Position.frontLeft), new HeadLamp(LightSize.medium, Position.frontLeft), new HeadLamp(LightSize.medium, Position.frontRight), new HeadLamp(LightSize.medium, Position.frontRight), new HeadLamp(LightSize.medium, Position.frontRight), new HeadLamp(LightSize.medium, Position.frontRoof), new HeadLamp(LightSize.medium, Position.frontRoof), new HeadLamp(LightSize.medium, Position.frontRoof), new HeadLamp(LightSize.medium, Position.frontRoof),};
+            bHeadLamps = new HeadLamp[]{new HeadLamp(LightSize.medium, Position.frontLeft), new HeadLamp(LightSize.medium, Position.frontLeft), new HeadLamp(LightSize.medium, Position.frontLeft), new HeadLamp(LightSize.medium, Position.frontRight), new HeadLamp(LightSize.medium, Position.frontRight), new HeadLamp(LightSize.medium, Position.frontRight), new HeadLamp(LightSize.medium, Position.frontRoof), new HeadLamp(LightSize.medium, Position.frontRoof), new HeadLamp(LightSize.medium, Position.frontRoof), new HeadLamp(LightSize.medium, Position.frontRoof)};
             bDirectionIndicators = new DirectionIndicator[]{new DirectionIndicator(LightSize.medium, Position.frontLeft), new DirectionIndicator(LightSize.medium, Position.frontRight), new DirectionIndicator(LightSize.medium, Position.backLeft), new DirectionIndicator(LightSize.medium, Position.backRight)};
             bBreakingLights = new BreakingLight[]{new BreakingLight(LightSize.medium, Position.backLeft), new BreakingLight(LightSize.medium, Position.backRight)};
             bBlueLights = new BlueLight[]{new BlueLight(LightSize.small, Position.frontLeft), new BlueLight(LightSize.small, Position.frontRight), new BlueLight(LightSize.big, Position.frontRoofLeft), new BlueLight(LightSize.big, Position.frontRoofRight), new BlueLight(LightSize.medium, Position.backLeft), new BlueLight(LightSize.medium, Position.backLeft), new BlueLight(LightSize.medium, Position.backRight), new BlueLight(LightSize.medium, Position.backRight)};
@@ -408,8 +408,7 @@ public class FLF {
             bGasPedal = new GasPedal();
             bJoystickFrontCannon = new JoystickFrontCannon(bCentralUnit);
             bJoystickRoofCannon = new JoystickRoofCannon(bCentralUnit);
-            bKeyButton[0] = new KeyButton(bJoystickFrontCannon);
-            bKeyButton[1] = new KeyButton(bJoystickRoofCannon);
+            bKeyButton = new KeyButton[]{new KeyButton(bJoystickFrontCannon), new KeyButton(bJoystickRoofCannon)};
             bKnobFrontCannon = new KnobFrontCannon();
             bKnobRoofCannon = new KnobRoofCannon();
             bLED = new LED();
@@ -485,8 +484,7 @@ public class FLF {
             }
 
             // Enum BatteryManagement
-            bBatteryManagement.setaBatteryBox(bBatteryBox);
-
+            BatteryManagement.setaBatteryBox(bBatteryBox);
             return this;
         }
 
