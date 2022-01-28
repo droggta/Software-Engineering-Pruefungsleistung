@@ -176,6 +176,58 @@ public class FLF {
         return aFrontCannon.getFoamRate();
     }
 
+    /**
+     * Changes the current velocity if the FLF and sends info to speed display and power unit
+     * @param i change of velocity in km/h
+     */
+    public void updateaVelocity(int i) {
+        aVelocity = aVelocity + i;
+        aCabine.setaSpeedDisplayValue(aVelocity);       //handles the visualization of the velocity by sending the value to cabine
+        //aPowerUnit.provide(aVelocity); still in implementation
+    }
+
+    /**
+     * Sends the steering angle to both front pivots and direction indicators
+     * @param aSteeringAngle Parameter given in % (minus=left, positiv=right)
+     */
+    public void steerFLF(int aSteeringAngle) {
+        for(int i = 0; i < aFrontPivot.length; i++){
+            aFrontPivot[0].updateaSteerAngle(aSteeringAngle);   //steering angle is send to both front pivots
+        }
+
+        //send information to direction indicators
+    }
+
+    /**
+     * Returns the angle both front pivots are currently set to
+     * @return angle given in % (minus=left, positiv=right)
+     */
+    public int getSteeringAngleFrontPivot(){
+        if(aFrontPivot[0].getSteerAngle() == aFrontPivot[1].getSteerAngle()){
+            return  aFrontPivot[0].getSteerAngle();
+        }
+        else {
+            return -9999;
+        }
+    }
+
+    /**
+     * returns the current velocity of the FLF
+     * @return veloctiy stored in the FLF class
+     */
+    public int getaVelocity() {
+        return aVelocity;
+    }
+
+    /**
+     *
+     */
+    public void activateGroundSprayNozzles(){
+        for (int i = 0; i < aGroundSprayNoozle.length; i++){
+            aGroundSprayNoozle[i].sprayWater();
+        }
+    }
+
     public static class Builder{
         // Klassen mit Verbindung zum FLF
         public PowerUnit bPowerUnit;
@@ -230,8 +282,8 @@ public class FLF {
         public WarningLight[] bWarningLights;
         public WaterTank bWaterTank;
         public Wheel[] bWheel;
-        //Enumerations
-        public BatteryManagement bBatteryManagement;
+        /*Enumerations
+        //public BatteryManagement bBatteryManagement;
         public BatteryStatus bBatteryStatus;
         public CannonModes bCannonModes;
         public CannonSteps bCannonSteps;
@@ -243,7 +295,7 @@ public class FLF {
         public Position bPosition;
         public SwitchStatus bSwitchStatus;
         public SwitchType bSwitchType;
-        public TankSubstance bTankSubstance;
+        public TankSubstance bTankSubstance;*/
 
         // Erstellen der Klassen am FLF und deren Unterklassen
         public Builder createPowerUnit(){
@@ -278,7 +330,7 @@ public class FLF {
 
         public Builder createLights(){
             bWarningLights = new WarningLight[]{new WarningLight(LightSize.small, Position.frontRoofLeft), new WarningLight(LightSize.small, Position.backRoofRight)};
-            bHeadLamps = new HeadLamp[]{new HeadLamp(LightSize.medium, Position.frontLeft), new HeadLamp(LightSize.medium, Position.frontLeft), new HeadLamp(LightSize.medium, Position.frontLeft), new HeadLamp(LightSize.medium, Position.frontRight), new HeadLamp(LightSize.medium, Position.frontRight), new HeadLamp(LightSize.medium, Position.frontRight), new HeadLamp(LightSize.medium, Position.frontRoof), new HeadLamp(LightSize.medium, Position.frontRoof), new HeadLamp(LightSize.medium, Position.frontRoof), new HeadLamp(LightSize.medium, Position.frontRoof),};
+            bHeadLamps = new HeadLamp[]{new HeadLamp(LightSize.medium, Position.frontLeft), new HeadLamp(LightSize.medium, Position.frontLeft), new HeadLamp(LightSize.medium, Position.frontLeft), new HeadLamp(LightSize.medium, Position.frontRight), new HeadLamp(LightSize.medium, Position.frontRight), new HeadLamp(LightSize.medium, Position.frontRight), new HeadLamp(LightSize.medium, Position.frontRoof), new HeadLamp(LightSize.medium, Position.frontRoof), new HeadLamp(LightSize.medium, Position.frontRoof), new HeadLamp(LightSize.medium, Position.frontRoof)};
             bDirectionIndicators = new DirectionIndicator[]{new DirectionIndicator(LightSize.medium, Position.frontLeft), new DirectionIndicator(LightSize.medium, Position.frontRight), new DirectionIndicator(LightSize.medium, Position.backLeft), new DirectionIndicator(LightSize.medium, Position.backRight)};
             bBreakingLights = new BreakingLight[]{new BreakingLight(LightSize.medium, Position.backLeft), new BreakingLight(LightSize.medium, Position.backRight)};
             bBlueLights = new BlueLight[]{new BlueLight(LightSize.small, Position.frontLeft), new BlueLight(LightSize.small, Position.frontRight), new BlueLight(LightSize.big, Position.frontRoofLeft), new BlueLight(LightSize.big, Position.frontRoofRight), new BlueLight(LightSize.medium, Position.backLeft), new BlueLight(LightSize.medium, Position.backLeft), new BlueLight(LightSize.medium, Position.backRight), new BlueLight(LightSize.medium, Position.backRight)};
@@ -356,8 +408,7 @@ public class FLF {
             bGasPedal = new GasPedal();
             bJoystickFrontCannon = new JoystickFrontCannon(bCentralUnit);
             bJoystickRoofCannon = new JoystickRoofCannon(bCentralUnit);
-            bKeyButton[0] = new KeyButton(bJoystickFrontCannon);
-            bKeyButton[1] = new KeyButton(bJoystickRoofCannon);
+            bKeyButton = new KeyButton[]{new KeyButton(bJoystickFrontCannon), new KeyButton(bJoystickRoofCannon)};
             bKnobFrontCannon = new KnobFrontCannon();
             bKnobRoofCannon = new KnobRoofCannon();
             bLED = new LED();
@@ -433,8 +484,7 @@ public class FLF {
             }
 
             // Enum BatteryManagement
-            bBatteryManagement.setaBatteryBox(bBatteryBox);
-
+            BatteryManagement.setaBatteryBox(bBatteryBox);
             return this;
         }
 
@@ -444,48 +494,7 @@ public class FLF {
         }
     }
 
-    /**
-     * Changes the current velocity if the FLF and sends info to speed display and power unit
-     * @param i change of velocity in km/h
-     */
-    public void updateaVelocity(int i) {
-        aVelocity = aVelocity + i;
-        aCabine.setaSpeedDisplayValue(aVelocity);       //handles the visualization of the velocity by sending the value to cabine
-        //aPowerUnit.provide(aVelocity); still in implementation
-    }
 
-    /**
-     * Sends the steering angle to both front pivots and direction indicators
-     * @param aSteeringAngle Parameter given in % (minus=left, positiv=right)
-     */
-    public void steerFLF(int aSteeringAngle) {
-        for(int i = 0; i < aFrontPivot.length; i++){
-            aFrontPivot[0].updateaSteerAngle(aSteeringAngle);   //steering angle is send to both front pivots
-        }
-
-        //send information to direction indicators
-    }
-
-    /**
-     * Returns the angle both front pivots are currently set to
-     * @return angle given in % (minus=left, positiv=right)
-     */
-    public int getSteeringAngleFrontPivot(){
-        if(aFrontPivot[0].getSteerAngle() == aFrontPivot[1].getSteerAngle()){
-            return  aFrontPivot[0].getSteerAngle();
-        }
-        else {
-            return -9999;
-        }
-    }
-
-    /**
-     * returns the current velocity of the FLF
-     * @return veloctiy stored in the FLF class
-     */
-    public int getaVelocity() {
-        return aVelocity;
-    }
 
 
 }

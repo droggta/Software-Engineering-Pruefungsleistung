@@ -16,4 +16,12 @@ public class BatteryBox {
     public void takeOut() {
 
     }
+
+    public int getallSoC(){
+        int content = 0;
+        for (int i = 0; i < 4; i++){
+            content += aBattery[i].getaSoC();
+        }
+        return content;
+    }
 }
