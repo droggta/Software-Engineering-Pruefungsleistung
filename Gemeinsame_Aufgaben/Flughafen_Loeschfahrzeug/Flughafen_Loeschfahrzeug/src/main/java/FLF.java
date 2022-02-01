@@ -8,6 +8,7 @@ public class FLF {
     private final WarningLight[] aWarningLights;
     private final BlueLight[] aBlueLights;
     private final HeadLamp[] aHeadLamps;
+    private final DirectionIndicator[] aDirectionIndicators;
     private final CentralUnit aCentralUnit;
     private final FrontPivot[] aFrontPivot;
     private final BackPivot[] aBackPivot;
@@ -47,6 +48,7 @@ public class FLF {
         aLights = builder.bLights;
         aWarningLights = builder.bWarningLights;
         aBlueLights = builder.bBlueLights;
+        aDirectionIndicators = builder.bDirectionIndicators;
         aHeadLamps = builder.bHeadLamps;
         aCentralUnit = builder.bCentralUnit;
         aFrontPivot = builder.bFrontPivot;
@@ -183,7 +185,7 @@ public class FLF {
     public void updateaVelocity(int i) {
         aVelocity = aVelocity + i;
         aCabine.setaSpeedDisplayValue(aVelocity);       //handles the visualization of the velocity by sending the value to cabine
-        //aPowerUnit.provide(aVelocity); still in implementation
+        aPowerUnit.provide(aVelocity);
     }
 
     /**
@@ -194,8 +196,19 @@ public class FLF {
         for(int i = 0; i < aFrontPivot.length; i++){
             aFrontPivot[0].updateaSteerAngle(aSteeringAngle);   //steering angle is send to both front pivots
         }
-
-        //send information to direction indicators
+        if(aSteeringAngle < 0){
+            aDirectionIndicators[0].turnOn();       //turn left indicator on
+            aDirectionIndicators[1].turnOff();      //turn right indicator off
+        }
+        else if(aSteeringAngle > 0){
+            aDirectionIndicators[0].turnOff();      //turn left indicator off
+            aDirectionIndicators[1].turnOn();       //turn right indicator on
+        }
+        else{                                       //steeringAngle = 0 meaning no direction indicator is needed
+            for(int i = 0; i < aDirectionIndicators.length){
+                aDirectionIndicators[i].turnOff();
+            }
+        }
     }
 
     /**

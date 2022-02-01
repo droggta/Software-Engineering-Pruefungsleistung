@@ -9,17 +9,23 @@ public class BatteryBox {
     public BatteryBox() {
     }
 
-    public void load() {
-
+    public void load(int unit) {
+        unit = (int) Math.floor(unit / aBattery.length);
+        for(int i = 0; i < aBattery.length; i++){
+            aBattery[i].fillVolume(unit);
+        }
     }
 
-    public void takeOut() {
-
+    public void takeOut(int unit) {
+        unit = (int) Math.floor(unit / aBattery.length);
+        for(int i = 0; i < aBattery.length; i++){
+            aBattery[i].consumeVolume(unit);
+        }
     }
 
     public int getallSoC(){
         int content = 0;
-        for (int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++){            //4 because of 4 batteries
             content += aBattery[i].getaSoC();
         }
         return content;
