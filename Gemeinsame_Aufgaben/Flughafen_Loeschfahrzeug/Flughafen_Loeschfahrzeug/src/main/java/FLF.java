@@ -15,6 +15,8 @@ public class FLF {
     private final Cabine aCabine;
     private Builder aBuilder;
     private int aVelocity = 0;
+    //Komplexaufgaben
+    private String aNumberPlate;
 
     public static FLF init(){
         FLF Flughafen_Loeschfahrzeug = new FLF.Builder()
@@ -55,6 +57,8 @@ public class FLF {
         aBackPivot = builder.bBackPivot;
         aCabine = builder.bCabine;
         aBuilder = builder;
+        //Komplexaufgaben
+        aNumberPlate = builder.bNumberPlate;
     }
 
     public void setaRoofCannonStatus(CannonStatus cStatus) {
@@ -205,7 +209,7 @@ public class FLF {
             aDirectionIndicators[1].turnOn();       //turn right indicator on
         }
         else{                                       //steeringAngle = 0 meaning no direction indicator is needed
-            for(int i = 0; i < aDirectionIndicators.length){
+            for(int i = 0; i < aDirectionIndicators.length; i++){
                 aDirectionIndicators[i].turnOff();
             }
         }
@@ -295,6 +299,9 @@ public class FLF {
         public WarningLight[] bWarningLights;
         public WaterTank bWaterTank;
         public Wheel[] bWheel;
+        //Komplexaufgaben
+        public String bNumberPlate;
+        public ReceiverModule[] bReceiverModule;
         /*Enumerations
         //public BatteryManagement bBatteryManagement;
         public BatteryStatus bBatteryStatus;
@@ -443,6 +450,10 @@ public class FLF {
             bSterringWheel = new SterringWheel();
             bSwitch = new Switch[]{new Switch(SwitchType.electricEngines), new Switch(SwitchType.warningLight), new Switch(SwitchType.blueLight), new Switch(SwitchType.headLamp), new Switch(SwitchType.roofMountedLight), new Switch(SwitchType.sideLamp)};       //Switches are initialized with their SwitchType
             bWaterTank = new WaterTank();
+            //Komplexaufgaben
+            bReceiverModule[0] = new ReceiverModule(bCentralUnit);
+            bReceiverModule[1] = new ReceiverModule(bCentralUnit);
+
 
             //Zuweisungen
             bBatteryBox.setaBattery(bBattery);
@@ -494,10 +505,15 @@ public class FLF {
             for (int i = 0; i < 2; i++){
                 bDoorButton = new DoorButton[]{new DoorButton(), new DoorButton()};
                 bDoors[i].setaDoorButton(bDoorButton);
+                //Komplexaufgaben
+                bDoors[i].setReceiverModule(bReceiverModule[i]);
             }
 
             // Enum BatteryManagement
             BatteryManagement.setaBatteryBox(bBatteryBox);
+
+            bNumberPlate = "DUS | FLF-5";
+
             return this;
         }
 

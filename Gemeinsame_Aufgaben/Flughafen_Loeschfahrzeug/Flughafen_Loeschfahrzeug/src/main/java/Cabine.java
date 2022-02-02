@@ -52,6 +52,17 @@ public class Cabine {
         this.aControlPanel = aControlPanel;
     }
 
+    /**
+     * Changes the door status of the doors. Index starts at 0
+     * @param doorIndex left door 0, right door 1
+     * @param newDoorStatus status the door should be set to
+     */
+    public void changeDoorStatus(int doorIndex, DoorStatus newDoorStatus){
+        if(doorIndex < aDoors.length){
+            aDoors[doorIndex].setaDoorStatus(newDoorStatus);
+        }
+    }
+
     public Cabine() {
 
     }

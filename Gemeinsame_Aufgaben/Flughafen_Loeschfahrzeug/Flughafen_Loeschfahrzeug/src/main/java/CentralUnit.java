@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class CentralUnit {
 
     private JoystickRoofCannon aJoystickRoofCannon;
@@ -7,6 +9,9 @@ public class CentralUnit {
     private SterringWheel aSteeringWheel;
     private ControlPanel aControlPanel;
     private FLF aFLF;
+    //Komplexaufgaben
+    private int aCode = 6072;
+    private String[] aPersonArray = {"Red Adair", "Sam"};          //2 because of Operator and Driver => 2 Persons
 
     public void setaJoystickRoofCannon(JoystickRoofCannon aJoystickRoofCannon) {
         this.aJoystickRoofCannon = aJoystickRoofCannon;
@@ -154,4 +159,10 @@ public class CentralUnit {
     public FoamRate getcurrentFoamRate() {
         return aFLF.getFoamRate();
     }
+
+    public void decipherString(String aEncryptedString) {
+    }
+
+
+    //Komplexaufgaben
 }
