@@ -39,6 +39,11 @@ public class ControlPanel {
         return aKnobRoofCannon.getaCannonMode();
     }
 
+    /**
+     * Use one of the six switches
+     * @param type Type of switch e.g. for electric motors
+     * @param status the status the switch is set to
+     */
     public void useSwitch(SwitchType type, SwitchStatus status){
         aCentralUnit.useSwitch(type, status);
     }

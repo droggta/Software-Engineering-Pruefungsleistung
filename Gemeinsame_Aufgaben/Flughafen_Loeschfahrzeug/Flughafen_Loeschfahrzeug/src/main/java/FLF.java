@@ -278,7 +278,7 @@ public class FLF {
         public FoamTank bFoamTank;
         public GasMask bGasMask;
         public GasPedal bGasPedal;
-        public HeadLamp[] bHeadLamps;   //10 Headlamps: left 3x right 3x roof 4x
+        public HeadLamp[] bHeadLamps;   //10 Headlamps: left 3x right// roof 4x
         public Joystick bJoystick;
         public JoystickFrontCannon bJoystickFrontCannon;
         public JoystickRoofCannon bJoystickRoofCannon;

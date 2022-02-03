@@ -2,6 +2,8 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.swing.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
@@ -222,7 +224,79 @@ public class TestApplication {
     @Test
     @Order(2)
     public void usageControlPanel(){        //checks if the controlPanel
-        //Driver does not use the control panel so nothing happens. Operator is responsible for the control panel
+        //Driver does not use the control panel so nothing happens. Operator is responsible for the control panel. Although behaviour of controlPanel is tested
+        if(aElectricMotor[0].getaMotorStatus() == MotorStatus.off){
+            aControlPanel.useSwitch(SwitchType.electricEngines, SwitchStatus.on);           //if motors are off turn them on by using the switch
+            for(int i = 0; i < aElectricMotor.length; i++){
+                assertEquals(MotorStatus.on, aElectricMotor[i].getaMotorStatus());
+            }
+        }
+        else{
+            aControlPanel.useSwitch(SwitchType.electricEngines, SwitchStatus.off);
+            for(int i = 0; i < aElectricMotor.length; i++){
+                assertEquals(MotorStatus.off, aElectricMotor[i].getaMotorStatus());
+            }
+        }
+        if(aWarningLight[0].getaLightStatus() == LightStatus.off){
+            aControlPanel.useSwitch(SwitchType.warningLight, SwitchStatus.on);              //if warninglights are off turn them on by using the switch
+            for(int i = 0; i < aWarningLight.length; i++){
+                assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());
+            }
+        }
+        else{
+            aControlPanel.useSwitch(SwitchType.warningLight, SwitchStatus.off);
+            for(int i = 0; i < aWarningLight.length; i++){
+                assertEquals(LightStatus.off, aWarningLight[i].getaLightStatus());
+            }
+        }
+        if(aBlueLight[0].getaLightStatus() == LightStatus.off){
+            aControlPanel.useSwitch(SwitchType.blueLight, SwitchStatus.on);              //if bluelights are off turn them on by using the switch
+            for(int i = 0; i < aBlueLight.length; i++){
+                assertEquals(LightStatus.on, aBlueLight[i].getaLightStatus());
+            }
+        }
+        else{
+            aControlPanel.useSwitch(SwitchType.blueLight, SwitchStatus.off);
+            for(int i = 0; i < aBlueLight.length; i++){
+                assertEquals(LightStatus.off, aBlueLight[i].getaLightStatus());
+            }
+        }
+        if(aHeadLamp[0].getaLightStatus() == LightStatus.off){
+            aControlPanel.useSwitch(SwitchType.headLamp, SwitchStatus.on);              //if frontlights are off turn them on by using the switch
+            for(int i = 0; i < 2; i++){
+                assertEquals(LightStatus.on, aHeadLamp[i].getaLightStatus());
+            }
+        }
+        else{
+            aControlPanel.useSwitch(SwitchType.headLamp, SwitchStatus.off);
+            for(int i = 0; i < 2; i++){
+                assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus());
+            }
+        }
+        if(aHeadLamp[2].getaLightStatus() == LightStatus.off){
+            aControlPanel.useSwitch(SwitchType.roofMountedLight, SwitchStatus.on);              //if rooflights are off turn them on by using the switch
+            for(int i = 2; i < 4; i++){
+                assertEquals(LightStatus.on, aHeadLamp[i].getaLightStatus());
+            }
+        }
+        else{
+            aControlPanel.useSwitch(SwitchType.roofMountedLight, SwitchStatus.off);
+            for(int i = 2; i < 4; i++){
+                assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus());
+            }
+        }
+        if(aHeadLamp[4].getaLightStatus() == LightStatus.off){
+            aControlPanel.useSwitch(SwitchType.sideLamp, SwitchStatus.on);              //if sidelamps are off turn them on by using the switch
+            for(int i = 4; i < 10; i++){
+                assertEquals(LightStatus.on, aHeadLamp[i].getaLightStatus());
+            }
+        }
+        else{
+            aControlPanel.useSwitch(SwitchType.sideLamp, SwitchStatus.off);
+            for(int i = 4; i < 10; i++){
+                assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus());
+            }
+        }
     }
 
     @Test
@@ -305,7 +379,7 @@ public class TestApplication {
         assertEquals(CannonSteps.fuenfhundert ,aKnobFrontCannon.getaCannonStep());          //Check if knob for front cannon is set to step one
         assertEquals(CannonModes.modeA, aKnobRoofCannon.getaCannonMode());                  //Check if knob for roof cannon is set to mode one
 
-        int startEnergieVolume = aBatteryBox.getallSoC();
+        int startEnergieVolume = aBatteryBox.getallSoC();           //Energylevel before driving
         int consumedEnergy = 0;
 
         for (int i = 1; i <= 7; i++){                                                   //accelerate the FLF to 28km/h in 4km/h steps
@@ -404,7 +478,7 @@ public class TestApplication {
         assertEquals(CannonSteps.fuenfhundert ,aKnobFrontCannon.getaCannonStep());          //Check if knob for front cannon is set to step one
         assertEquals(CannonModes.modeA, aKnobRoofCannon.getaCannonMode());                  //Check if knob for roof cannon is set to mode one
 
-        int startEnergieVolume = aBatteryBox.getallSoC();
+        int startEnergieVolume = aBatteryBox.getallSoC();                                   //saves current energy level in order to check if consumption is right
         int consumedEnergy = 0;
 
         for (int i = 1; i <= 20; i++){                                                   //accelerate the FLF to 28km/h in 4km/h steps
