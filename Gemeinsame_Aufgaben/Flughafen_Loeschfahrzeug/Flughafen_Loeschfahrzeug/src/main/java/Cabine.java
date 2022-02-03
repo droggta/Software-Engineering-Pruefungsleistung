@@ -63,6 +63,19 @@ public class Cabine {
         }
     }
 
+    public void changeDoorStatus(int doorIndex){
+        if(doorIndex < aDoors.length){
+            if(aDoors[doorIndex].getaDoorStatus() == DoorStatus.closed){
+                aDoors[doorIndex].setaDoorStatus(DoorStatus.open);
+            }
+            else{
+                aDoors[doorIndex].setaDoorStatus(DoorStatus.closed);
+            }
+        }
+    }
+
+
+
     public Cabine() {
 
     }

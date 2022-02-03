@@ -1,4 +1,9 @@
-import java.util.ArrayList;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 public class CentralUnit {
 
@@ -11,7 +16,10 @@ public class CentralUnit {
     private FLF aFLF;
     //Komplexaufgaben
     private int aCode = 6072;
-    private String[] aPersonArray = {"Red Adair", "Sam"};          //2 because of Operator and Driver => 2 Persons
+    private String[] aPersonArray = new String[] {"FT-DUS-FLF-5-Red Adair-6072", "FT-DUS-FLF-5-Sam-6071"};          //2 because of Operator and Driver => 2 Persons
+    private Cipher decryptCipher;
+    private byte[] decodedKey = Base64.getDecoder().decode("1234");
+    private SecretKey aKey = new SecretKeySpec(decodedKey, 0 , decodedKey.length, "DES");
 
     public void setaJoystickRoofCannon(JoystickRoofCannon aJoystickRoofCannon) {
         this.aJoystickRoofCannon = aJoystickRoofCannon;
@@ -41,8 +49,7 @@ public class CentralUnit {
         this.aFLF = aFLF;
     }
 
-    public CentralUnit() {
-
+    public CentralUnit() throws Exception {
     }
 
     /**
@@ -160,7 +167,30 @@ public class CentralUnit {
         return aFLF.getFoamRate();
     }
 
-    public void decipherString(String aEncryptedString) {
+    public String decipherString(String aEncryptedString, SecretKey key) throws Exception{
+        decryptCipher = Cipher.getInstance("DES");
+        decryptCipher.init(Cipher.DECRYPT_MODE, key);
+        byte[] dec = Base64.getEncoder().encode(aEncryptedString.getBytes(StandardCharsets.UTF_8));
+        byte[] utf8 = decryptCipher.doFinal(dec);
+        return new String(utf8, "UTF8");
+    }
+
+    public void receiveIDCardString(String getaEncryptedString, int doorID) {
+        boolean check = false;
+        try {
+            String temp = decipherString(getaEncryptedString, aKey);
+            for(int i=0 ; i < aPersonArray.length; i++){
+                if(aPersonArray[i] == temp){
+                    check = true;
+                }
+            }
+            if(check == true){
+                aFLF.changeDoorStatus(doorID);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 

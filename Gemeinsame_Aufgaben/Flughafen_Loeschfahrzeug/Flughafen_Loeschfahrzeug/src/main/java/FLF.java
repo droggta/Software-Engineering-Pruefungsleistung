@@ -245,6 +245,10 @@ public class FLF {
         }
     }
 
+    public void changeDoorStatus(int doorID) {
+        aCabine.changeDoorStatus(doorID);
+    }
+
     public static class Builder{
         // Klassen mit Verbindung zum FLF
         public PowerUnit bPowerUnit;
@@ -358,7 +362,11 @@ public class FLF {
         }
 
         public Builder createCentralUnit(){
-            bCentralUnit = new CentralUnit();
+            try {
+                bCentralUnit = new CentralUnit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             bControlPanel.setaCentralUnit(bCentralUnit);
             bBreakPedal.setaCentralUnit(bCentralUnit);
             bGasPedal.setaCentralUnit(bCentralUnit);
@@ -417,7 +425,11 @@ public class FLF {
             bBattery = new Battery[]{new Battery(), new Battery(), new Battery(), new Battery()};
             bBatteryBox = new BatteryBox();
             bBreakPedal = new BreakPedal();
-            bCentralUnit = new CentralUnit();
+            try {
+                bCentralUnit = new CentralUnit();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             bControlPanel = new ControlPanel();
             bDoors = new Doors[]{new Doors(), new Doors()};
             bDriver = new Driver();
@@ -451,8 +463,8 @@ public class FLF {
             bSwitch = new Switch[]{new Switch(SwitchType.electricEngines), new Switch(SwitchType.warningLight), new Switch(SwitchType.blueLight), new Switch(SwitchType.headLamp), new Switch(SwitchType.roofMountedLight), new Switch(SwitchType.sideLamp)};       //Switches are initialized with their SwitchType
             bWaterTank = new WaterTank();
             //Komplexaufgaben
-            bReceiverModule[0] = new ReceiverModule(bCentralUnit);
-            bReceiverModule[1] = new ReceiverModule(bCentralUnit);
+            bReceiverModule[0] = new ReceiverModule(bCentralUnit, 0);
+            bReceiverModule[1] = new ReceiverModule(bCentralUnit, 1);
 
 
             //Zuweisungen
