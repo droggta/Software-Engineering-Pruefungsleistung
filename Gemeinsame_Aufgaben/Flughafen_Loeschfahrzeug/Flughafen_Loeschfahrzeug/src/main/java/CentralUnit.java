@@ -16,7 +16,7 @@ public class CentralUnit {
     private FLF aFLF;
     //Komplexaufgaben
     private int aCode = 6072;
-    private String[] aPersonArray = new String[] {"FT-DUS-FLF-5-Red Adair-6072", "FT-DUS-FLF-5-Sam-6071"};          //2 because of Operator and Driver => 2 Persons
+    private String[] aPersonArray = new String[] {"FT-DUS-FLF-5-Red Adair-6072", "FT-DUS-FLF-5-Sam-6072"};          //2 because of Operator and Driver => 2 Persons
     private Cipher decryptCipher;
     private byte[] decodedKey = Base64.getDecoder().decode("1234");
     private SecretKey aKey = new SecretKeySpec(decodedKey, 0 , decodedKey.length, "DES");
