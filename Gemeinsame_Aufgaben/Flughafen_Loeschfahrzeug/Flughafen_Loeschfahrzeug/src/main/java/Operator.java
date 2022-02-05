@@ -4,6 +4,7 @@ public class Operator {
     private JoystickRoofCannon aJoystickRoofCannon;
     private KnobFrontCannon bKnobFrontCannon;
     private KnobRoofCannon bKnobRoofCannon;
+    private DoorButton[][] aDoorButtons;
 
     public void setbKnobFrontCannon(KnobFrontCannon bKnobFrontCannon) {
         this.bKnobFrontCannon = bKnobFrontCannon;
@@ -15,6 +16,10 @@ public class Operator {
 
     public void setaControlPanel(ControlPanel aControlPanel) {
         this.aControlPanel = aControlPanel;
+    }
+
+    public void setbDoorButtons(DoorButton[][] bDoorButtons) {
+        this.aDoorButtons = bDoorButtons;
     }
 
     public void setaJoystickRoofCannon(JoystickRoofCannon ajoystickRoofCannon) {
@@ -47,6 +52,18 @@ public class Operator {
      * @param doorIndex 0 = left door   1 = right door
      */
     public void useDoorButton(Position position, int doorIndex){
-        aControlPanel.useDoorButton(position, doorIndex);
+        int iPosition;
+        switch (position){
+            case indoor:
+                iPosition = 0;
+                break;
+            case outdoor:
+                iPosition = 1;
+                break;
+            default:
+                iPosition = 0;
+                break;
+        }
+        aDoorButtons[doorIndex][iPosition].pushButton();
     }
 }

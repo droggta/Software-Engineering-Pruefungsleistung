@@ -901,7 +901,9 @@ public class TestApplication {
     }
 
     private void checkParkingComplex() throws Exception{
+        aDoors[1].setaDoorStatus(DoorStatus.closed);      //initial the door is closed and operator inside the FLF
         IdCard idCardSam = new IdCard("FT-DUS-FLF-5-Sam-6072", "Sam", aCentralUnit.getaKey());      //Create IdCardSam
+        aOperator.useDoorButton(Position.indoor, 1);        //Operator opens the rightdoor=1 from the inside and leaves the FLF
         
     }
 

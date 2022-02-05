@@ -4,6 +4,7 @@ public class Driver {
     private GasPedal aGasPedal;
     private BreakPedal aBreakPedal;
     private SterringWheel aSterringWheel;
+    private DoorButton[][] aDoorButtons;
 
     public void setaSterringWheel(SterringWheel aSterringWheel) {
         this.aSterringWheel = aSterringWheel;
@@ -21,6 +22,9 @@ public class Driver {
         this.aBreakPedal = aBreakPedal;
     }
 
+    public void setbDoorButtons(DoorButton[][] bDoorButtons) {
+        this.aDoorButtons = bDoorButtons;
+    }
 
     public Driver() {
 
@@ -60,6 +64,25 @@ public class Driver {
         aJoyStickFrontCannon.pushKeyButton();
     }
 
-
+    /**
+     * Use the door Button to close and open Doors of FLF
+     * @param position indoor or outdoor Button
+     * @param doorIndex 0 = left door   1 = right door
+     */
+    public void useDoorButton(Position position, int doorIndex) {
+        int iPosition;
+        switch (position) {
+            case indoor:
+                iPosition = 0;
+                break;
+            case outdoor:
+                iPosition = 1;
+                break;
+            default:
+                iPosition = 0;
+                break;
+        }
+        aDoorButtons[doorIndex][iPosition].pushButton();
+    }
 
 }

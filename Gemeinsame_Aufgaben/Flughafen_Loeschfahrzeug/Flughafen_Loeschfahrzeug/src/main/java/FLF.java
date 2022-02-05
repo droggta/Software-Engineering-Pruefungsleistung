@@ -250,14 +250,6 @@ public class FLF {
         aCabine.changeDoorStatus(doorID);
     }
 
-    /**
-     * Sends the command of closing and opening FLF doors to the cabine
-     * @param position indoor or outdoor Button
-     * @param doorIndex 0 = left door   1 = right door
-     */
-    public void useDoorButton(Position position, int doorIndex) {
-        aCabine.useDoorButton(position, doorIndex);
-    }
 
     public static class Builder{
         // Klassen mit Verbindung zum FLF
@@ -524,12 +516,20 @@ public class FLF {
                 bSeats[i].setaGasMask(bGasMask);
             }
 
+            DoorButton[][] tempDoorButtons = new DoorButton[2][2];      //contains all DoorButtons
+
             for (int i = 0; i < 2; i++){
-                bDoorButton = new DoorButton[]{new DoorButton(Position.indoor, bDoors[i]), new DoorButton(Position.outdoor, bDoors[i])};
+                DoorButton dB1 = new DoorButton(Position.indoor, bDoors[i]);
+                DoorButton dB2 = new DoorButton(Position.outdoor, bDoors[i]);
+                bDoorButton = new DoorButton[]{dB1, dB2};
+                tempDoorButtons[i][0] = dB1;
+                tempDoorButtons[i][1] = dB2;
                 bDoors[i].setaDoorButton(bDoorButton);
                 //Komplexaufgaben
                 bDoors[i].setReceiverModule(bReceiverModule[i]);
             }
+            bOperator.setbDoorButtons(tempDoorButtons);
+            bDriver.setbDoorButtons(tempDoorButtons);
 
             // Enum BatteryManagement
             BatteryManagement.setaBatteryBox(bBatteryBox);

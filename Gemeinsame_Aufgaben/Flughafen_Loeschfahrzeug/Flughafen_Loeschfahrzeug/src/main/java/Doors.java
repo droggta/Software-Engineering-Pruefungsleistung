@@ -37,12 +37,4 @@ public class Doors {
 
     }
 
-    public void useDoorButton(Position position) {
-        if(aDoorButton[0].getaPosition() == position){
-            aDoorButton[0].pushButton();
-        }
-        else{
-            aDoorButton[1].pushButton();
-        }
-    }
 }
