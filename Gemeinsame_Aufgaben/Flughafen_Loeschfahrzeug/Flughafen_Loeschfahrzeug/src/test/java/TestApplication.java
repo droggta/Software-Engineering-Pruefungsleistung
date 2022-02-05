@@ -900,4 +900,9 @@ public class TestApplication {
         assertEquals(initWaterVolume-diffWaterVolume, aWaterTank.getVolume());      //check if the new fill level equals the expected one
     }
 
+    private void checkParkingComplex() throws Exception{
+        IdCard idCardSam = new IdCard("FT-DUS-FLF-5-Sam-6072", "Sam", aCentralUnit.getaKey());      //Create IdCardSam
+        
+    }
+
 }

@@ -87,4 +87,13 @@ public class Cabine {
     public void setaSpeedDisplayValue(int aVelocity) {
         aSpeedDisplay.setValue(aVelocity);
     }
+
+    /**
+     * Sends the command of closing and opening FLF doors to the Doors
+     * @param position indoor or outdoor Button
+     * @param doorIndex 0 = left door   1 = right door
+     */
+    public void useDoorButton(Position position, int doorIndex) {
+        aDoors[doorIndex].useDoorButton(position);
+    }
 }

@@ -193,6 +193,18 @@ public class CentralUnit {
 
     }
 
+    public SecretKey getaKey(){
+        return aKey;
+    }
+
+    /**
+     * Sends the command of closing and opening FLF doors to the FLF
+     * @param position indoor or outdoor Button
+     * @param doorIndex 0 = left door   1 = right door
+     */
+    public void useDoorButton(Position position, int doorIndex) {
+        aFLF.useDoorButton(position, doorIndex)
+    }
 
     //Komplexaufgaben
 }

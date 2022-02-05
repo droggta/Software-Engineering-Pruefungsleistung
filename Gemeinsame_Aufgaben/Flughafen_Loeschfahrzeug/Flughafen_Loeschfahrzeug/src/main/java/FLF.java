@@ -13,6 +13,7 @@ public class FLF {
     private final FrontPivot[] aFrontPivot;
     private final BackPivot[] aBackPivot;
     private final Cabine aCabine;
+    public Object useDoorButton;
     private Builder aBuilder;
     private int aVelocity = 0;
     //Komplexaufgaben
@@ -247,6 +248,15 @@ public class FLF {
 
     public void changeDoorStatus(int doorID) {
         aCabine.changeDoorStatus(doorID);
+    }
+
+    /**
+     * Sends the command of closing and opening FLF doors to the cabine
+     * @param position indoor or outdoor Button
+     * @param doorIndex 0 = left door   1 = right door
+     */
+    public void useDoorButton(Position position, int doorIndex) {
+        aCabine.useDoorButton(position, doorIndex);
     }
 
     public static class Builder{
@@ -515,7 +525,7 @@ public class FLF {
             }
 
             for (int i = 0; i < 2; i++){
-                bDoorButton = new DoorButton[]{new DoorButton(), new DoorButton()};
+                bDoorButton = new DoorButton[]{new DoorButton(Position.indoor, bDoors[i]), new DoorButton(Position.outdoor, bDoors[i])};
                 bDoors[i].setaDoorButton(bDoorButton);
                 //Komplexaufgaben
                 bDoors[i].setReceiverModule(bReceiverModule[i]);
