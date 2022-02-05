@@ -25,6 +25,15 @@ public class Doors {
         }
     }
 
+    public void changeLock(){
+        if(aDoorStatus == DoorStatus.locked){
+            aDoorStatus = DoorStatus.closed;
+        }
+        else{
+            aDoorStatus = DoorStatus.locked;
+        }
+    }
+
     public void setReceiverModule(ReceiverModule module){
         aReceiverModule = module;
     }
