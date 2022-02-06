@@ -912,6 +912,7 @@ public class TestApplication {
         IdCard idCardSam = new IdCard("FT-DUS-FLF-5-Sam-6072", "Sam", aCentralUnit.getaKey());      //Create IdCardSam
         aOperator.useDoorButton(Position.indoor, 1);        //Operator opens the rightdoor=1 from the inside and leaves the FLF
         aDriver.useDoorButton(Position.indoor, 0);          //Driver opens the leftdoor=0 from the inside and leaves the FLF
+        aReceivverModule[0].readIdCard(idCardSam);                   //Driver Sam hold his Card at the ReceiverModule of the left door
 
 
 
