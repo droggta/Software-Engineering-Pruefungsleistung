@@ -79,6 +79,8 @@ public class TestApplication {
     private SwitchStatus aSwitchStatus;
     private SwitchType aSwitchType;
     private TankSubstance aTankSubstance;*/
+    //Komplexaufgaben
+    private ReceiverModule[] aReceivverModule;
 
     @BeforeEach
     public void init() {
@@ -149,6 +151,8 @@ public class TestApplication {
         aSwitchStatus = aBuilder.bSwitchStatus;
         aSwitchType = aBuilder.bSwitchType;
         aTankSubstance = aBuilder.bTankSubstance;*/
+        //Komplexaufgaben
+        aReceivverModule = aBuilder.bReceiverModule;
     }
 
     @Test
@@ -900,13 +904,20 @@ public class TestApplication {
         assertEquals(initWaterVolume-diffWaterVolume, aWaterTank.getVolume());      //check if the new fill level equals the expected one
     }
 
+    // K O M P L E X - T E S T S
+
     private void checkParkingComplex() throws Exception{
         aDoors[1].setaDoorStatus(DoorStatus.closed);      //initial the door is closed and operator inside the FLF
         aDoors[0].setaDoorStatus(DoorStatus.closed);
         IdCard idCardSam = new IdCard("FT-DUS-FLF-5-Sam-6072", "Sam", aCentralUnit.getaKey());      //Create IdCardSam
         aOperator.useDoorButton(Position.indoor, 1);        //Operator opens the rightdoor=1 from the inside and leaves the FLF
-        aDriver.useDoorButton(Position.indoor, 0);          //Operator opend the leftdoor=0 from the inside and leaves the FLF
+        aDriver.useDoorButton(Position.indoor, 0);          //Driver opens the leftdoor=0 from the inside and leaves the FLF
 
+
+
+    }
+
+    private void checkInspectionDriveComplex() throws Exception{
 
     }
 

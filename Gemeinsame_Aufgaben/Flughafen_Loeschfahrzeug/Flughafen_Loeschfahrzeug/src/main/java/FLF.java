@@ -18,6 +18,7 @@ public class FLF {
     private int aVelocity = 0;
     //Komplexaufgaben
     private String aNumberPlate;
+    private ReceiverModule[] aReceiverModule;
 
     public static FLF init(){
         FLF Flughafen_Loeschfahrzeug = new FLF.Builder()
@@ -60,6 +61,7 @@ public class FLF {
         aBuilder = builder;
         //Komplexaufgaben
         aNumberPlate = builder.bNumberPlate;
+        aReceiverModule = builder.bReceiverModule;
     }
 
     public void setaRoofCannonStatus(CannonStatus cStatus) {
@@ -535,6 +537,7 @@ public class FLF {
             BatteryManagement.setaBatteryBox(bBatteryBox);
 
             bNumberPlate = "DUS | FLF-5";
+
 
             return this;
         }
