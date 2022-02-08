@@ -919,7 +919,12 @@ public class TestApplication {
     }
 
     private void checkInspectionDriveComplex() throws Exception{
-
+        aDoors[1].setaDoorStatus(DoorStatus.locked);      //initial the door is closed and operator inside the FLF
+        aDoors[0].setaDoorStatus(DoorStatus.locked);
+        IdCard idCardSam = new IdCard("FT-DUS-FLF-5-Sam-6072", "Sam", aCentralUnit.getaKey());      //Create IdCardSam (Driver)
+        aReceivverModule[0].readIdCard(idCardSam);                  //Driver Sam uses his idCard
+        aOperator.useDoorButton(Position.indoor, 1);
+        aDriver.useDoorButton(Position.indoor, 1);
     }
 
 }

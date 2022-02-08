@@ -65,8 +65,8 @@ public class Cabine {
 
     public void changeDoorStatus(int doorIndex){
         if(doorIndex < aDoors.length){
-            if(aDoors[doorIndex].getaDoorStatus() == DoorStatus.closed){
-                aDoors[doorIndex].setaDoorStatus(DoorStatus.open);
+            if(aDoors[doorIndex].getaDoorStatus() == DoorStatus.closed || aDoors[doorIndex].getaDoorStatus() == DoorStatus.open){
+                aDoors[doorIndex].setaDoorStatus(DoorStatus.locked);
             }
             else{
                 aDoors[doorIndex].setaDoorStatus(DoorStatus.closed);

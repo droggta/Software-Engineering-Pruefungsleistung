@@ -13,7 +13,6 @@ public class FLF {
     private final FrontPivot[] aFrontPivot;
     private final BackPivot[] aBackPivot;
     private final Cabine aCabine;
-    public Object useDoorButton;
     private Builder aBuilder;
     private int aVelocity = 0;
     //Komplexaufgaben

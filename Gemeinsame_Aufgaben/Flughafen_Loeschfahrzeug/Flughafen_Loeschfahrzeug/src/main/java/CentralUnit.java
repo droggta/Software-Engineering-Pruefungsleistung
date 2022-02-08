@@ -175,7 +175,7 @@ public class CentralUnit {
         return new String(utf8, "UTF8");
     }
 
-    public void receiveIDCardString(String getaEncryptedString, int doorID) {
+    public void receiveIDCardString(String getaEncryptedString) {
         boolean check = false;
         try {
             String temp = decipherString(getaEncryptedString, aKey);
@@ -185,11 +185,13 @@ public class CentralUnit {
                 }
             }
             if(check == true){
-                aFLF.changeDoorStatus(doorID);
+                aFLF.changeDoorStatus(1);
+                aFLF.changeDoorStatus(0);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 

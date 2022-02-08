@@ -66,4 +66,5 @@ public class Operator {
         }
         aDoorButtons[doorIndex][iPosition].pushButton();
     }
+
 }

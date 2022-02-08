@@ -17,6 +17,6 @@ public class ReceiverModule {
      * @param card
      */
     public void readIdCard(IdCard card){
-        aCentralUnit.receiveIDCardString(card.getaEncryptedString(), door);
+        aCentralUnit.receiveIDCardString(card.getaEncryptedString());
     }
 }
