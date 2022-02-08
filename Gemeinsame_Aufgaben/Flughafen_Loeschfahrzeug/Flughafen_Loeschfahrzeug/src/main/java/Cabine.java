@@ -10,7 +10,6 @@ public class Cabine {
     private GasPedal aGasPedal;
     private BreakPedal aBreakPedal;
     private SterringWheel aSterringWheel;
-    private int velocity = 0;
 
     public void setaGasPedal(GasPedal aGasPedal) {
         this.aGasPedal = aGasPedal;
