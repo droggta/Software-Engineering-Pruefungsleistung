@@ -44,6 +44,8 @@ public class FLF {
     }
 
     private FLF(Builder builder){
+        aCentralUnit = builder.bCentralUnit;
+        aCentralUnit.setaFLF(this);
         aPowerUnit = builder.bPowerUnit;
         aGroundSprayNoozle = builder.bGroundSprayNoozle;
         aFrontCannon = builder.bFrontCannon;
@@ -53,7 +55,6 @@ public class FLF {
         aBlueLights = builder.bBlueLights;
         aDirectionIndicators = builder.bDirectionIndicators;
         aHeadLamps = builder.bHeadLamps;
-        aCentralUnit = builder.bCentralUnit;
         aFrontPivot = builder.bFrontPivot;
         aBackPivot = builder.bBackPivot;
         aCabine = builder.bCabine;
@@ -466,8 +467,7 @@ public class FLF {
             bSwitch = new Switch[]{new Switch(SwitchType.electricEngines), new Switch(SwitchType.warningLight), new Switch(SwitchType.blueLight), new Switch(SwitchType.headLamp), new Switch(SwitchType.roofMountedLight), new Switch(SwitchType.sideLamp)};       //Switches are initialized with their SwitchType
             bWaterTank = new WaterTank();
             //Komplexaufgaben
-            bReceiverModule[0] = new ReceiverModule(bCentralUnit, 0);
-            bReceiverModule[1] = new ReceiverModule(bCentralUnit, 1);
+            bReceiverModule = new ReceiverModule[]{new ReceiverModule(bCentralUnit, 0), new ReceiverModule(bCentralUnit, 1)};
 
 
             //Zuweisungen
