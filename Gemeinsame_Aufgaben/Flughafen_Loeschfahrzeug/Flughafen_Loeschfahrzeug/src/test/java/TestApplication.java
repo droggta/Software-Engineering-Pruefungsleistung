@@ -84,7 +84,7 @@ public class TestApplication {
 
     @BeforeEach
     public void init() {
-        aFLF = FLF.init();
+        aFLF = FLF.init(false);
         aBuilder = aFLF.getaBuilder();
         aFLF.setaBuilder(null);
         aPowerUnit = aBuilder.bPowerUnit;

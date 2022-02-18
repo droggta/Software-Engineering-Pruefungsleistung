@@ -19,15 +19,16 @@ public class FLF {
     private String aNumberPlate;
     private ReceiverModule[] aReceiverModule;
 
-    public static FLF init(){
+    public static FLF init(boolean intJoystick){
         FLF Flughafen_Loeschfahrzeug = new FLF.Builder()
                 .createeverything()
+                .createCentralUnit()
+                .createJoystick(intJoystick)
                 .createPowerUnit()
                 .createGroundSprayNozzle()
                 .createFrontCannon()
                 .createRoofCannon()
                 .createLights()
-                .createCentralUnit()
                 .createFrontPivot()
                 .createBackPivot()
                 .createCabine()
@@ -67,6 +68,8 @@ public class FLF {
     public void setaRoofCannonStatus(CannonStatus cStatus) {
         aRoofCannon.setaCannonStatus(cStatus);
     }
+
+    public void setFrontCannonAngle(int angle) {aFrontCannon.setFrontCannonAngle(angle);}
 
     public void setRoofCannonAngle(int angle) {
         aRoofCannon.setRoofCannonAngle(angle);
@@ -310,6 +313,8 @@ public class FLF {
         //Komplexaufgaben
         public String bNumberPlate;
         public ReceiverModule[] bReceiverModule;
+        public IntJoystickFrontCannon bIntJoystickFrontCannon;
+        public IntJoystickRoofCannon bIntJoystickRoofCannon;
         /*Enumerations
         //public BatteryManagement bBatteryManagement;
         public BatteryStatus bBatteryStatus;
@@ -375,8 +380,6 @@ public class FLF {
             bBreakPedal.setaCentralUnit(bCentralUnit);
             bGasPedal.setaCentralUnit(bCentralUnit);
             bSterringWheel.setaCentralUnit(bCentralUnit);
-            bJoystickFrontCannon.setaCentralUnit(bCentralUnit);
-            bJoystickRoofCannon.setaCentralUnit(bCentralUnit);
             return this;
         }
 
@@ -422,6 +425,35 @@ public class FLF {
             return this;
         }
 
+        public Builder createJoystick(boolean intJoystick){
+
+            if (intJoystick){
+                bIntJoystickFrontCannon = new IntJoystickFrontCannon(bCentralUnit);
+                bIntJoystickRoofCannon = new IntJoystickRoofCannon(bCentralUnit);
+            } else{
+                bJoystickFrontCannon = new JoystickFrontCannon(bCentralUnit);
+                bJoystickRoofCannon = new JoystickRoofCannon(bCentralUnit);
+                bKeyButton = new KeyButton[]{new KeyButton(bJoystickFrontCannon), new KeyButton(bJoystickRoofCannon)};
+                bPressButton = new PressButton[]{new LeftPressButton(bJoystickFrontCannon), new LeftPressButton(bJoystickRoofCannon), new RightPressButton(bJoystickFrontCannon), new RightPressButton(bJoystickRoofCannon)};
+
+                bJoystickFrontCannon.setaKeyButton(bKeyButton[0]);
+                bJoystickRoofCannon.setaKeyButton(bKeyButton[1]);
+
+                bJoystickFrontCannon.setaCentralUnit(bCentralUnit);
+                bJoystickRoofCannon.setaCentralUnit(bCentralUnit);
+
+                bJoystickFrontCannon.setaLeftPressButton((LeftPressButton) bPressButton[0]);
+                bJoystickFrontCannon.setaRightPressButton((RightPressButton) bPressButton[2]);
+                bJoystickRoofCannon.setaLeftPressButton((LeftPressButton) bPressButton[1]);
+                bJoystickRoofCannon.setaRightPressButton((RightPressButton) bPressButton[3]);
+
+                bDriver.setaJoyStickFrontCannon(bJoystickFrontCannon);
+                bOperator.setaJoystickRoofCannon(bJoystickRoofCannon);
+            }
+
+            return this;
+        }
+
         //Methoden der Unterklassen
         public Builder createeverything()
         {
@@ -442,22 +474,12 @@ public class FLF {
             bFoamTank = new FoamTank();
             bFrontCannon = new FrontCannon();
             bGasPedal = new GasPedal();
-            bJoystickFrontCannon = new JoystickFrontCannon(bCentralUnit);
-            bJoystickRoofCannon = new JoystickRoofCannon(bCentralUnit);
-            bKeyButton = new KeyButton[]{new KeyButton(bJoystickFrontCannon), new KeyButton(bJoystickRoofCannon)};
             bKnobFrontCannon = new KnobFrontCannon();
             bKnobRoofCannon = new KnobRoofCannon();
             bLED = new LED();
-            //bLeftPressButton = new LeftPressButton();
             bMixingUnit = new MixingUnit();
             bOperator = new Operator();
             bPieceSegment = new PieceSegment[]{new PieceSegment(), new PieceSegment(), new PieceSegment()};
-            //bRightPressButton = new RightPressButton();
-            bPressButton = new PressButton[4];
-            bPressButton[0] = new LeftPressButton(bJoystickFrontCannon);
-            bPressButton[1] = new LeftPressButton(bJoystickRoofCannon);
-            bPressButton[2] = new RightPressButton(bJoystickFrontCannon);
-            bPressButton[3] = new RightPressButton(bJoystickRoofCannon);
             bRoofCannon = new RoofCannon();
             bSeats = new Seats[]{new Seats(), new Seats(), new Seats(), new Seats()};
             bSegment1 = new Segment1();
@@ -484,10 +506,8 @@ public class FLF {
             bDriver.setaBreakPedal(bBreakPedal);
             bDriver.setaGasPedal(bGasPedal);
             bDriver.setaSterringWheel(bSterringWheel);
-            bDriver.setaJoyStickFrontCannon(bJoystickFrontCannon);
 
             bOperator.setaControlPanel(bControlPanel);
-            bOperator.setaJoystickRoofCannon(bJoystickRoofCannon);
             bOperator.setbKnobFrontCannon(bKnobFrontCannon);
             bOperator.setbKnobRoofCannon(bKnobRoofCannon);
 
@@ -497,20 +517,9 @@ public class FLF {
             bKnobFrontCannon.setaControlPanel(bControlPanel);
             bKnobRoofCannon.setaControlPanel(bControlPanel);
 
-
-            bJoystickFrontCannon.setaKeyButton(bKeyButton[0]);
-            bJoystickRoofCannon.setaKeyButton(bKeyButton[1]);
-
-            bJoystickFrontCannon.setaLeftPressButton((LeftPressButton) bPressButton[0]);
-            bJoystickFrontCannon.setaRightPressButton((RightPressButton) bPressButton[2]);
-            bJoystickRoofCannon.setaLeftPressButton((LeftPressButton) bPressButton[1]);
-            bJoystickRoofCannon.setaRightPressButton((RightPressButton) bPressButton[3]);
-
             for (int i = 0; i < bSwitch.length; i++){
                 bSwitch[i].setaControlPanel(bControlPanel);
             }
-            //bJoystick.setaLeftPressButton(bPressButton[0]);  Das hier war die Alte Version. Nun sind die PressButtons in einem Array angelegt
-            //bJoystick.setaRightPressButton(bPressButton[2]);
 
             for (int i = 0; i < 4; i++){
                 bGasMask = new GasMask();

@@ -77,6 +77,10 @@ public class CentralUnit {
         aFLF.activateRoofCannon();
     }
 
+    public void setAngleFrontCannon(int pangle){ aFLF.setFrontCannonAngle(pangle);}
+
+    public void setAngleRoofCannon(int pangle){ aFLF.setRoofCannonAngle(pangle);}
+
     public void adjustMixture() {
         aFLF.adjustMixture();
     }
