@@ -1,10 +1,11 @@
+import static java.lang.System.arraycopy;
+
 public class FLF {
 
     private final PowerUnit aPowerUnit;
     private final GroundSprayNozzle[] aGroundSprayNoozle;
     private final FrontCannon aFrontCannon;
     private final RoofCannon aRoofCannon;
-    private final Lights[] aLights;
     private final WarningLight[] aWarningLights;
     private final BlueLight[] aBlueLights;
     private final HeadLamp[] aHeadLamps;
@@ -51,7 +52,6 @@ public class FLF {
         aGroundSprayNoozle = builder.bGroundSprayNoozle;
         aFrontCannon = builder.bFrontCannon;
         aRoofCannon = builder.bRoofCannon;
-        aLights = builder.bLights;
         aWarningLights = builder.bWarningLights;
         aBlueLights = builder.bBlueLights;
         aDirectionIndicators = builder.bDirectionIndicators;
@@ -204,7 +204,7 @@ public class FLF {
      */
     public void steerFLF(int aSteeringAngle) {
         for(int i = 0; i < aFrontPivot.length; i++){
-            aFrontPivot[0].updateaSteerAngle(aSteeringAngle);   //steering angle is send to both front pivots
+            aFrontPivot[i].updateaSteerAngle(aSteeringAngle);   //steering angle is send to both front pivots
         }
         if(aSteeringAngle < 0){
             aDirectionIndicators[0].turnOn();       //turn left indicator on
@@ -262,7 +262,6 @@ public class FLF {
         public GroundSprayNozzle[] bGroundSprayNoozle;
         public FrontCannon bFrontCannon;
         public RoofCannon bRoofCannon;
-        public Lights[] bLights;
         public CentralUnit bCentralUnit;
         public FrontPivot[] bFrontPivot;
         public BackPivot[] bBackPivot;
@@ -479,7 +478,7 @@ public class FLF {
             bLED = new LED();
             bMixingUnit = new MixingUnit();
             bOperator = new Operator();
-            bPieceSegment = new PieceSegment[]{new PieceSegment(), new PieceSegment(), new PieceSegment()};
+            bPieceSegment = new PieceSegment[]{new PieceSegment(6), new PieceSegment(6), new PieceSegment(5)};
             bRoofCannon = new RoofCannon();
             bSeats = new Seats[]{new Seats(), new Seats(), new Seats(), new Seats()};
             bSegment1 = new Segment1();

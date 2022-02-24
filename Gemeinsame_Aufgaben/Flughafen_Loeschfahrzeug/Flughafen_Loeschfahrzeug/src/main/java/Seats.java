@@ -4,11 +4,11 @@ public class Seats {
     private Operator aOperator;
     private Driver aDriver;
 
-    public void setaOperator(Operator aOperator) {
+    public void setaPerson(Operator aOperator) {
         this.aOperator = aOperator;
     }
 
-    public void setaDriver(Driver aDriver) {
+    public void setaPerson(Driver aDriver) {
         this.aDriver = aDriver;
     }
 

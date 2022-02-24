@@ -10,10 +10,10 @@ public class Battery {
         int length = 100;
         int height = 10;
         int width = 100;
-        aCapacity = new boolean[length][height][width];     //12500 as inital value
-        for(int i=0; i<aCapacity.length; i++){
-            for(int j=0; j<aCapacity[i].length; j++){
-                for(int k=0; k<aCapacity[i][j].length; k++){
+        aCapacity = new boolean[length][height][width];     //100.000 as inital value
+        for(int i=0; i<100; i++){
+            for(int j=0; j<10; j++){
+                for(int k=0; k<100; k++){
                     aCapacity[i][j][k] = true;                 //true means filled
                 }
             }
@@ -36,20 +36,15 @@ public class Battery {
 
     public int getaSoC() {
         int calculatedSoC = 0;
-        int[] tempFillLevel = aFillLevel;
-        int tankLength = aCapacity.length;             //length of the Tank
-        int tankWidth = aCapacity[0][0].length;        //width of the Tank
-        int tankHeight = aCapacity[0].length;          //height of the Tank
 
-        int i;
-        for(i=aFillLevel[1]; i > 0;i--){            //Height
-            calculatedSoC+= (divisor[0]*divisor[2]); //process layer LxB (Height)
-        }
-        for(i=aFillLevel[2]; i > 0; i--){
-            calculatedSoC+= (divisor[0]);            //process B (Width)
-        }
-        for(i=aFillLevel[0]; i >0; i--){
-            calculatedSoC++;
+        for(int i=0; i<100; i++){
+            for(int j=0; j<10; j++){
+                for(int k=0; k<100; k++){
+                    if(aCapacity[i][j][k]){               //true means filled
+                        calculatedSoC++;
+                    }
+                }
+            }
         }
 
         return calculatedSoC;

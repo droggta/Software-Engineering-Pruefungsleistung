@@ -43,7 +43,7 @@ public class Doors {
     }
 
     public Doors() {
-
+        aDoorStatus = DoorStatus.closed;
     }
 
 }

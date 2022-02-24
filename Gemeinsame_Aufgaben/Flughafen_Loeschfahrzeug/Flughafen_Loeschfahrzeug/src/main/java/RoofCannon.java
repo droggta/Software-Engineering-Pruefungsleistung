@@ -55,7 +55,7 @@ public class RoofCannon {
     }
 
     public void setSegment2Angle(int i) {
-        aSegment2.setAngle(i);
+        aSegment2.changeSegmentAngle(i);
     }
 
     public void setSegment1Angle(int i) {

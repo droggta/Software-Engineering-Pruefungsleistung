@@ -2,8 +2,6 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
@@ -91,7 +89,6 @@ public class TestApplication {
         aGroundSprayNoozle = aBuilder.bGroundSprayNoozle;
         aFrontCannon = aBuilder.bFrontCannon;
         aRoofCannon = aBuilder.bRoofCannon;
-        aLights = aBuilder.bLights;
         aCentralUnit = aBuilder.bCentralUnit;
         aFrontPivot = aBuilder.bFrontPivot;
         aBackPivot = aBuilder.bBackPivot;
@@ -157,6 +154,7 @@ public class TestApplication {
 
     @Test
     @Order(1)
+    @DisplayName("buildComplete")
     public void sum() {
         //int result = calculator.sum(3, 4);
         assertNotNull(aBackPivot);
@@ -227,6 +225,7 @@ public class TestApplication {
 
     @Test
     @Order(2)
+    @DisplayName("usageControlPanel")
     public void usageControlPanel(){        //checks if the controlPanel
         //Driver does not use the control panel so nothing happens. Operator is responsible for the control panel. Although behaviour of controlPanel is tested
         if(aElectricMotor[0].getaMotorStatus() == MotorStatus.off){
@@ -305,15 +304,24 @@ public class TestApplication {
 
     @Test
     @Order(3)
+    @DisplayName("handleParking - s01")
     public void handleParking(){
         assertEquals(MotorStatus.off, aElectricMotor[0].getaMotorStatus());       //check if electric motors are turned off
         assertEquals(MotorStatus.off, aElectricMotor[1].getaMotorStatus());
         for(int i = 0; i < 4; i++){
             assertEquals(null,aSeats[i].getPerson());                       //Check if all seats are free
         }
+        for (int i = 0; i < aDoors.length; i++)
+        {
+            if (aDoors[i].getaDoorStatus() == DoorStatus.closed){
+                aDoors[i].changeDoorstatus();
+            }
+        }
         assertEquals(DoorStatus.open, aDoors[0].getaDoorStatus());                //check if doors are open
         assertEquals(DoorStatus.open, aDoors[1].getaDoorStatus());
+        aRoofCannon.getaSegment1().changeSegmentAngle(90);
         assertEquals(90, aRoofCannon.getaSegment1().getAngle());       //check roofcannon
+        aRoofCannon.getaSegment2().changeSegmentAngle(90);
         assertEquals(90, aRoofCannon.getaSegment2().getAngle());
         assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
         //check Headlamp. FLF has in total 10 headlamps => Array(3 headlamps on each side and 4 on the roof)
@@ -330,52 +338,62 @@ public class TestApplication {
         for(int i=0; i < aBattery.length; i++){
             assertEquals(100000, aBattery[i].getaSoC());                      //Check if Batteries are 100% full (SoC=State of Charge)
         }
-        assertEquals(CannonModes.modeA, aKnobFrontCannon.getaCannonStep());             //Check Knob for FrontCannon
-        assertEquals(CannonSteps.fuenfhundert, aKnobRoofCannon.getaCannonMode());       //Check Knob for RoofCannon
+        assertEquals(CannonSteps.fuenfhundert, aKnobFrontCannon.getaCannonStep());             //Check Knob for FrontCannon
+        assertEquals(CannonModes.modeA, aKnobRoofCannon.getaCannonMode());       //Check Knob for RoofCannon
     }
 
     @Test
     @Order(4)
+    @DisplayName("handleInspektionDrive - s02")
     public void handleInspectionDrive(){
-        assertEquals(MotorStatus.on, aElectricMotor[0].getaMotorStatus());          //Check if electric motors are on
-        assertEquals(MotorStatus.on, aElectricMotor[1].getaMotorStatus());
+        for(int i = 0; i < 2; i++){
+            aElectricMotor[i].setaMotorStatus(MotorStatus.on);
+            assertEquals(MotorStatus.on, aElectricMotor[i].getaMotorStatus());   //Check if electric motors are on
+        }
+        aSeats[0].setaPerson(aDriver);
+        aSeats[1].setaPerson(aOperator);
         for(int i = 0; i < 2; i++){
             assertNotNull(aSeats[i].getPerson());                            //Check if both front seats are taken
         }
         assertEquals(DoorStatus.closed, aDoors[0].getaDoorStatus());                //check if doors are closed
         assertEquals(DoorStatus.closed, aDoors[1].getaDoorStatus());
-        assertEquals(0, aRoofCannon.getaSegment1().getAngle());
-        assertEquals(0, aRoofCannon.getaSegment2().getAngle());
-        for(int i = 0; i < aRoofCannon.getaSegment2().getaPiecesegment().length; i++){      //check if segments of roof arm are retracted
-            assertEquals(0, aRoofCannon.getaSegment2().getaPiecesegment()[i]);
-        }
+        aRoofCannon.getaSegment1().changeSegmentAngle(90);
+        assertEquals(90, aRoofCannon.getaSegment1().getAngle());       //check roofcannon
+        aRoofCannon.getaSegment2().changeSegmentAngle(90);
+        assertEquals(90, aRoofCannon.getaSegment2().getAngle());
         assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
         // TODO: Was sind die Seitenlampen?
         // Dachscheinwerfer
         for(int i = 0; i < aHeadLamp.length; i++) {
             if(aHeadLamp[i].getaPosition() == Position.frontRoof) {
-                assertEquals(LightStatus.off, aLights[i].getaLightStatus());
+                aHeadLamp[i].setaLightStatus(LightStatus.off);
+                assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus());
             }
         }
         //Seitenlampen sind hier Fahrtrichtungsanzeiger & Bremslicht
         for(int i = 0; i < aBreakingLight.length; i++){
+            aBreakingLight[i].setaLightStatus(LightStatus.off);
             assertEquals(LightStatus.off, aBreakingLight[i].getaLightStatus());
         }
         for(int i = 0; i < aDirectionIndicator.length; i++){
+            aDirectionIndicator[i].setaLightStatus(LightStatus.off);
             assertEquals(LightStatus.off, aDirectionIndicator[i].getaLightStatus());
         }
         // Frontscheinwerfer
         for(int i = 0; i < aHeadLamp.length; i++){
             if(aHeadLamp[i].getaPosition() != Position.frontRoof) {
-                assertEquals(LightStatus.on, aLights[i].getaLightStatus());
+                aHeadLamp[i].setaLightStatus(LightStatus.on);
+                assertEquals(LightStatus.on, aHeadLamp[i].getaLightStatus());
             }
         }
         // Warnlicht
         for(int i = 0; i < aWarningLight.length; i++){                                      //Check if warning light is turned on
+            aWarningLight[i].setaLightStatus(LightStatus.on);
             assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());
         }
         // Blaulicht
         for(int i = 0 ; i < aBlueLight.length; i++){                                        //Check if Bluelight is turned off
+            aBlueLight[i].setaLightStatus(LightStatus.off);
             assertEquals(LightStatus.off, aBlueLight[i].getaLightStatus());
         }
         assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full
@@ -434,14 +452,15 @@ public class TestApplication {
 
     @Test
     @Order(5)
+    @DisplayName("handleEmergencyService - s03")
     public void handleEmergencyService(){
-        assertEquals(MotorStatus.on, aElectricMotor[0].getaMotorStatus());          //Check if electric motors are on
-        assertEquals(MotorStatus.on, aElectricMotor[1].getaMotorStatus());
         for(int i = 0; i < 2; i++){
-            assertNotNull(aSeats[i].getPerson());                       //Check if both front seats are taken
+            aElectricMotor[i].setaMotorStatus(MotorStatus.on);
+            assertEquals(MotorStatus.on, aElectricMotor[i].getaMotorStatus());   //Check if electric motors are on
         }
         assertEquals(DoorStatus.closed, aDoors[0].getaDoorStatus());                //check if doors are closed
         assertEquals(DoorStatus.closed, aDoors[1].getaDoorStatus());
+
         assertEquals(0, aRoofCannon.getaSegment1().getAngle());
         assertEquals(0, aRoofCannon.getaSegment2().getAngle());
         for(int i = 0; i < aRoofCannon.getaSegment2().getaPiecesegment().length; i++){      //check if segments of roof arm are retracted
@@ -500,6 +519,7 @@ public class TestApplication {
 
     @Test
     @Order(6)
+    @DisplayName("handleFuelTruckOnFire - s04")
     public void handleFuelTruckOnFire(){
         assertEquals(MotorStatus.on, aElectricMotor[0].getaMotorStatus());          //Check if electric motors are on
         assertEquals(MotorStatus.on, aElectricMotor[1].getaMotorStatus());
@@ -591,6 +611,7 @@ public class TestApplication {
 
     @Test
     @Order(7)
+    @DisplayName("handlePushbackVehicleOnFire - s05")
     public void handlePushbackVehicleOnFire(){
         int p = 0;
         int initWaterVolume = aWaterTank.getVolume();
@@ -672,6 +693,7 @@ public class TestApplication {
 
     @Test
     @Order(8)
+    @DisplayName("handleAirplaneEngineFire - s06")
     public void handleAirplaneEngineFire(){
         assertEquals(MotorStatus.on, aElectricMotor[0].getaMotorStatus());       //Check if electric motors are turned on
         assertEquals(MotorStatus.on, aElectricMotor[1].getaMotorStatus());

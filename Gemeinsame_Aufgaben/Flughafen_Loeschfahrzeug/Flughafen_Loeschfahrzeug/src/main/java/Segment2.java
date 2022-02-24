@@ -21,7 +21,7 @@ public class Segment2 {
         return angle;
     }
 
-    public void setAngle(int angle) {
+    public void changeSegmentAngle(int angle) {
         this.angle = angle;
     }
 }

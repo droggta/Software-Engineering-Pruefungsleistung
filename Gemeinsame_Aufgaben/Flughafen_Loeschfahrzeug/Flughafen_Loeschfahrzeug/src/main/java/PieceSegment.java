@@ -3,7 +3,7 @@ public class PieceSegment {
     int length;
 
 
-    public PieceSegment(){
+    public PieceSegment(int plength){
         length = 0;
 
     }

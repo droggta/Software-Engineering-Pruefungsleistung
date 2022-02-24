@@ -22,7 +22,7 @@ public class FrontCannon {
     }
 
     public FrontCannon() {
-
+        aCannonStatus = CannonStatus.deactivated;
     }
 
     public void setFrontCannonAngle(int i) {

@@ -30,8 +30,8 @@ public class PowerUnit {
 
     public void provide(int velocity){
         int neededUnits = velocity * 25;            //25untis per 1km/h consumption
-        if(aBatteryManagement.getSoC() >= neededUnits){
-            aBatteryManagement.takeOut(velocity*25);
+        if(aBatteryManagement.instance.getSoC() >= neededUnits){
+            aBatteryManagement.instance.takeOut(neededUnits);
         }
         else
         {
