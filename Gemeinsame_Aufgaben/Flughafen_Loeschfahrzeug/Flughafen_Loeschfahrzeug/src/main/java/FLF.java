@@ -1,5 +1,3 @@
-import static java.lang.System.arraycopy;
-
 public class FLF {
 
     private final PowerUnit aPowerUnit;
@@ -14,6 +12,7 @@ public class FLF {
     private final FrontPivot[] aFrontPivot;
     private final BackPivot[] aBackPivot;
     private final Cabine aCabine;
+    private final MixingUnit aMixingUnit;
     private Builder aBuilder;
     private int aVelocity = 0;
     //Komplexaufgaben
@@ -59,6 +58,7 @@ public class FLF {
         aFrontPivot = builder.bFrontPivot;
         aBackPivot = builder.bBackPivot;
         aCabine = builder.bCabine;
+        aMixingUnit = builder.bMixingUnit;
         aBuilder = builder;
         //Komplexaufgaben
         aNumberPlate = builder.bNumberPlate;
@@ -107,7 +107,7 @@ public class FLF {
      * Adjusts the mixture of foam and water for both all cannons
      */
     public void adjustMixture() {
-        aRoofCannon.adjustMixture();
+        aMixingUnit.adjustFoamRate();
     }
 
     /**
@@ -375,6 +375,7 @@ public class FLF {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            bCentralUnit.setaControlPanel(bControlPanel);
             bControlPanel.setaCentralUnit(bCentralUnit);
             bBreakPedal.setaCentralUnit(bCentralUnit);
             bGasPedal.setaCentralUnit(bCentralUnit);
@@ -507,8 +508,8 @@ public class FLF {
             bDriver.setaSterringWheel(bSterringWheel);
 
             bOperator.setaControlPanel(bControlPanel);
-            bOperator.setbKnobFrontCannon(bKnobFrontCannon);
-            bOperator.setbKnobRoofCannon(bKnobRoofCannon);
+            bOperator.setaKnobFrontCannon(bKnobFrontCannon);
+            bOperator.setaKnobRoofCannon(bKnobRoofCannon);
 
             bControlPanel.setaSwitch(bSwitch);
             bControlPanel.setaKnobFrontCannon(bKnobFrontCannon);

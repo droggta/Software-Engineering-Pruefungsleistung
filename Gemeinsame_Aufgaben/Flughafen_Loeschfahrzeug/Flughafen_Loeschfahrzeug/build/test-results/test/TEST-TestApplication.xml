@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestApplication" tests="8" skipped="0" failures="5" errors="0" timestamp="2022-02-23T18:39:56" hostname="DESKTOP-8VD62NE" time="0.091">
+<testsuite name="TestApplication" tests="8" skipped="0" failures="5" errors="0" timestamp="2022-02-24T15:21:39" hostname="DESKTOP-8VD62NE" time="0.114">
   <properties/>
-  <testcase name="buildComplete" classname="TestApplication" time="0.038"/>
-  <testcase name="usageControlPanel" classname="TestApplication" time="0.006"/>
-  <testcase name="handleParking - s01" classname="TestApplication" time="0.009"/>
-  <testcase name="handleInspektionDrive - s02" classname="TestApplication" time="0.022">
+  <testcase name="buildComplete" classname="TestApplication" time="0.049"/>
+  <testcase name="usageControlPanel" classname="TestApplication" time="0.005"/>
+  <testcase name="handleParking - s01" classname="TestApplication" time="0.008"/>
+  <testcase name="handleInspektionDrive - s02" classname="TestApplication" time="0.023">
     <failure message="org.opentest4j.AssertionFailedError: expected: &lt;383900&gt; but was: &lt;400000&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;383900&gt; but was: &lt;400000&gt;
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
@@ -104,14 +104,14 @@
 	at java.base/java.lang.Thread.run(Thread.java:831)
 </failure>
   </testcase>
-  <testcase name="handleEmergencyService - s03" classname="TestApplication" time="0.002">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;0&gt; but was: &lt;PieceSegment@19bfb7d7&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;0&gt; but was: &lt;PieceSegment@19bfb7d7&gt;
+  <testcase name="handleEmergencyService - s03" classname="TestApplication" time="0.008">
+    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;359000&gt; but was: &lt;400000&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;359000&gt; but was: &lt;400000&gt;
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
-	at TestApplication.handleEmergencyService(TestApplication.java:466)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:510)
+	at TestApplication.handleEmergencyService(TestApplication.java:518)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -204,14 +204,15 @@
 	at java.base/java.lang.Thread.run(Thread.java:831)
 </failure>
   </testcase>
-  <testcase name="handleFuelTruckOnFire - s04" classname="TestApplication" time="0.002">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;on&gt; but was: &lt;off&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;on&gt; but was: &lt;off&gt;
+  <testcase name="handleFuelTruckOnFire - s04" classname="TestApplication" time="0.008">
+    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;9700&gt; but was: &lt;10050&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;9700&gt; but was: &lt;10050&gt;
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
-	at TestApplication.handleFuelTruckOnFire(TestApplication.java:523)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:510)
+	at TestApplication.checkEmitConsumptionCannon(TestApplication.java:947)
+	at TestApplication.handleFuelTruckOnFire(TestApplication.java:591)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -305,13 +306,14 @@
 </failure>
   </testcase>
   <testcase name="handlePushbackVehicleOnFire - s05" classname="TestApplication" time="0.002">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;on&gt; but was: &lt;off&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;on&gt; but was: &lt;off&gt;
+    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;1725&gt; but was: &lt;1775&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;1725&gt; but was: &lt;1775&gt;
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
-	at TestApplication.handlePushbackVehicleOnFire(TestApplication.java:618)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:510)
+	at TestApplication.checkEmitConsumptionCannon(TestApplication.java:946)
+	at TestApplication.handlePushbackVehicleOnFire(TestApplication.java:668)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -404,14 +406,15 @@
 	at java.base/java.lang.Thread.run(Thread.java:831)
 </failure>
   </testcase>
-  <testcase name="handleAirplaneEngineFire - s06" classname="TestApplication" time="0.002">
-    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;on&gt; but was: &lt;off&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;on&gt; but was: &lt;off&gt;
+  <testcase name="handleAirplaneEngineFire - s06" classname="TestApplication" time="0.003">
+    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;1725&gt; but was: &lt;1775&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;1725&gt; but was: &lt;1775&gt;
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1124)
-	at TestApplication.handleAirplaneEngineFire(TestApplication.java:697)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:510)
+	at TestApplication.checkEmitConsumptionCannon(TestApplication.java:946)
+	at TestApplication.handleAirplaneEngineFire(TestApplication.java:753)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

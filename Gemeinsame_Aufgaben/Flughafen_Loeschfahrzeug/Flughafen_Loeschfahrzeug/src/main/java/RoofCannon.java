@@ -26,17 +26,11 @@ public class RoofCannon {
     }
 
     public RoofCannon() {
-
+        aCannonStatus = CannonStatus.deactivated;
     }
 
     public void setRoofCannonAngle(int angle) {
         aSegment1.changeSegmentAngle(angle);
-    }
-
-    public void adjustMixture() {
-        if(aCannonStatus == CannonStatus.activated) {       //only if the cannon is activated the foam rate can be adjusted
-            aMixingUnit.adjustFoamRate();
-        }
     }
 
     /**

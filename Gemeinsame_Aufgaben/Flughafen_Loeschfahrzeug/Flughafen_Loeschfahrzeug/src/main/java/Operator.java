@@ -2,16 +2,16 @@ public class Operator {
 
     private ControlPanel aControlPanel;
     private JoystickRoofCannon aJoystickRoofCannon;
-    private KnobFrontCannon bKnobFrontCannon;
-    private KnobRoofCannon bKnobRoofCannon;
+    private KnobFrontCannon aKnobFrontCannon;
+    private KnobRoofCannon aKnobRoofCannon;
     private DoorButton[][] aDoorButtons;
 
-    public void setbKnobFrontCannon(KnobFrontCannon bKnobFrontCannon) {
-        this.bKnobFrontCannon = bKnobFrontCannon;
+    public void setaKnobFrontCannon(KnobFrontCannon aKnobFrontCannon) {
+        this.aKnobFrontCannon = aKnobFrontCannon;
     }
 
-    public void setbKnobRoofCannon(KnobRoofCannon bKnobRoofCannon) {
-        this.bKnobRoofCannon = bKnobRoofCannon;
+    public void setaKnobRoofCannon(KnobRoofCannon aKnobRoofCannon) {
+        this.aKnobRoofCannon = aKnobRoofCannon;
     }
 
     public void setaControlPanel(ControlPanel aControlPanel) {
@@ -35,11 +35,11 @@ public class Operator {
      * @param cannonMode
      */
     public void useKnobJoystickRoofCannon(CannonModes cannonMode){
-        bKnobRoofCannon.setaCannonMode(cannonMode);
+        aKnobRoofCannon.setaCannonMode(cannonMode);
     }
 
     public void useKnobJoystickFrontCannon(CannonSteps cannonSteps){
-        bKnobFrontCannon.setaCannonStep(cannonSteps);
+        aKnobFrontCannon.setaCannonStep(cannonSteps);
     }
 
     public void useJoystickPressButton(Position p) {
