@@ -48,7 +48,7 @@ public abstract class Tank {
      * Moves the pointer to the new fill level
      * @param pVolume consumed volume in units
      */
-    public void consumeVolume(int pVolume) {        //!!!Function still needs an update due to the change from an int into an array
+  /*  public void consumeVolume(int pVolume) {        //!!!Function still needs an update due to the change from an int into an array
         int tempVolume = pVolume;
         int diffLength = 0;
         int diffHeight = 0;
@@ -68,6 +68,53 @@ public abstract class Tank {
         aFillLevel[0]-= diffLength;
         aFillLevel[1]-= diffHeight;
         aFillLevel[2]-= diffWidth;
+
+    }*/
+
+    public void consumeVolume(int pVolume){
+        int tempVolume = pVolume;
+        int diffLength = 0;
+        int diffHeight = 0;
+        int diffWidth = 0;
+
+        while(tempVolume >= (divisor[0]*divisor[2])){     //If consumed volume bigger than 1 layer Length*Width
+            diffHeight = (int) Math.floor(tempVolume / (divisor[0]*divisor[2]));
+            tempVolume -= diffHeight*(divisor[0]*divisor[2]);
+        }
+        while(tempVolume >= (divisor[0]) && (aFillLevel[2]-diffWidth-1 > 0)) {                //if volume is bigger as width
+            diffWidth++;
+            tempVolume-= divisor[0];
+        }
+        if(tempVolume >= divisor[0]){
+            tempVolume -= aFillLevel[2]*divisor[0];
+            diffHeight++;
+            diffWidth = divisor[2]- tempVolume;
+        }
+        if(tempVolume == 0){
+            aFillLevel[1]-= diffHeight;
+            aFillLevel[2]-= diffWidth;
+            return;
+        }
+        if((aFillLevel[0]-tempVolume) >= 0) {
+            diffLength = tempVolume;
+
+            aFillLevel[0]-= diffLength;
+            aFillLevel[1]-= diffHeight;
+            aFillLevel[2]-= diffWidth;
+        }
+        else{
+            tempVolume -= aFillLevel[0];
+            diffWidth++;
+            diffLength = divisor[0] - tempVolume;
+
+            //Pointer is updated
+            aFillLevel[0] = diffLength;
+            aFillLevel[1]-= diffHeight;
+            aFillLevel[2]-= diffWidth;
+        }
+
+
+
 
     }
 
