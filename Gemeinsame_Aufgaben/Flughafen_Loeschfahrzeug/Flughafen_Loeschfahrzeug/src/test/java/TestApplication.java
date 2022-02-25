@@ -408,17 +408,19 @@ public class TestApplication {
             aDriver.accelerate();
             consumedEnergy += aFLF.getaVelocity()*25;
             assertEquals(i*4, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
+            assertEquals(startEnergieVolume-consumedEnergy, aBatteryBox.getallSoC());
         }
+        assertEquals(startEnergieVolume-consumedEnergy, aBatteryBox.getallSoC());
         //FLF fährt fünf Interationen mit konstant 28km/h geradeaus
         for (int i = 0; i < 5; i++){
-            consumedEnergy += aFLF.getaVelocity()*25;
+           // consumedEnergy += aFLF.getaVelocity()*25;
             assertEquals(28, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
         }
 
         //FLF fährt fünf Interationen mit konstant 28km/h nach 5% links
         aDriver.steer(-5);                                            //change steeringangle to -5% (left)
         for (int i = 0; i < 3; i++){
-            consumedEnergy += aFLF.getaVelocity()*25;
+           // consumedEnergy += aFLF.getaVelocity()*25;
             assertEquals(28, aFLF.getaVelocity());                                    //check if the velocity is actually 28km/h
             assertEquals(-5, aFLF.getSteeringAngleFrontPivot());                        //check if the steering angle of the front pivots is -5%
         }
@@ -426,7 +428,7 @@ public class TestApplication {
         //FLF fährt fünf Interationen mit konstant 28km/h geradeaus
         aDriver.steer(5);
         for (int i = 0; i < 5; i++){
-            consumedEnergy += aFLF.getaVelocity()*25;
+           // consumedEnergy += aFLF.getaVelocity()*25;
             assertEquals(28, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
             assertEquals(0, aFLF.getSteeringAngleFrontPivot());
         }
@@ -434,7 +436,7 @@ public class TestApplication {
         //FLF fährt fünf Interationen mit konstant 28km/h nach 5% rechts
         aDriver.steer(5);                                            //change steeringangle to -5% (left)
         for (int i = 0; i < 3; i++){
-            consumedEnergy += aFLF.getaVelocity()*25;
+           // consumedEnergy += aFLF.getaVelocity()*25;
             assertEquals(28, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
             assertEquals(5, aFLF.getSteeringAngleFrontPivot());                        //check if the steering angle of the front pivots is -5%
         }
@@ -512,7 +514,7 @@ public class TestApplication {
         }
         //FLF fährt fünf Interationen mit konstant 28km/h geradeaus
         for (int i = 0; i < 10; i++){
-            consumedEnergy += aFLF.getaVelocity()*25;
+            //consumedEnergy += aFLF.getaVelocity()*25;
             assertEquals(80, aFLF.getaVelocity());                                      //check if the velocity is actually 28km/h
         }
         assertEquals(startEnergieVolume-consumedEnergy, aBatteryBox.getallSoC());
@@ -573,7 +575,7 @@ public class TestApplication {
         assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());                    //Check if foam tank is 100% full
 
         int startVolumeWater = aWaterTank.getVolume();
-        aFLF.activateGroundSprayNozzles();
+        //aFLF.activateGroundSprayNozzles();
         //TODO: assertEquals(startVolumeWater-(100* aGroundSprayNoozle.length), aWaterTank.getVolume()); //Check if Waterconsumption from GroundNozzles is correct
 
         if(aFrontCannon.getaCannonStatus() != CannonStatus.activated) {         //Check if frontcannon ist activated
