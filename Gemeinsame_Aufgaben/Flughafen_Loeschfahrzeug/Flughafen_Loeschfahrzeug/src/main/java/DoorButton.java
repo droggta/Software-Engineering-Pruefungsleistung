@@ -1,7 +1,7 @@
 public class DoorButton {
 
-    private Doors aDoor;
-    private Position aPosition;             //indoor or outdoor
+    private final Doors aDoor;
+    private final Position aPosition;             //indoor or outdoor
 
     /**
      * Creates a new DoorButton

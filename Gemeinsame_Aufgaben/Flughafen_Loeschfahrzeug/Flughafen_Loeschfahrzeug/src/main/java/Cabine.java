@@ -1,26 +1,27 @@
 public class Cabine {
 
     private Doors[] aDoors;
-    private JoystickFrontCannon aJoystickFrontCannon;
-    private JoystickRoofCannon aJoystickRoofCannon;
     private SpeedDisplay aSpeedDisplay;
-    private EnergyDisplay aEnergyDisplay;
-    private ControlPanel aControlPanel;
-    private Seats[] aSeats;
+    private SterringWheel aSterringWheel;
     private GasPedal aGasPedal;
     private BreakPedal aBreakPedal;
-    private SterringWheel aSterringWheel;
+    private Seats[] aSeats;
+    private JoystickFrontCannon aJoystickFrontCannon;
+    private JoystickRoofCannon aJoystickRoofCannon;
+    private EnergyDisplay aEnergyDisplay;
+    private ControlPanel aControlPanel;
 
-    public void setaGasPedal(GasPedal aGasPedal) {
-        this.aGasPedal = aGasPedal;
-    }
-
-    public void setaBreakPedal(BreakPedal aBreakPedal) {
-        this.aBreakPedal = aBreakPedal;
-    }
 
     public void setaSterringWheel(SterringWheel aSterringWheel) {
         this.aSterringWheel = aSterringWheel;
+    }
+
+    public void setaGasPedal(GasPedal aGasPedal){
+        this.aGasPedal = aGasPedal;
+    }
+
+    public void setaBreakPedal(BreakPedal aBreakPedal){
+        this.aBreakPedal = aBreakPedal;
     }
 
     public void setaSeats(Seats[] aSeats) {

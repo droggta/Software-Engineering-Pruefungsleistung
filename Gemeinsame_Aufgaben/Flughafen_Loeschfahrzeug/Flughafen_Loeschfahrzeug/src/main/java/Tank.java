@@ -1,7 +1,7 @@
 public abstract class Tank {
 
     private TankSubstance content;
-    private int aFillLevel[];        //Field in the array which is filled (true)  [LxHxB]
+    private int[] aFillLevel;        //Field in the array which is filled (true)  [LxHxB]
     private int[] divisor;
 
 
@@ -59,8 +59,6 @@ public abstract class Tank {
             diffLength = tempVolume;
 
             aFillLevel[0]-= diffLength;
-            aFillLevel[1]-= diffHeight;
-            aFillLevel[2]-= diffWidth;
         }
         else{
             tempVolume -= aFillLevel[0];
@@ -69,9 +67,9 @@ public abstract class Tank {
 
             //Pointer is updated
             aFillLevel[0] = diffLength;
-            aFillLevel[1]-= diffHeight;
-            aFillLevel[2]-= diffWidth;
         }
+        aFillLevel[1]-= diffHeight;
+        aFillLevel[2]-= diffWidth;
     }
 
     /**

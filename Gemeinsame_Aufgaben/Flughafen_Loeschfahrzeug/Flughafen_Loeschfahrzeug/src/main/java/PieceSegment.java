@@ -1,6 +1,6 @@
 public class PieceSegment {
 
-    int length;
+    final int length;
 
 
     public PieceSegment(int plength){

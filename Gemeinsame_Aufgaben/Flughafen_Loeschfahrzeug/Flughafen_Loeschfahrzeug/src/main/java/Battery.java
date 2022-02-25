@@ -1,6 +1,6 @@
 public class Battery {
 
-    private int aFillLevel[];        //Field in the array which is filled (true)  [LxHxB]
+    private int[] aFillLevel;        //Field in the array which is filled (true)  [LxHxB]
     private int[] divisor;
     private BatteryStatus aBatteryStatus;
     private int aSoC;        //Soc = State of Charge
@@ -62,8 +62,6 @@ public class Battery {
             diffLength = tempVolume;
 
             aFillLevel[0]-= diffLength;
-            aFillLevel[1]-= diffHeight;
-            aFillLevel[2]-= diffWidth;
         }
         else{
             tempVolume -= aFillLevel[0];
@@ -72,9 +70,9 @@ public class Battery {
 
             //Pointer is updated
             aFillLevel[0] = diffLength;
-            aFillLevel[1]-= diffHeight;
-            aFillLevel[2]-= diffWidth;
         }
+        aFillLevel[1]-= diffHeight;
+        aFillLevel[2]-= diffWidth;
     }
 
     private int[] checkArea(int tempVolume, int diffLength, int diffHeight, int diffWidth, int forceStep){
@@ -93,8 +91,7 @@ public class Battery {
                 tempVolume -= diffHeight * areaUnit;
             }
         }
-        int[] diffKoord = checkRow(tempVolume, diffLength, diffHeight, diffWidth, forceStep);
-        return diffKoord;
+        return checkRow(tempVolume, diffLength, diffHeight, diffWidth, forceStep);
     }
 
     private int[] checkRow(int tempVolume, int diffLength, int diffHeight, int diffWidth, int forceStep){

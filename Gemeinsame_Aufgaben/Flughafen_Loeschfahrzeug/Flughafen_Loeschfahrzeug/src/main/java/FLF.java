@@ -8,16 +8,35 @@ public class FLF {
     private final BlueLight[] aBlueLights;
     private final HeadLamp[] aHeadLamps;
     private final DirectionIndicator[] aDirectionIndicators;
-    private final CentralUnit aCentralUnit;
     private final FrontPivot[] aFrontPivot;
     private final BackPivot[] aBackPivot;
     private final Cabine aCabine;
     private final MixingUnit aMixingUnit;
+    private final String aNumberPlate;
+    private final ReceiverModule[] aReceiverModule;
     private Builder aBuilder;
     private int aVelocity = 0;
-    //Komplexaufgaben
-    private String aNumberPlate;
-    private ReceiverModule[] aReceiverModule;
+
+    private FLF(Builder builder){
+        CentralUnit aCentralUnit = builder.bCentralUnit;
+        aCentralUnit.setaFLF(this);
+        aPowerUnit = builder.bPowerUnit;
+        aGroundSprayNoozle = builder.bGroundSprayNoozle;
+        aFrontCannon = builder.bFrontCannon;
+        aRoofCannon = builder.bRoofCannon;
+        aWarningLights = builder.bWarningLights;
+        aBlueLights = builder.bBlueLights;
+        aDirectionIndicators = builder.bDirectionIndicators;
+        aHeadLamps = builder.bHeadLamps;
+        aFrontPivot = builder.bFrontPivot;
+        aBackPivot = builder.bBackPivot;
+        aCabine = builder.bCabine;
+        aMixingUnit = builder.bMixingUnit;
+        aBuilder = builder;
+        //Komplexaufgaben
+        aNumberPlate = builder.bNumberPlate;
+        aReceiverModule = builder.bReceiverModule;
+    }
 
     public static FLF init(boolean intJoystick){
         FLF Flughafen_Loeschfahrzeug = new FLF.Builder()
@@ -40,29 +59,9 @@ public class FLF {
     public Builder getaBuilder() {
         return aBuilder;
     }
+
     public void setaBuilder(Builder pbuilder) {
         aBuilder = pbuilder;
-    }
-
-    private FLF(Builder builder){
-        aCentralUnit = builder.bCentralUnit;
-        aCentralUnit.setaFLF(this);
-        aPowerUnit = builder.bPowerUnit;
-        aGroundSprayNoozle = builder.bGroundSprayNoozle;
-        aFrontCannon = builder.bFrontCannon;
-        aRoofCannon = builder.bRoofCannon;
-        aWarningLights = builder.bWarningLights;
-        aBlueLights = builder.bBlueLights;
-        aDirectionIndicators = builder.bDirectionIndicators;
-        aHeadLamps = builder.bHeadLamps;
-        aFrontPivot = builder.bFrontPivot;
-        aBackPivot = builder.bBackPivot;
-        aCabine = builder.bCabine;
-        aMixingUnit = builder.bMixingUnit;
-        aBuilder = builder;
-        //Komplexaufgaben
-        aNumberPlate = builder.bNumberPlate;
-        aReceiverModule = builder.bReceiverModule;
     }
 
     public void setaRoofCannonStatus(CannonStatus cStatus) {
@@ -76,30 +75,30 @@ public class FLF {
     }
 
     public void activateFrontCannon() {
-        switch (aFrontCannon.getaCannonStatus()){
-            case activated:     //if current status is activated roof cannon is being deactivated
+        switch (aFrontCannon.getaCannonStatus()) {
+            case activated -> {     //if current status is activated roof cannon is being deactivated
                 aFrontCannon.setaCannonStatus(CannonStatus.deactivated);
                 aFrontCannon.setFrontCannonAngle(0);      //set angle of segment1 of roof cannon
-                break;
-            case deactivated:   //if current status is deactivated roof cannon is being activated
+            }
+            case deactivated -> {   //if current status is deactivated roof cannon is being activated
                 aFrontCannon.setaCannonStatus(CannonStatus.activated);
                 aFrontCannon.setFrontCannonAngle(90);     //set angle of segment1 of roof cannon
-                break;
+            }
         }
     }
 
     public void activateRoofCannon() {
-        switch (aRoofCannon.getaCannonStatus()){
-            case activated:
+        switch (aRoofCannon.getaCannonStatus()) {
+            case activated -> {
                 aRoofCannon.setaCannonStatus(CannonStatus.deactivated);
                 aRoofCannon.setSegment1Angle(0);
                 aRoofCannon.setSegment2Angle(0);
-                break;
-            case deactivated:
+            }
+            case deactivated -> {
                 aRoofCannon.setaCannonStatus(CannonStatus.activated);
                 aRoofCannon.setSegment1Angle(90);
                 aRoofCannon.setSegment2Angle(90);
-                break;
+            }
         }
     }
 
@@ -156,8 +155,8 @@ public class FLF {
             lStatus = LightStatus.on;
         }
 
-        for (int i = 0; i < aWarningLights.length; i++){
-            aWarningLights[i].setaLightStatus(lStatus);
+        for (WarningLight aWarningLight : aWarningLights) {
+            aWarningLight.setaLightStatus(lStatus);
         }
     }
 
@@ -167,8 +166,8 @@ public class FLF {
             lStatus = LightStatus.on;
         }
 
-        for (int i = 0; i < aBlueLights.length; i++){
-            aBlueLights[i].setaLightStatus(lStatus);
+        for (BlueLight aBlueLight : aBlueLights) {
+            aBlueLight.setaLightStatus(lStatus);
         }
     }
 
@@ -213,8 +212,8 @@ public class FLF {
      * @param aSteeringAngle Parameter given in % (minus=left, positiv=right)
      */
     public void steerFLF(int aSteeringAngle) {
-        for(int i = 0; i < aFrontPivot.length; i++){
-            aFrontPivot[i].updateaSteerAngle(aSteeringAngle);   //steering angle is send to both front pivots
+        for (FrontPivot frontPivot : aFrontPivot) {
+            frontPivot.updateaSteerAngle(aSteeringAngle);   //steering angle is send to both front pivots
         }
         if(aSteeringAngle < 0){
             aDirectionIndicators[0].turnOn();       //turn left indicator on
@@ -225,8 +224,8 @@ public class FLF {
             aDirectionIndicators[1].turnOn();       //turn right indicator on
         }
         else{                                       //steeringAngle = 0 meaning no direction indicator is needed
-            for(int i = 0; i < aDirectionIndicators.length; i++){
-                aDirectionIndicators[i].turnOff();
+            for (DirectionIndicator aDirectionIndicator : aDirectionIndicators) {
+                aDirectionIndicator.turnOff();
             }
         }
     }
@@ -256,8 +255,8 @@ public class FLF {
      *
      */
     public void activateGroundSprayNozzles(){
-        for (int i = 0; i < aGroundSprayNoozle.length; i++){
-            aGroundSprayNoozle[i].sprayWater();
+        for (GroundSprayNozzle groundSprayNozzle : aGroundSprayNoozle) {
+            groundSprayNozzle.sprayWater();
         }
     }
 
@@ -302,13 +301,11 @@ public class FLF {
         public KnobFrontCannon bKnobFrontCannon;
         public KnobRoofCannon bKnobRoofCannon;
         public LED bLED;
-        //public LeftPressButton bLeftPressButton;
         public MixingUnit bMixingUnit;
         public Operator bOperator;
         public PieceSegment[] bPieceSegment;
         public Pivot bPivot;
         public PressButton[] bPressButton;
-        //public RightPressButton bRightPressButton;
         public Seats[] bSeats;
         public Segment1 bSegment1;
         public Segment2 bSegment2;
@@ -324,20 +321,6 @@ public class FLF {
         public ReceiverModule[] bReceiverModule;
         public IntJoystickFrontCannon bIntJoystickFrontCannon;
         public IntJoystickRoofCannon bIntJoystickRoofCannon;
-        /*Enumerations
-        //public BatteryManagement bBatteryManagement;
-        public BatteryStatus bBatteryStatus;
-        public CannonModes bCannonModes;
-        public CannonSteps bCannonSteps;
-        public DoorStatus bDoorStatus;
-        public FoamRate bFoamRate;
-        public LEDColor bLEDColor;
-        public LightSize bLightSize;
-        public LightStatus bLightStatus;
-        public Position bPosition;
-        public SwitchStatus bSwitchStatus;
-        public SwitchType bSwitchType;
-        public TankSubstance bTankSubstance;*/
 
         // Erstellen der Klassen am FLF und deren Unterklassen
         public Builder createPowerUnit(){
@@ -527,8 +510,8 @@ public class FLF {
             bKnobFrontCannon.setaControlPanel(bControlPanel);
             bKnobRoofCannon.setaControlPanel(bControlPanel);
 
-            for (int i = 0; i < bSwitch.length; i++){
-                bSwitch[i].setaControlPanel(bControlPanel);
+            for (Switch aSwitch : bSwitch) {
+                aSwitch.setaControlPanel(bControlPanel);
             }
 
             for (int i = 0; i < 4; i++){

@@ -15,7 +15,6 @@ public class Switch {
 
     /**
      * Sets the reference to the controlPanel the switch belongs to
-     * @param bControlPanel
      */
     public void setaControlPanel(ControlPanel bControlPanel) {
     }

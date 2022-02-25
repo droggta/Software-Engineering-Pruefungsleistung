@@ -70,18 +70,11 @@ public class Driver {
      * @param doorIndex 0 = left door   1 = right door
      */
     public void useDoorButton(Position position, int doorIndex) {
-        int iPosition;
-        switch (position) {
-            case indoor:
-                iPosition = 0;
-                break;
-            case outdoor:
-                iPosition = 1;
-                break;
-            default:
-                iPosition = 0;
-                break;
-        }
+        int iPosition = switch (position) {
+            case indoor -> 0;
+            case outdoor -> 1;
+            default -> 0;
+        };
         aDoorButtons[doorIndex][iPosition].pushButton();
     }
 

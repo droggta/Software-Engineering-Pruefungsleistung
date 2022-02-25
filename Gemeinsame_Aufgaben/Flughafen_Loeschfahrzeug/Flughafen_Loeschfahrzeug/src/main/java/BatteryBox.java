@@ -11,15 +11,15 @@ public class BatteryBox {
 
     public void load(int unit) {
         unit = (int) Math.floor(unit / aBattery.length);
-        for(int i = 0; i < aBattery.length; i++){
-            aBattery[i].fillVolume(unit);
+        for (Battery battery : aBattery) {
+            battery.fillVolume(unit);
         }
     }
 
     public void takeOut(int unit) {
         unit = (int) Math.floor(unit / aBattery.length);
-        for(int i = 0; i < aBattery.length; i++){
-            aBattery[i].consumeVolume(unit);
+        for (Battery battery : aBattery) {
+            battery.consumeVolume(unit);
         }
     }
 

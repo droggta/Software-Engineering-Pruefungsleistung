@@ -2,7 +2,6 @@ public class JoystickFrontCannon extends Joystick{
 
     /**
      * Creates a JoystickFrontCannon. This Joystick ist used by the driver of the FLF
-     * @param c
      */
     public JoystickFrontCannon(CentralUnit c) {
         super(c);
@@ -16,20 +15,16 @@ public class JoystickFrontCannon extends Joystick{
     public void pushPressButton(Position aPosition) {
 
         switch (aPosition) {
-            case left:      //left button is used for activating and deactivating
+            case left ->      //left button is used for activating and deactivating
                     aCentralUnit.activateFrontCannon();
-                    break;
-
-            case right:     //right button is used for adjusting the mixture
+            case right ->     //right button is used for adjusting the mixture
                     aCentralUnit.adjustMixture(this);
-                    break;
         }
 
     }
 
     /**
      * Returns the current FoamRate the MixingUnit is set to
-     * @return
      */
     public FoamRate getcurrentFoamRate(){
         return aCentralUnit.getcurrentFoamRate();

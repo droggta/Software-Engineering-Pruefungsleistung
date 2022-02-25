@@ -5,18 +5,15 @@ import java.util.Base64;
 
 public class IdCard {
 
-    private RfidChip aRfidChip;
-    private String aOwner;
-    private Cipher encryptCipher;
+    private final RfidChip aRfidChip;
 
     /**
      * Creates a new IdCard and encrypts the code
      * @param code whole code with FLF number plate identifier
      */
     public IdCard(String code, String owner, SecretKey key) throws Exception{
-        aOwner = owner;
         aRfidChip = new RfidChip();
-        encryptCipher = Cipher.getInstance("DES");
+        Cipher encryptCipher = Cipher.getInstance("DES");
         encryptCipher.init(Cipher.ENCRYPT_MODE, key);
         byte[] utf8 = code.getBytes(StandardCharsets.UTF_8);
         byte[] enc = encryptCipher.doFinal(utf8);

@@ -1,6 +1,5 @@
 public class ControlPanel {
 
-    private Switch[] aSwitch;
     private KnobFrontCannon aKnobFrontCannon;
     private KnobRoofCannon aKnobRoofCannon;
     private CentralUnit aCentralUnit;
@@ -18,7 +17,6 @@ public class ControlPanel {
     }
 
     public void setaSwitch(Switch[] aSwitch) {
-        this.aSwitch = aSwitch;
     }
 
 
@@ -29,7 +27,6 @@ public class ControlPanel {
 
     /**
      * returns current CannonStep being set by the KnobFrontCannon
-     * @return
      */
     public CannonSteps getFrontCannonStep() {
         return aKnobFrontCannon.getaCannonStep();

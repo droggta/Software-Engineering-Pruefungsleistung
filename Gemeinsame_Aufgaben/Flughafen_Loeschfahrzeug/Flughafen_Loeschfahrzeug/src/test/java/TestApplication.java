@@ -1,16 +1,10 @@
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestApplication {
-    // TODO: Superklassen und Enums raus nehmen
     private FLF aFLF;
-    private FLF.Builder aBuilder;
 
     // Klassen mit Verbindung zum FLF
     private PowerUnit aPowerUnit;
@@ -31,10 +25,10 @@ public class TestApplication {
     private BreakPedal aBreakPedal;
     private ControlPanel aControlPanel;
     private DirectionIndicator[] aDirectionIndicator;
-    private Display aDisplay;
     private DoorButton[] aDoorButton;
     private Doors[] aDoors;
     private Driver aDriver;
+    private Display aDisplay;
     private ElectricMotor[] aElectricMotor;
     private EnergyDisplay aEnergyDisplay;
     private FoamTank aFoamTank;
@@ -63,27 +57,13 @@ public class TestApplication {
     private WarningLight[] aWarningLight;
     private WaterTank aWaterTank;
     private Wheel[] aWheel;
-    /*Enumerations
-    private BatteryManagement aBatteryManagement;
-    private BatteryStatus aBatteryStatus;
-    private CannonModes aCannonModes;
-    private CannonSteps aCannonSteps;
-    private DoorStatus aDoorStatus;
-    private FoamRate aFoamRate;
-    private LEDColor aLEDColor;
-    private LightSize aLightSize;
-    private LightStatus aLightStatus;
-    private Position aPosition;
-    private SwitchStatus aSwitchStatus;
-    private SwitchType aSwitchType;
-    private TankSubstance aTankSubstance;*/
     //Komplexaufgaben
     private ReceiverModule[] aReceivverModule;
 
     @BeforeEach
     public void init() {
         aFLF = FLF.init(false);
-        aBuilder = aFLF.getaBuilder();
+        FLF.Builder aBuilder = aFLF.getaBuilder();
         aFLF.setaBuilder(null);
         aPowerUnit = aBuilder.bPowerUnit;
         aGroundSprayNoozle = aBuilder.bGroundSprayNoozle;
@@ -134,20 +114,6 @@ public class TestApplication {
         aWarningLight = aBuilder.bWarningLights;
         aWaterTank = aBuilder.bWaterTank;
         aWheel = aBuilder.bWheel;
-        /*Enumerations
-        aBatteryManagement = aBuilder.bBatteryManagement;
-        aBatteryStatus = aBuilder.bBatteryStatus;
-        aCannonModes = aBuilder.bCannonModes;
-        aCannonSteps = aBuilder.bCannonSteps;
-        aDoorStatus = aBuilder.bDoorStatus;
-        aFoamRate = aBuilder.bFoamRate;
-        aLEDColor = aBuilder.bLEDColor;
-        aLightSize = aBuilder.bLightSize;
-        aLightStatus = aBuilder.bLightStatus;
-        aPosition = aBuilder.bPosition;
-        aSwitchStatus = aBuilder.bSwitchStatus;
-        aSwitchType = aBuilder.bSwitchType;
-        aTankSubstance = aBuilder.bTankSubstance;*/
         //Komplexaufgaben
         aReceivverModule = aBuilder.bReceiverModule;
     }
@@ -156,31 +122,23 @@ public class TestApplication {
     @Order(1)
     @DisplayName("buildComplete")
     public void sum() {
-        //int result = calculator.sum(3, 4);
         assertNotNull(aBackPivot);
         assertNotNull(aBattery);
         assertNotNull(aBatteryBox);
-        //assertNotNull(aBatteryManagement);
-        //assertNotNull(aBatteryStatus);
         assertNotNull(aBlueLight);
         assertNotNull(aBreakDisc);
         assertNotNull(aBreakingLight);
         assertNotNull(aBreakPedal);
         assertNotNull(aCabine);
-        //assertNotNull(aCannonModes);
-        //assertNotNull(aCannonSteps);
         assertNotNull(aCentralUnit);
         assertNotNull(aControlPanel);
         assertNotNull(aDirectionIndicator);
-        //assertNotNull(aDisplay);
         assertNotNull(aDoorButton);
         assertNotNull(aDoors);
-        //assertNotNull(aDoorStatus);
         assertNotNull(aDriver);
         assertNotNull(aElectricMotor);
         assertNotNull(aEnergyDisplay);
         assertNotNull(aFLF);
-        //assertNotNull(aFoamRate);
         assertNotNull(aFoamTank);
         assertNotNull(aFrontCannon);
         assertNotNull(aFrontPivot);
@@ -188,22 +146,15 @@ public class TestApplication {
         assertNotNull(aGasPedal);
         assertNotNull(aGroundSprayNoozle);
         assertNotNull(aHeadLamp);
-        //assertNotNull(aJoystick);
         assertNotNull(aJoystickFrontCannon);
         assertNotNull(aJoystickRoofCannon);
         assertNotNull(aKeyButton);
         assertNotNull(aKnobFrontCannon);
         assertNotNull(aKnobRoofCannon);
         assertNotNull(aLED);
-        //assertNotNull(aLEDColor);
-        //assertNotNull(aLights);
-        //assertNotNull(aLightSize);
-        //assertNotNull(aLightStatus);
         assertNotNull(aMixingUnit);
         assertNotNull(aOperator);
         assertNotNull(aPieceSegment);
-        //assertNotNull(aPivot);
-        //assertNotNull(aPosition);
         assertNotNull(aPowerUnit);
         assertNotNull(aPressButton);
         assertNotNull(aRoofCannon);
@@ -213,10 +164,6 @@ public class TestApplication {
         assertNotNull(aSpeedDisplay);
         assertNotNull(aSterringWheel);
         assertNotNull(aSwitch);
-        //assertNotNull(aSwitchStatus);
-        //assertNotNull(aSwitchType);
-        //assertNotNull(aTank);
-        //assertNotNull(aTankSubstance);
         assertNotNull(aWarningLight);
         assertNotNull(aWaterTank);
         assertNotNull(aWheel);
@@ -230,38 +177,38 @@ public class TestApplication {
         //Driver does not use the control panel so nothing happens. Operator is responsible for the control panel. Although behaviour of controlPanel is tested
         if(aElectricMotor[0].getaMotorStatus() == MotorStatus.off){
             aControlPanel.useSwitch(SwitchType.electricEngines, SwitchStatus.on);           //if motors are off turn them on by using the switch
-            for(int i = 0; i < aElectricMotor.length; i++){
-                assertEquals(MotorStatus.on, aElectricMotor[i].getaMotorStatus());
+            for (ElectricMotor electricMotor : aElectricMotor) {
+                assertEquals(MotorStatus.on, electricMotor.getaMotorStatus());
             }
         }
         else{
             aControlPanel.useSwitch(SwitchType.electricEngines, SwitchStatus.off);
-            for(int i = 0; i < aElectricMotor.length; i++){
-                assertEquals(MotorStatus.off, aElectricMotor[i].getaMotorStatus());
+            for (ElectricMotor electricMotor : aElectricMotor) {
+                assertEquals(MotorStatus.off, electricMotor.getaMotorStatus());
             }
         }
         if(aWarningLight[0].getaLightStatus() == LightStatus.off){
             aControlPanel.useSwitch(SwitchType.warningLight, SwitchStatus.on);              //if warninglights are off turn them on by using the switch
-            for(int i = 0; i < aWarningLight.length; i++){
-                assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());
+            for (WarningLight warningLight : aWarningLight) {
+                assertEquals(LightStatus.on, warningLight.getaLightStatus());
             }
         }
         else{
             aControlPanel.useSwitch(SwitchType.warningLight, SwitchStatus.off);
-            for(int i = 0; i < aWarningLight.length; i++){
-                assertEquals(LightStatus.off, aWarningLight[i].getaLightStatus());
+            for (WarningLight warningLight : aWarningLight) {
+                assertEquals(LightStatus.off, warningLight.getaLightStatus());
             }
         }
         if(aBlueLight[0].getaLightStatus() == LightStatus.off){
             aControlPanel.useSwitch(SwitchType.blueLight, SwitchStatus.on);              //if bluelights are off turn them on by using the switch
-            for(int i = 0; i < aBlueLight.length; i++){
-                assertEquals(LightStatus.on, aBlueLight[i].getaLightStatus());
+            for (BlueLight blueLight : aBlueLight) {
+                assertEquals(LightStatus.on, blueLight.getaLightStatus());
             }
         }
         else{
             aControlPanel.useSwitch(SwitchType.blueLight, SwitchStatus.off);
-            for(int i = 0; i < aBlueLight.length; i++){
-                assertEquals(LightStatus.off, aBlueLight[i].getaLightStatus());
+            for (BlueLight blueLight : aBlueLight) {
+                assertEquals(LightStatus.off, blueLight.getaLightStatus());
             }
         }
         if(aHeadLamp[0].getaLightStatus() == LightStatus.off){
@@ -309,12 +256,11 @@ public class TestApplication {
         assertEquals(MotorStatus.off, aElectricMotor[0].getaMotorStatus());       //check if electric motors are turned off
         assertEquals(MotorStatus.off, aElectricMotor[1].getaMotorStatus());
         for(int i = 0; i < 4; i++){
-            assertEquals(null,aSeats[i].getPerson());                       //Check if all seats are free
+            assertNull(aSeats[i].getPerson());                       //Check if all seats are free
         }
-        for (int i = 0; i < aDoors.length; i++)
-        {
-            if (aDoors[i].getaDoorStatus() == DoorStatus.closed){
-                aDoors[i].changeDoorstatus();
+        for (Doors aDoor : aDoors) {
+            if (aDoor.getaDoorStatus() == DoorStatus.closed) {
+                aDoor.changeDoorstatus();
             }
         }
         assertEquals(DoorStatus.open, aDoors[0].getaDoorStatus());                //check if doors are open
@@ -325,18 +271,18 @@ public class TestApplication {
         assertEquals(90, aRoofCannon.getaSegment2().getAngle());
         assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
         //check Headlamp. FLF has in total 10 headlamps => Array(3 headlamps on each side and 4 on the roof)
-        for(int i=0; i < aHeadLamp.length; i++){
-            assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus());            //check HeadLights
+        for (HeadLamp headLamp : aHeadLamp) {
+            assertEquals(LightStatus.off, headLamp.getaLightStatus());            //check HeadLights
         }
-        for(int i=0; i < aDirectionIndicator.length; i++){
-            assertEquals(LightStatus.off, aDirectionIndicator[i].getaLightStatus());            //check DirectionIndicatorlights
+        for (DirectionIndicator directionIndicator : aDirectionIndicator) {
+            assertEquals(LightStatus.off, directionIndicator.getaLightStatus());            //check DirectionIndicatorlights
         }
         //assertEquals(LightStatus.off, aWarningLight[].getaLightStatus());                     //Check if Warninglight is off
         //assertEquals(LightStatus.off, aBlueLight[].getaLightStatus());                     //Check if BlueLight is off
         assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                            //check if watertank is 100% full
         assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());                            //check if foamtank is 100% full
-        for(int i=0; i < aBattery.length; i++){
-            assertEquals(100000, aBattery[i].getaSoC());                      //Check if Batteries are 100% full (SoC=State of Charge)
+        for (Battery battery : aBattery) {
+            assertEquals(100000, battery.getaSoC());                      //Check if Batteries are 100% full (SoC=State of Charge)
         }
         assertEquals(CannonSteps.fuenfhundert, aKnobFrontCannon.getaCannonStep());             //Check Knob for FrontCannon
         assertEquals(CannonModes.modeA, aKnobRoofCannon.getaCannonMode());       //Check Knob for RoofCannon
@@ -364,37 +310,37 @@ public class TestApplication {
         assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
         // TODO: Was sind die Seitenlampen?
         // Dachscheinwerfer
-        for(int i = 0; i < aHeadLamp.length; i++) {
-            if(aHeadLamp[i].getaPosition() == Position.frontRoof) {
-                aHeadLamp[i].setaLightStatus(LightStatus.off);
-                assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus());
+        for (HeadLamp lamp : aHeadLamp) {
+            if (lamp.getaPosition() == Position.frontRoof) {
+                lamp.setaLightStatus(LightStatus.off);
+                assertEquals(LightStatus.off, lamp.getaLightStatus());
             }
         }
         //Seitenlampen sind hier Fahrtrichtungsanzeiger & Bremslicht
-        for(int i = 0; i < aBreakingLight.length; i++){
-            aBreakingLight[i].setaLightStatus(LightStatus.off);
-            assertEquals(LightStatus.off, aBreakingLight[i].getaLightStatus());
+        for (BreakingLight breakingLight : aBreakingLight) {
+            breakingLight.setaLightStatus(LightStatus.off);
+            assertEquals(LightStatus.off, breakingLight.getaLightStatus());
         }
-        for(int i = 0; i < aDirectionIndicator.length; i++){
-            aDirectionIndicator[i].setaLightStatus(LightStatus.off);
-            assertEquals(LightStatus.off, aDirectionIndicator[i].getaLightStatus());
+        for (DirectionIndicator directionIndicator : aDirectionIndicator) {
+            directionIndicator.setaLightStatus(LightStatus.off);
+            assertEquals(LightStatus.off, directionIndicator.getaLightStatus());
         }
         // Frontscheinwerfer
-        for(int i = 0; i < aHeadLamp.length; i++){
-            if(aHeadLamp[i].getaPosition() != Position.frontRoof) {
-                aHeadLamp[i].setaLightStatus(LightStatus.on);
-                assertEquals(LightStatus.on, aHeadLamp[i].getaLightStatus());
+        for (HeadLamp headLamp : aHeadLamp) {
+            if (headLamp.getaPosition() != Position.frontRoof) {
+                headLamp.setaLightStatus(LightStatus.on);
+                assertEquals(LightStatus.on, headLamp.getaLightStatus());
             }
         }
         // Warnlicht
-        for(int i = 0; i < aWarningLight.length; i++){                                      //Check if warning light is turned on
-            aWarningLight[i].setaLightStatus(LightStatus.on);
-            assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());
+        for (WarningLight warningLight : aWarningLight) {                                      //Check if warning light is turned on
+            warningLight.setaLightStatus(LightStatus.on);
+            assertEquals(LightStatus.on, warningLight.getaLightStatus());
         }
         // Blaulicht
-        for(int i = 0 ; i < aBlueLight.length; i++){                                        //Check if Bluelight is turned off
-            aBlueLight[i].setaLightStatus(LightStatus.off);
-            assertEquals(LightStatus.off, aBlueLight[i].getaLightStatus());
+        for (BlueLight blueLight : aBlueLight) {                                        //Check if Bluelight is turned off
+            blueLight.setaLightStatus(LightStatus.off);
+            assertEquals(LightStatus.off, blueLight.getaLightStatus());
         }
         assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full
         assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());                    //Check if foam tank is 100% full
@@ -468,35 +414,35 @@ public class TestApplication {
         assertEquals(CannonStatus.deactivated, aFrontCannon.getaCannonStatus());
         // TODO: Was sind die Seitenlampen?
         // Dachscheinwerfer
-        for(int i = 0; i < aHeadLamp.length; i++) {
-            if(aHeadLamp[i].getaPosition() == Position.frontRoof) {
-                aHeadLamp[i].setaLightStatus(LightStatus.on);
-                assertEquals(LightStatus.on, aHeadLamp[i].getaLightStatus());
+        for (HeadLamp lamp : aHeadLamp) {
+            if (lamp.getaPosition() == Position.frontRoof) {
+                lamp.setaLightStatus(LightStatus.on);
+                assertEquals(LightStatus.on, lamp.getaLightStatus());
             }
         }
         //Seitenlampen sind hier Fahrtrichtungsanzeiger & Bremslicht
-        for(int i = 0; i < aBreakingLight.length; i++){
-            assertEquals(LightStatus.off, aBreakingLight[i].getaLightStatus());
+        for (BreakingLight breakingLight : aBreakingLight) {
+            assertEquals(LightStatus.off, breakingLight.getaLightStatus());
         }
-        for(int i = 0; i < aDirectionIndicator.length; i++){
-            assertEquals(LightStatus.off, aDirectionIndicator[i].getaLightStatus());
+        for (DirectionIndicator directionIndicator : aDirectionIndicator) {
+            assertEquals(LightStatus.off, directionIndicator.getaLightStatus());
         }
         // Frontscheinwerfer
-        for(int i = 0; i < aHeadLamp.length; i++){
-            if(aHeadLamp[i].getaPosition() != Position.frontRoof) {
-                aHeadLamp[i].setaLightStatus(LightStatus.on);
-                assertEquals(LightStatus.on, aHeadLamp[i].getaLightStatus());
+        for (HeadLamp headLamp : aHeadLamp) {
+            if (headLamp.getaPosition() != Position.frontRoof) {
+                headLamp.setaLightStatus(LightStatus.on);
+                assertEquals(LightStatus.on, headLamp.getaLightStatus());
             }
         }
         // Warnlicht
-        for(int i = 0; i < aWarningLight.length; i++){                                      //Check if warning light is turned on
-            aWarningLight[i].setaLightStatus(LightStatus.on);
-            assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());
+        for (WarningLight warningLight : aWarningLight) {                                      //Check if warning light is turned on
+            warningLight.setaLightStatus(LightStatus.on);
+            assertEquals(LightStatus.on, warningLight.getaLightStatus());
         }
         // Blaulicht
-        for(int i = 0 ; i < aBlueLight.length; i++){                                        //Check if Bluelight is turned off
-            aBlueLight[i].setaLightStatus(LightStatus.on);
-            assertEquals(LightStatus.on, aBlueLight[i].getaLightStatus());
+        for (BlueLight blueLight : aBlueLight) {                                        //Check if Bluelight is turned off
+            blueLight.setaLightStatus(LightStatus.on);
+            assertEquals(LightStatus.on, blueLight.getaLightStatus());
         }
 
         assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full
@@ -538,45 +484,45 @@ public class TestApplication {
 
         // TODO: Was sind die Seitenlampen?
         // Dachscheinwerfer
-        for(int i = 0; i < aHeadLamp.length; i++) {
-            if(aHeadLamp[i].getaPosition() == Position.frontRoof) {
-                aHeadLamp[i].setaLightStatus(LightStatus.on);
-                assertEquals(LightStatus.on, aHeadLamp[i].getaLightStatus());
+        for (HeadLamp lamp : aHeadLamp) {
+            if (lamp.getaPosition() == Position.frontRoof) {
+                lamp.setaLightStatus(LightStatus.on);
+                assertEquals(LightStatus.on, lamp.getaLightStatus());
             }
         }
         //Seitenlampen sind hier Fahrtrichtungsanzeiger & Bremslicht
-        for(int i = 0; i < aBreakingLight.length; i++){
-            aBreakingLight[i].setaLightStatus(LightStatus.on);
-            assertEquals(LightStatus.on, aBreakingLight[i].getaLightStatus());
+        for (BreakingLight breakingLight : aBreakingLight) {
+            breakingLight.setaLightStatus(LightStatus.on);
+            assertEquals(LightStatus.on, breakingLight.getaLightStatus());
         }
-        for(int i = 0; i < aDirectionIndicator.length; i++){
-            aDirectionIndicator[i].setaLightStatus(LightStatus.on);
-            assertEquals(LightStatus.on, aDirectionIndicator[i].getaLightStatus());
+        for (DirectionIndicator directionIndicator : aDirectionIndicator) {
+            directionIndicator.setaLightStatus(LightStatus.on);
+            assertEquals(LightStatus.on, directionIndicator.getaLightStatus());
         }
         // Frontscheinwerfer
-        for(int i = 0; i < aHeadLamp.length; i++){
-            if(aHeadLamp[i].getaPosition() != Position.frontRoof) {
-                aHeadLamp[i].setaLightStatus(LightStatus.on);
-                assertEquals(LightStatus.on, aHeadLamp[i].getaLightStatus());
+        for (HeadLamp headLamp : aHeadLamp) {
+            if (headLamp.getaPosition() != Position.frontRoof) {
+                headLamp.setaLightStatus(LightStatus.on);
+                assertEquals(LightStatus.on, headLamp.getaLightStatus());
             }
         }
         // Warnlicht
-        for(int i = 0; i < aWarningLight.length; i++){                                      //Check if warning light is turned on
-            aWarningLight[i].setaLightStatus(LightStatus.on);
-            assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());
+        for (WarningLight warningLight : aWarningLight) {                                      //Check if warning light is turned on
+            warningLight.setaLightStatus(LightStatus.on);
+            assertEquals(LightStatus.on, warningLight.getaLightStatus());
         }
         // Blaulicht
-        for(int i = 0 ; i < aBlueLight.length; i++){                                        //Check if Bluelight is turned off
-            aBlueLight[i].setaLightStatus(LightStatus.on);
-            assertEquals(LightStatus.on, aBlueLight[i].getaLightStatus());
+        for (BlueLight blueLight : aBlueLight) {                                        //Check if Bluelight is turned off
+            blueLight.setaLightStatus(LightStatus.on);
+            assertEquals(LightStatus.on, blueLight.getaLightStatus());
         }
         // TODO: Ist Tank initial bei 100%?
         assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full
         assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());                    //Check if foam tank is 100% full
 
         int startVolumeWater = aWaterTank.getVolume();
-        //aFLF.activateGroundSprayNozzles();
-        //TODO: assertEquals(startVolumeWater-(100* aGroundSprayNoozle.length), aWaterTank.getVolume()); //Check if Waterconsumption from GroundNozzles is correct
+        aFLF.activateGroundSprayNozzles();
+        assertEquals(startVolumeWater-(100* aGroundSprayNoozle.length), aWaterTank.getVolume()); //Check if Waterconsumption from GroundNozzles is correct
 
         if(aFrontCannon.getaCannonStatus() != CannonStatus.activated) {         //Check if frontcannon ist activated
             aDriver.useJoystickPressButton(Position.left);                      //if not press button in order to activate
@@ -607,7 +553,7 @@ public class TestApplication {
             }
         }
         if (aMixingUnit.getaFoamRate() != FoamRate.drei) {
-            assertTrue(false); //error: changing the foamRate seems not to work!
+            fail(); //error: changing the foamRate seems not to work!
         }
         assertEquals(FoamRate.drei, aMixingUnit.getaFoamRate());               //check if foamRate is successfully set to 5%
         assertEquals(90, aRoofCannon.getaSegment1().getAngle());        //check if angle of segment1 is 90degreee
@@ -632,24 +578,24 @@ public class TestApplication {
         aSeats[1].setaPerson(aOperator);
         assertEquals("Driver", aSeats[0].getPerson());                  //Check if the Driver sits on seat 0
         assertEquals("Operator", aSeats[1].getPerson());                //Check if the Operator sits on seat 1
-        for (int i = 0; i < aDoors.length; i++){
-            aDoors[i].setaDoorStatus(DoorStatus.closed);
-            assertEquals(DoorStatus.closed, aDoors[i].getaDoorStatus());        //Check if all doors are closed
+        for (Doors aDoor : aDoors) {
+            aDoor.setaDoorStatus(DoorStatus.closed);
+            assertEquals(DoorStatus.closed, aDoor.getaDoorStatus());        //Check if all doors are closed
         }
-        for(int i=0; i < aHeadLamp.length; i++){                                //check Headlamp. FLF has in total 10 headlamps => Array(3 headlamps on each side and 4 on the roof)
-            aHeadLamp[i].setaLightStatus(LightStatus.off);
-            assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus());      //check headlights(roof and side)
+        for (HeadLamp headLamp : aHeadLamp) {                                //check Headlamp. FLF has in total 10 headlamps => Array(3 headlamps on each side and 4 on the roof)
+            headLamp.setaLightStatus(LightStatus.off);
+            assertEquals(LightStatus.off, headLamp.getaLightStatus());      //check headlights(roof and side)
         }
-        for(int i = 0; i < aWarningLight.length; i++) {
-            aWarningLight[i].setaLightStatus(LightStatus.on);
-            assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());   //Check if Warninglight is on
+        for (WarningLight warningLight : aWarningLight) {
+            warningLight.setaLightStatus(LightStatus.on);
+            assertEquals(LightStatus.on, warningLight.getaLightStatus());   //Check if Warninglight is on
         }
-        for(int i = 0; i < aBlueLight.length; i++) {
-            aBlueLight[i].setaLightStatus(LightStatus.on);
-            assertEquals(LightStatus.on, aBlueLight[i].getaLightStatus());      //Check if BlueLight is on
+        for (BlueLight blueLight : aBlueLight) {
+            blueLight.setaLightStatus(LightStatus.on);
+            assertEquals(LightStatus.on, blueLight.getaLightStatus());      //Check if BlueLight is on
         }
-        //Todo: assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());      //Check if water tank is 100% full
-        //Todo: assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());        //Check if foam tank is 100% full
+        assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());      //Check if water tank is 100% full
+        assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());        //Check if foam tank is 100% full
         if(aFrontCannon.getaCannonStatus() != CannonStatus.activated) {         //Check if frontcannon ist activated
             aDriver.useJoystickPressButton(Position.left);                      //if not press button in order to activate
         }
@@ -661,7 +607,7 @@ public class TestApplication {
         {
             aDriver.useJoystickPressButton(Position.right);                     //...repeat pressing the Button unit FoamRate is set to 10%
             if(p>5){
-                assertTrue(false);                                      //error: changing the foamRate seems not to work!
+                fail();                                      //error: changing the foamRate seems not to work!
             }
         }
         assertEquals(CannonSteps.dreitausendfuenfhundert, aKnobFrontCannon.getaCannonStep());   //Check if volume is successfully set to 3500units
@@ -682,7 +628,7 @@ public class TestApplication {
         while(aMixingUnit.getaFoamRate() != FoamRate.fuenf){                    //check if foamrate is 5%
             aOperator.useJoystickPressButton(Position.right);                   //if not press button in order to change foamRate
             if(p>5){
-                assertTrue(false);                                      //error: changing the foamRate seems not to work!
+                fail();                                      //error: changing the foamRate seems not to work!
             }
         }
         assertEquals(FoamRate.fuenf, aMixingUnit.getaFoamRate());               //check if foamRate is successfully set to 5%
@@ -697,7 +643,7 @@ public class TestApplication {
         {
             aDriver.useJoystickPressButton(Position.right);                     //...repeat pressing the Button unit FoamRate is set to 10%
             if(p>5){
-                assertTrue(false);                                      //error: changing the foamRate seems not to work!
+                fail();                                      //error: changing the foamRate seems not to work!
             }
         }
         assertEquals(CannonSteps.tausend, aKnobFrontCannon.getaCannonStep());   //Check if volume is successfully set to 3500units
@@ -724,17 +670,17 @@ public class TestApplication {
         aRoofCannon.setaCannonStatus(CannonStatus.activated);
         assertEquals(CannonStatus.activated, aRoofCannon.getaCannonStatus());   //Check if rootcannon is activated
         //check Headlamp. FLF has in total 10 headlamps => Array(3 headlamps on each side and 4 on the roof)
-        for(int i=0; i < aHeadLamp.length; i++){
-            aHeadLamp[i].setaLightStatus(LightStatus.off);
-            assertEquals(LightStatus.off, aHeadLamp[i].getaLightStatus());            //check headlights(roof and side)
+        for (HeadLamp headLamp : aHeadLamp) {
+            headLamp.setaLightStatus(LightStatus.off);
+            assertEquals(LightStatus.off, headLamp.getaLightStatus());            //check headlights(roof and side)
         }
-        for(int i = 0; i < aWarningLight.length; i++) {
-            aWarningLight[i].setaLightStatus(LightStatus.on);
-            assertEquals(LightStatus.on, aWarningLight[i].getaLightStatus());              //check if warninglight is on
+        for (WarningLight warningLight : aWarningLight) {
+            warningLight.setaLightStatus(LightStatus.on);
+            assertEquals(LightStatus.on, warningLight.getaLightStatus());              //check if warninglight is on
         }
-        for(int i = 0; i < aBlueLight.length; i++) {
-            aBlueLight[i].setaLightStatus(LightStatus.on);
-            assertEquals(LightStatus.on, aBlueLight[i].getaLightStatus());                 //check if bluelight is on
+        for (BlueLight blueLight : aBlueLight) {
+            blueLight.setaLightStatus(LightStatus.on);
+            assertEquals(LightStatus.on, blueLight.getaLightStatus());                 //check if bluelight is on
         }
         assertEquals(new WaterTank().getVolume(), aWaterTank.getVolume());                  //Check if water tank is 100% full
         assertEquals(new FoamTank().getVolume(), aFoamTank.getVolume());                    //Check if foam tank is 100% full
@@ -748,7 +694,7 @@ public class TestApplication {
             aJoystickFrontCannon.pushPressButton(Position.right);                       //as long as foamRate!=10 press right button
             p++;
             if(p>5){
-                assertTrue(false);                                              //error: changing the foamRate doesn't work as it should!
+                fail();                                              //error: changing the foamRate doesn't work as it should!
             }
         }
         for(int i=0; i<5; i++){
@@ -765,7 +711,7 @@ public class TestApplication {
             aJoystickFrontCannon.pushPressButton(Position.right);                       //as long as foamRate!=10 press right button
             p++;
             if(p>5){
-                assertTrue(false);                                              //error: changing the foamRate doesn't work as it should!
+                fail();                                              //error: changing the foamRate doesn't work as it should!
             }
         }
         for(int i=0; i<5; i++){
@@ -777,7 +723,7 @@ public class TestApplication {
             aJoystickFrontCannon.pushPressButton(Position.right);                       //as long as foamRate!=10 press right button
             p++;
             if(p>5){
-                assertTrue(false);                                              //error: changing the foamRate doesn't work as it should!
+                fail();                                              //error: changing the foamRate doesn't work as it should!
             }
         }
         for(int i=0; i<5; i++){
@@ -789,7 +735,7 @@ public class TestApplication {
             aJoystickFrontCannon.pushPressButton(Position.right);                       //as long as foamRate!=3 press right button
             p++;
             if(p>5){
-                assertTrue(false);                                              //error: changing the foamRate doesn't work as it should!
+                fail();                                              //error: changing the foamRate doesn't work as it should!
             }
         }
         for(int i=0; i<5; i++){
@@ -886,8 +832,8 @@ public class TestApplication {
      * @param tempMix current foamrate
      */
     private void behaviorJoystickFaomRate(int tempMix, Joystick joystick) {
-        switch (tempMix){
-            case 0:
+        switch (tempMix) {
+            case 0 -> {
                 joystick.pushPressButton(Position.right);
                 assertEquals(3, aMixingUnit.getaFoamRateAsInt());
                 joystick.pushPressButton(Position.right);
@@ -896,8 +842,8 @@ public class TestApplication {
                 assertEquals(10, aMixingUnit.getaFoamRateAsInt());
                 joystick.pushPressButton(Position.right);
                 assertEquals(0, aMixingUnit.getaFoamRateAsInt());
-                break;
-            case 3:
+            }
+            case 3 -> {
                 joystick.pushPressButton(Position.right);
                 assertEquals(5, aMixingUnit.getaFoamRateAsInt());
                 joystick.pushPressButton(Position.right);
@@ -906,8 +852,8 @@ public class TestApplication {
                 assertEquals(0, aMixingUnit.getaFoamRateAsInt());
                 joystick.pushPressButton(Position.right);
                 assertEquals(3, aMixingUnit.getaFoamRateAsInt());
-                break;
-            case 5:
+            }
+            case 5 -> {
                 joystick.pushPressButton(Position.right);
                 assertEquals(10, aMixingUnit.getaFoamRateAsInt());
                 joystick.pushPressButton(Position.right);
@@ -916,8 +862,8 @@ public class TestApplication {
                 assertEquals(3, aMixingUnit.getaFoamRateAsInt());
                 joystick.pushPressButton(Position.right);
                 assertEquals(5, aMixingUnit.getaFoamRateAsInt());
-                break;
-            case 10:
+            }
+            case 10 -> {
                 joystick.pushPressButton(Position.right);
                 assertEquals(0, aMixingUnit.getaFoamRateAsInt());
                 joystick.pushPressButton(Position.right);
@@ -926,7 +872,7 @@ public class TestApplication {
                 assertEquals(5, aMixingUnit.getaFoamRateAsInt());
                 joystick.pushPressButton(Position.right);
                 assertEquals(10, aMixingUnit.getaFoamRateAsInt());
-                break;
+            }
         }
 
     }

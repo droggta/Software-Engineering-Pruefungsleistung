@@ -8,5 +8,5 @@ public abstract class Display {
      */
     public void setValue(int pValue){
         displayedValue = pValue;
-    };
+    }
 }

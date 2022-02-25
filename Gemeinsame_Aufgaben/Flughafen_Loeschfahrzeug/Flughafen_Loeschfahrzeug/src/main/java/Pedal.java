@@ -1,3 +1,3 @@
 public interface Pedal {
-    public void changeSpeedStep();
+    void changeSpeedStep();
 }

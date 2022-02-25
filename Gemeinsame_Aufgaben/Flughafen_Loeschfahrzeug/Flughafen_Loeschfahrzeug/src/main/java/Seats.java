@@ -1,6 +1,5 @@
 public class Seats {
 
-    private GasMask aGasMask;
     private Operator aOperator;
     private Driver aDriver;
 
@@ -13,7 +12,6 @@ public class Seats {
     }
 
     public void setaGasMask(GasMask aGasMask) {
-        this.aGasMask = aGasMask;
     }
 
     public String getPerson(){

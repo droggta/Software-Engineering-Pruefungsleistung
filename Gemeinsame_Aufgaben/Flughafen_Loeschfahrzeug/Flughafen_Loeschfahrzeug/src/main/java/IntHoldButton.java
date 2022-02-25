@@ -1,8 +1,8 @@
 public class IntHoldButton {
 
-    private IntJoystick aJoystick;
+    private final IntJoystick aJoystick;
 
-    public IntHoldButton(IntJoystick pJoystick){aJoystick = pJoystick;};
+    public IntHoldButton(IntJoystick pJoystick){aJoystick = pJoystick;}
 
     public void pressHoldButton(){aJoystick.pushHoldButton();}
 

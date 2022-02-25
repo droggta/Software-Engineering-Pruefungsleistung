@@ -14,20 +14,20 @@ public abstract class Joystick {
 
     }
 
-    public static void setaLeftPressButton(LeftPressButton aLeftPressButton) {
-        aLeftPressButton = aLeftPressButton;
+    public void setaLeftPressButton(LeftPressButton pLeftPressButton) {
+        aLeftPressButton = pLeftPressButton;
     }
 
-    public static void setaRightPressButton(RightPressButton aRightPressButton) {
-        aRightPressButton = aRightPressButton;
+    public void setaRightPressButton(RightPressButton pRightPressButton) {
+        aRightPressButton = pRightPressButton;
     }
 
-    protected static void setaKeyButton(KeyButton aKeyButton) {
-        aKeyButton = aKeyButton;
+    protected void setaKeyButton(KeyButton pKeyButton) {
+        aKeyButton = pKeyButton;
     }
 
-    public static void setaCentralUnit(CentralUnit aCentralUnit) {
-        aCentralUnit = aCentralUnit;
+    public void setaCentralUnit(CentralUnit pCentralUnit) {
+        aCentralUnit = pCentralUnit;
     }
 
     public abstract void pushPressButton(Position aPosition);

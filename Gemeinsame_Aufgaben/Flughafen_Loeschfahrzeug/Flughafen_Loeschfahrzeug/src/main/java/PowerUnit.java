@@ -23,15 +23,15 @@ public class PowerUnit {
             mStatus = MotorStatus.on;
         }
 
-        for(int i = 0; i < aElectricMotor.length; i++){
-            aElectricMotor[i].setaMotorStatus(mStatus);
+        for (ElectricMotor electricMotor : aElectricMotor) {
+            electricMotor.setaMotorStatus(mStatus);
         }
     }
 
     public void provide(int velocity){
         int neededUnits = velocity * 25;            //25untis per 1km/h consumption
-        if(aBatteryManagement.instance.getSoC() >= neededUnits){
-            aBatteryManagement.instance.takeOut(neededUnits);
+        if(BatteryManagement.instance.getSoC() >= neededUnits){
+            BatteryManagement.instance.takeOut(neededUnits);
         }
         else
         {

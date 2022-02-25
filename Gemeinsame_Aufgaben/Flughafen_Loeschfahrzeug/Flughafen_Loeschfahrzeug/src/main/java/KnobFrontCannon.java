@@ -1,9 +1,6 @@
-import javax.naming.ldap.Control;
-
 public class KnobFrontCannon {
 
     private CannonSteps aCannonStep;
-    private ControlPanel aControlPanel;
 
     public KnobFrontCannon() {
         aCannonStep = CannonSteps.fuenfhundert;
@@ -12,36 +9,26 @@ public class KnobFrontCannon {
 
 
     public void setaControlPanel(ControlPanel aControlPanel) {
-        this.aControlPanel = aControlPanel;
     }
 
     /**
      * returns current CannonStep
-     * @return
      */
     public CannonSteps getaCannonStep() {
         return aCannonStep;
     }
 
     public int getaCannonStepAsInt(){
-        switch (aCannonStep){
-            case fuenfhundert:
-                return 500;
-            case tausend:
-                return 1000;
-            case tausendfuenfhundert:
-                return 1500;
-            case zweitausend:
-                return 2000;
-            case zweitausendfuenfhundert:
-                return 2500;
-            case dreitausend:
-                return 3000;
-            case dreitausendfuenfhundert:
-                return 3500;
-            default:
-                return 0;//error
-        }
+        return switch (aCannonStep) {
+            case fuenfhundert -> 500;
+            case tausend -> 1000;
+            case tausendfuenfhundert -> 1500;
+            case zweitausend -> 2000;
+            case zweitausendfuenfhundert -> 2500;
+            case dreitausend -> 3000;
+            case dreitausendfuenfhundert -> 3500;
+            default -> 0;//error
+        };
     }
 
     public void setaCannonStep(CannonSteps step){

@@ -13,12 +13,8 @@ public class Startup {
         while(repeat){
             String input = scanner.nextLine();
 
-            switch (input){
-                case "Ende":
-                    repeat = false;
-                    break;
-                default:
-                    break;
+            if ("Ende".equals(input)) {
+                repeat = false;
             }
         }
 

@@ -2,7 +2,6 @@ public class JoystickRoofCannon extends Joystick{
 
     /**
      * Creates a JoystickFrontCannon. This Joystick ist used by the driver of the FLF
-     * @param c
      */
     public JoystickRoofCannon(CentralUnit c) {
         super(c);
@@ -16,13 +15,10 @@ public class JoystickRoofCannon extends Joystick{
     @Override
     public void pushPressButton(Position aPosition) {
         switch (aPosition) {
-            case left:      //left button is used for activating and deactivating
-                aCentralUnit.activateRoofCannon();
-                break;
-
-            case right:     //right button is used for adjusting the mixture
-                aCentralUnit.adjustMixture(this);
-                break;
+            case left ->      //left button is used for activating and deactivating
+                    aCentralUnit.activateRoofCannon();
+            case right ->     //right button is used for adjusting the mixture
+                    aCentralUnit.adjustMixture(this);
         }
 
     }

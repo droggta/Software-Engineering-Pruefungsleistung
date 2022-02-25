@@ -1,6 +1,5 @@
 public class Operator {
 
-    private ControlPanel aControlPanel;
     private JoystickRoofCannon aJoystickRoofCannon;
     private KnobFrontCannon aKnobFrontCannon;
     private KnobRoofCannon aKnobRoofCannon;
@@ -15,7 +14,6 @@ public class Operator {
     }
 
     public void setaControlPanel(ControlPanel aControlPanel) {
-        this.aControlPanel = aControlPanel;
     }
 
     public void setbDoorButtons(DoorButton[][] bDoorButtons) {
@@ -32,7 +30,6 @@ public class Operator {
 
     /**
      * Operator uses the Knob to change the CannonMode of the RoofCannon
-     * @param cannonMode
      */
     public void useKnobJoystickRoofCannon(CannonModes cannonMode){
         aKnobRoofCannon.setaCannonMode(cannonMode);
@@ -52,18 +49,11 @@ public class Operator {
      * @param doorIndex 0 = left door   1 = right door
      */
     public void useDoorButton(Position position, int doorIndex){
-        int iPosition;
-        switch (position){
-            case indoor:
-                iPosition = 0;
-                break;
-            case outdoor:
-                iPosition = 1;
-                break;
-            default:
-                iPosition = 0;
-                break;
-        }
+        int iPosition = switch (position) {
+            case indoor -> 0;
+            case outdoor -> 1;
+            default -> 0;
+        };
         aDoorButtons[doorIndex][iPosition].pushButton();
     }
 

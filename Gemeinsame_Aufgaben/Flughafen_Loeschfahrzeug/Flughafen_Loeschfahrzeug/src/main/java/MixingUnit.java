@@ -19,7 +19,6 @@ public class MixingUnit {
 
     /**
      * changes to the given FoamRate
-     * @param fRate
      */
     public void adjustFoamRate(FoamRate fRate){
         aFoamRate = fRate;
@@ -29,22 +28,12 @@ public class MixingUnit {
      * Function automatically increases the FoamRate by one step
      */
     public void adjustFoamRate(){
-        switch (aFoamRate){
-            case zero:
-                aFoamRate = FoamRate.drei;
-                break;
-            case drei:
-                aFoamRate = FoamRate.fuenf;
-                break;
-            case fuenf:
-                aFoamRate = FoamRate.zehn;
-                break;
-            case zehn:
-                aFoamRate = FoamRate.zero;
-                break;
-            default:
-                System.out.println("Warning: Problem with adjusting the FoamRate");
-                break;
+        switch (aFoamRate) {
+            case zero -> aFoamRate = FoamRate.drei;
+            case drei -> aFoamRate = FoamRate.fuenf;
+            case fuenf -> aFoamRate = FoamRate.zehn;
+            case zehn -> aFoamRate = FoamRate.zero;
+            default -> System.out.println("Warning: Problem with adjusting the FoamRate");
         }
     }
 
@@ -58,18 +47,13 @@ public class MixingUnit {
      * @return FoamRate in percentage
      */
     public int getaFoamRateAsInt(){
-        switch (aFoamRate){
-            case zero:
-                return 0;
-            case drei:
-                return 3;
-            case fuenf:
-                return 5;
-            case zehn:
-                return 10;
-            default:
-                return -1;
-        }
+        return switch (aFoamRate) {
+            case zero -> 0;
+            case drei -> 3;
+            case fuenf -> 5;
+            case zehn -> 10;
+            default -> -1;
+        };
     }
 
     public void consumeFoam(int foamVolume) {

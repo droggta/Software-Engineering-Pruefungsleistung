@@ -1,14 +1,12 @@
 public class KnobRoofCannon {
 
     private CannonModes aCannonMode;
-    private ControlPanel aControlPanel;
 
     public KnobRoofCannon() {
         aCannonMode = CannonModes.modeA;
     }
 
     public void setaControlPanel(ControlPanel aControlPanel) {
-        this.aControlPanel = aControlPanel;
     }
 
     public CannonModes getaCannonMode() {
@@ -16,16 +14,12 @@ public class KnobRoofCannon {
     }
 
     public int getaCannonModeAsInt(){
-        switch (aCannonMode){
-            case modeA:
-                return 500;
-            case modeB:
-                return 1000;
-            case modeC:
-                return 2500;
-            default:
-                return 0;    //error
-        }
+        return switch (aCannonMode) {
+            case modeA -> 500;
+            case modeB -> 1000;
+            case modeC -> 2500;
+            default -> 0;    //error
+        };
     }
 
     public void setaCannonMode(CannonModes aCannonMode) {
