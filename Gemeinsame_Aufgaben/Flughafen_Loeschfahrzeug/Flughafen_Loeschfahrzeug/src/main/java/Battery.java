@@ -1,6 +1,5 @@
 public class Battery {
 
-    protected boolean aCapacity[][][];
     private int aFillLevel[];        //Field in the array which is filled (true)  [LxHxB]
     private int[] divisor;
     private BatteryStatus aBatteryStatus;
@@ -10,14 +9,7 @@ public class Battery {
         int length = 100;
         int height = 10;
         int width = 100;
-        aCapacity = new boolean[length][height][width];     //100.000 as inital value
-        for(int i=0; i<100; i++){
-            for(int j=0; j<10; j++){
-                for(int k=0; k<100; k++){
-                    aCapacity[i][j][k] = true;                 //true means filled
-                }
-            }
-        }
+
         setaFillLevel(new int[]{length, height, width});        //because tank is initial filled the pointer is set to the highest field
         setaDivisor(new int[]{length, height, width});
     }
@@ -34,22 +26,6 @@ public class Battery {
         divisor = a;
     }
 
-  /*  public int getaSoC() {
-        int calculatedSoC = 0;
-
-        for(int i=0; i<100; i++){
-            for(int j=0; j<10; j++){
-                for(int k=0; k<100; k++){
-                    if(aCapacity[i][j][k]){               //true means filled
-                        calculatedSoC++;
-                    }
-                }
-            }
-        }
-
-        return calculatedSoC;
-    }
-*/
     public int getaSoC(){
         int calculatedSoC = 0;
         calculatedSoC += (aFillLevel[1]-1) * divisor[0] * divisor[2];
@@ -99,11 +75,6 @@ public class Battery {
             aFillLevel[1]-= diffHeight;
             aFillLevel[2]-= diffWidth;
         }
-
-
-
-
-
     }
 
     private int[] checkArea(int tempVolume, int diffLength, int diffHeight, int diffWidth, int forceStep){

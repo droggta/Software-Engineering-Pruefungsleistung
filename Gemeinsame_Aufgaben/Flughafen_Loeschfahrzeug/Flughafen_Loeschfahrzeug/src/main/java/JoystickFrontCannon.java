@@ -21,7 +21,7 @@ public class JoystickFrontCannon extends Joystick{
                     break;
 
             case right:     //right button is used for adjusting the mixture
-                    aCentralUnit.adjustMixture();
+                    aCentralUnit.adjustMixture(this);
                     break;
         }
 

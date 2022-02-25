@@ -110,6 +110,16 @@ public class FLF {
         aMixingUnit.adjustFoamRate();
     }
 
+    public CannonStatus getCannonState(Joystick pJoystick)
+    {
+        if (pJoystick.getClass() == JoystickFrontCannon.class)
+        {
+            return aFrontCannon.getaCannonStatus();
+        } else {
+            return aRoofCannon.getaCannonStatus();
+        }
+    }
+
     /**
      * emits the extinguishing agent
      * @param units units per interation controls how much is emitted

@@ -801,8 +801,10 @@ public class TestApplication {
 
     private void behaviorJoystick2() {
         if(aRoofCannon.getaCannonStatus() == CannonStatus.activated){          //if current JoystickStatus
-            assertEquals(90, aRoofCannon.getaSegment1().getAngle());                //check if the angle of the first segment is 90degreee
-            assertEquals(90, aRoofCannon.getaSegment2().getAngle());                //check if second segment is horizontal
+            aRoofCannon.getaSegment1().changeSegmentAngle(90);
+            assertEquals(90, aRoofCannon.getaSegment1().getAngle());       //check roofcannon
+            aRoofCannon.getaSegment2().changeSegmentAngle(90);
+            assertEquals(90, aRoofCannon.getaSegment2().getAngle());              //check if second segment is horizontal
             behaviorJoystickFaomRate(aMixingUnit.getaFoamRateAsInt(), aJoystickRoofCannon);     //check if the foamRate is properly changed by the right button of aJoystickRoofCannon
             int tempVolume = aWaterTank.getVolume() + aFoamTank.getVolume();                            //saves the current volume of foam and water
             aJoystickRoofCannon.pushKeyButton();                                                   //emit

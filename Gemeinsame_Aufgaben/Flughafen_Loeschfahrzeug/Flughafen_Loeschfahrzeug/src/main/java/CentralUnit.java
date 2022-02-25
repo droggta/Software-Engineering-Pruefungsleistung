@@ -81,10 +81,16 @@ public class CentralUnit {
 
     public void setAngleRoofCannon(int pangle){ aFLF.setRoofCannonAngle(pangle);}
 
+    public void adjustMixture(Joystick pJoystick) {
+
+        if(aFLF.getCannonState(pJoystick) == CannonStatus.activated){
+            aFLF.adjustMixture();
+        }
+    }
+
     public void adjustMixture() {
         aFLF.adjustMixture();
     }
-
 
     public void emitExtinguishingAgentFrontCannon() {
         int units = 0;          //units per iteration
